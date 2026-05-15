@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mariam Fatima · AI Learning Journey · Outskill AIAP C10</title>
+  <meta name="description" content="14-day AI Accelerator Program — 50+ tools, 100+ concepts, built in public by Mariam Fatima.">
+  <meta property="og:title" content="Mariam Fatima · 14 Days Becoming AI-Native">
+  <meta property="og:description" content="A documented journey through the Outskill Gen AI Accelerator — tools, builds, and key insights from all 14 sessions.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Analytics — replace G-XXXXXXXXXX with your real ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── THEME TOKENS ── */
+    :root {
+      /* Light (Option D — default) */
+      --bg:         #F8F6FF;
+      --bg2:        #EFEBFF;
+      --card:       #FFFFFF;
+      --card-h:     #F3EFFE;
+      --border:     rgba(120,80,220,0.14);
+      --border-h:   rgba(120,80,220,0.36);
+
+      --p1:         #7B50DC;
+      --p2:         #5530A8;
+      --a1:         #7B50DC;
+      --a2:         #5530A8;
+      --a3:         #9B78E8;
+      --glow:       rgba(123,80,220,0.18);
+
+      --td:         #1A1035;
+      --tmd:        #4A3870;
+      --tfd:        #9888C0;
+
+      --tag-bg:     rgba(123,80,220,0.10);
+      --tag-bd:     rgba(123,80,220,0.28);
+      --tag-txt:    #5530A8;
+      --tag2-bd:    rgba(123,80,220,0.18);
+      --tag2-txt:   #6A50A0;
+
+      --tk-bg:      rgba(123,80,220,0.07);
+      --stat-bg:    rgba(123,80,220,0.06);
+      --prog-bg:    rgba(123,80,220,0.10);
+
+      --toggle-bg:  #EDE8FF;
+      --toggle-ico: #7B50DC;
+
+      --shadow:     0 4px 24px rgba(60,30,120,0.10);
+      --shadow-h:   0 12px 40px rgba(60,30,120,0.16);
+      --r: 16px;
+    }
+
+    [data-theme="dark"] {
+      --bg:         #120E2E;
+      --bg2:        #1A1540;
+      --card:       #180F38;
+      --card-h:     #221848;
+      --border:     rgba(200,130,255,0.14);
+      --border-h:   rgba(200,130,255,0.36);
+
+      --p1:         #C882FF;
+      --p2:         #9040C8;
+      --a1:         #C882FF;
+      --a2:         #E0C0FF;
+      --a3:         #D8A8FF;
+      --glow:       rgba(200,130,255,0.20);
+
+      --td:         #F0ECFF;
+      --tmd:        #A090C8;
+      --tfd:        #5A4880;
+
+      --tag-bg:     rgba(200,130,255,0.14);
+      --tag-bd:     rgba(200,130,255,0.32);
+      --tag-txt:    #C882FF;
+      --tag2-bd:    rgba(200,130,255,0.20);
+      --tag2-txt:   #9880B8;
+
+      --tk-bg:      rgba(200,130,255,0.08);
+      --stat-bg:    rgba(200,130,255,0.07);
+      --prog-bg:    rgba(200,130,255,0.10);
+
+      --toggle-bg:  #2A1850;
+      --toggle-ico: #C882FF;
+
+      --shadow:     0 4px 24px rgba(0,0,0,0.40);
+      --shadow-h:   0 12px 44px rgba(0,0,0,0.50);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--td);
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 0.35s, color 0.35s;
+    }
+
+    /* Subtle dot grid */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 0;
+      background-image: radial-gradient(circle, rgba(123,80,220,0.07) 1px, transparent 1px);
+      background-size: 36px 36px;
+      transition: opacity 0.35s;
+    }
+    [data-theme="dark"] body::before {
+      background-image: radial-gradient(circle, rgba(200,130,255,0.06) 1px, transparent 1px);
+    }
+
+    /* Orbs — dark only */
+    .orb { position: fixed; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: 0; opacity: 0; transition: opacity 0.5s; }
+    [data-theme="dark"] .orb { opacity: 1; }
+    .o1 { width: 600px; height: 600px; background: #7B50DC; opacity: 0; top: -180px; right: -140px; }
+    .o2 { width: 400px; height: 400px; background: #3B0764; opacity: 0; bottom: 80px; left: -100px; }
+    [data-theme="dark"] .o1 { opacity: 0.11; }
+    [data-theme="dark"] .o2 { opacity: 0.10; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fu { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:none; } }
+    .anim { animation: fu 0.6s ease backwards; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(248,246,255,0.92);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.35s, border-color 0.35s;
+    }
+    [data-theme="dark"] nav { background: rgba(18,14,46,0.92); }
+    .ni {
+      max-width: 1080px; margin: 0 auto;
+      padding: 0 28px; height: 66px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .nl { display: flex; align-items: center; gap: 12px; }
+    .logo {
+      width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--p1), var(--p2));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-weight: 700; color: #fff;
+      box-shadow: 0 0 16px var(--glow);
+    }
+    .lname {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.08rem; font-weight: 600; color: var(--td);
+      letter-spacing: 0.01em;
+    }
+    .ntag {
+      font-size: 0.58rem; font-weight: 700;
+      letter-spacing: 0.13em; text-transform: uppercase;
+      color: var(--a1);
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-bd);
+      padding: 3px 10px; border-radius: 100px;
+    }
+    .nr { display: flex; align-items: center; gap: 10px; }
+
+    /* Toggle */
+    .toggle-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; border-radius: 9px;
+      background: var(--toggle-bg);
+      border: 1px solid var(--border);
+      cursor: pointer; transition: all 0.2s;
+      color: var(--toggle-ico);
+    }
+    .toggle-btn:hover { border-color: var(--border-h); }
+    .toggle-btn svg { width: 16px; height: 16px; flex-shrink: 0; transition: opacity 0.2s; }
+    .icon-moon { display: block; }
+    .icon-sun  { display: none; }
+    [data-theme="dark"] .icon-moon { display: none; }
+    [data-theme="dark"] .icon-sun  { display: block; }
+
+    /* LinkedIn button */
+    .li-btn {
+      display: flex; align-items: center; gap: 7px;
+      background: rgba(10,102,194,0.10);
+      border: 1px solid rgba(10,102,194,0.28);
+      color: #1A66C2; padding: 7px 16px;
+      border-radius: 9px; font-size: 0.76rem; font-weight: 600;
+      text-decoration: none; transition: all 0.2s; letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    [data-theme="dark"] .li-btn { color: #7BB8F0; background: rgba(10,102,194,0.12); }
+    .li-btn:hover { background: rgba(10,102,194,0.18); border-color: rgba(10,102,194,0.5); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; z-index: 1;
+      max-width: 1080px; margin: 0 auto;
+      padding: 88px 28px 64px;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--a1); margin-bottom: 26px;
+    }
+    .eline { display: block; width: 28px; height: 1.5px; background: var(--a1); border-radius: 2px; opacity: 0.6; }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 7vw, 5.6rem);
+      font-weight: 300; line-height: 1.0;
+      letter-spacing: -0.02em; color: var(--td);
+      margin-bottom: 8px;
+    }
+    h1 .gr {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--a1) 0%, var(--a3) 60%, var(--p2) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hsub {
+      font-size: 1.13rem; font-weight: 300;
+      color: var(--tmd); margin-bottom: 36px;
+      line-height: 1.7; max-width: 560px;
+    }
+
+    .hchips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 44px; }
+    .hchip {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.78rem; font-weight: 500; color: var(--tmd);
+      background: var(--stat-bg);
+      border: 1px solid var(--border);
+      padding: 7px 15px; border-radius: 100px;
+      transition: border-color 0.2s;
+    }
+    .hchip svg { color: var(--a1); flex-shrink: 0; }
+
+    /* Stats */
+    .stats {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      border: 1px solid var(--border); border-radius: var(--r);
+      overflow: hidden; box-shadow: var(--shadow);
+    }
+    .sblk {
+      padding: 24px 18px; text-align: center;
+      background: var(--stat-bg);
+      border-right: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .sblk:last-child { border-right: none; }
+    .sblk:hover { background: var(--card-h); }
+    .snum {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.6rem; font-weight: 700; line-height: 1;
+      background: linear-gradient(135deg, var(--a1), var(--a3));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-bottom: 5px;
+    }
+    .slbl {
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--tfd);
+    }
+
+    /* ── PROGRESS ── */
+    .pw {
+      position: relative; z-index: 1;
+      max-width: 1080px; margin: 0 auto;
+      padding: 0 28px 56px;
+    }
+    .ph { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+    .pl { font-size: 0.63rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tfd); }
+    .pp { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--a1); }
+    .pt { height: 4px; background: var(--prog-bg); border-radius: 2px; overflow: hidden; }
+    .pf {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--p2), var(--a1));
+      border-radius: 2px;
+      transition: width 1.4s cubic-bezier(0.4,0,0.2,1);
+      box-shadow: 0 0 8px var(--glow);
+    }
+
+    /* ── SECTION TITLE ── */
+    .secw {
+      position: relative; z-index: 1;
+      max-width: 1080px; margin: 0 auto;
+      padding: 0 28px 22px;
+    }
+    .sectitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 400; font-style: italic;
+      color: var(--tmd);
+      display: flex; align-items: center; gap: 16px;
+    }
+    .sectitle::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
+    }
+
+    /* ── BADGE SHELF ── */
+    .bw {
+      position: relative; z-index: 1;
+      max-width: 1080px; margin: 0 auto;
+      padding: 0 28px 60px;
+    }
+    .bshelf { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
+    .bshelf::-webkit-scrollbar { display: none; }
+    .bitem {
+      flex-shrink: 0; display: flex; flex-direction: column;
+      align-items: center; gap: 6px;
+      animation: fu 0.45s ease backwards;
+    }
+    .bimg { width: 58px; height: 58px; }
+    .bimg img { width: 100%; height: 100%; object-fit: contain; }
+    .bday { font-size: 0.54rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--tfd); }
+
+    /* ── CARDS GRID ── */
+    .jw {
+      position: relative; z-index: 1;
+      max-width: 1080px; margin: 0 auto;
+      padding: 0 28px 80px;
+    }
+    .jgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(318px,1fr));
+      gap: 16px;
+    }
+
+    .dcard {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      overflow: hidden; position: relative;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s, background 0.35s;
+      animation: fu 0.55s ease backwards;
+      box-shadow: var(--shadow);
+    }
+    .dcard::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--a1), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .dcard:hover { transform: translateY(-4px); border-color: var(--border-h); box-shadow: var(--shadow-h); }
+    .dcard:hover::before { opacity: 1; }
+
+    .ch { padding: 22px 22px 0; display: flex; gap: 14px; align-items: flex-start; }
+    .dayno {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem; font-weight: 700; line-height: 1;
+      color: var(--border-h); flex-shrink: 0;
+      width: 50px; text-align: right; margin-top: -2px;
+      transition: color 0.35s;
+    }
+    .cta-wrap { flex: 1; min-width: 0; }
+    .cdate { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--tfd); margin-bottom: 4px; }
+    .ctitle { font-family: 'Cormorant Garamond', serif; font-size: 1.18rem; font-weight: 600; line-height: 1.24; color: var(--td); }
+
+    .cb { padding: 14px 22px 22px; }
+    .csummary { font-size: 0.92rem; font-weight: 400; color: var(--tmd); line-height: 1.75; margin-bottom: 15px; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 9px; }
+    .ttool {
+      font-size: 0.63rem; font-weight: 700; letter-spacing: 0.05em;
+      background: var(--tag-bg); border: 1px solid var(--tag-bd);
+      color: var(--tag-txt); padding: 4px 10px; border-radius: 5px; text-transform: uppercase;
+    }
+    .tconcept {
+      font-size: 0.63rem; font-weight: 500;
+      background: transparent; border: 1px solid var(--tag2-bd);
+      color: var(--tag2-txt); padding: 4px 10px; border-radius: 5px;
+    }
+
+    .takeaway {
+      margin-top: 14px; padding: 13px 15px;
+      background: var(--tk-bg);
+      border-left: 2.5px solid var(--a1);
+      border-radius: 0 8px 8px 0;
+    }
+    .tklbl { font-size: 0.56rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--a1); opacity: 0.8; margin-bottom: 5px; }
+    .tktxt { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; color: var(--td); line-height: 1.6; }
+
+    .proj-link {
+      display: inline-flex; align-items: center; gap: 7px;
+      margin-top: 15px; padding: 8px 16px;
+      font-size: 0.76rem; font-weight: 600; letter-spacing: 0.03em;
+      color: var(--a1); background: var(--tag-bg);
+      border: 1px solid var(--tag-bd); border-radius: 9px;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .proj-link:hover { background: var(--card-h); border-color: var(--a1); transform: translateX(3px); }
+
+    /* ── TOOLS CLOUD ── */
+    .tw {
+      position: relative; z-index: 1;
+      max-width: 1080px; margin: 0 auto;
+      padding: 0 28px 80px;
+    }
+    .tcloud { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tchip {
+      font-size: 0.72rem; font-weight: 500;
+      background: var(--stat-bg); border: 1px solid var(--border);
+      color: var(--tmd); padding: 6px 14px; border-radius: 100px;
+      transition: all 0.2s;
+    }
+    .tchip:hover { border-color: var(--border-h); color: var(--a1); background: var(--card-h); }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative; z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 34px 28px;
+      background: var(--bg);
+      transition: background 0.35s;
+    }
+    .fi {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 14px;
+    }
+    .fb { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--td); }
+    .fn { font-size: 0.72rem; color: var(--tfd); margin-top: 2px; }
+    .btt {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 0.72rem; font-weight: 500; color: var(--tmd);
+      text-decoration: none; padding: 8px 16px;
+      border: 1px solid var(--border); border-radius: 9px; transition: all 0.2s;
+    }
+    .btt:hover { border-color: var(--border-h); color: var(--a1); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      .hero, .pw, .secw, .bw, .jw, .tw { padding-left: 18px; padding-right: 18px; }
+      .hero { padding-top: 60px; }
+      h1 { font-size: 2.8rem; }
+      .stats { grid-template-columns: repeat(2,1fr); }
+      .sblk:nth-child(2) { border-right: none; }
+      .sblk:nth-child(3) { border-right: 1px solid var(--border); border-top: 1px solid var(--border); }
+      .sblk:nth-child(4) { border-top: 1px solid var(--border); }
+      .jgrid { grid-template-columns: 1fr; }
+      .ntag, .lname { display: none; }
+      .ni { padding: 0 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="orb o1"></div>
+<div class="orb o2"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="ni">
+    <div class="nl">
+      <div class="logo">M</div>
+      <span class="lname">Mariam Fatima</span>
+      <span class="ntag">AIAP C10 · Outskill</span>
+    </div>
+    <div class="nr">
+      <button class="toggle-btn" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Toggle dark / light">
+        <svg class="icon-moon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a class="li-btn" href="https://www.linkedin.com/in/mariam-fatima-b7a9a9131/" target="_blank" rel="noopener">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        Connect
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero anim">
+  <div class="eyebrow">
+    <span class="eline"></span>
+    Learning in Public &nbsp;·&nbsp; Gen AI Accelerator · Cohort 10
+    <span class="eline"></span>
+  </div>
+  <h1><span class="gr">14 Days.</span><br>Becoming AI-Native.</h1>
+  <p class="hsub">A fully documented journey through the Outskill AI Accelerator Program — every tool explored, every concept mastered, every build shipped.</p>
+
+  <div class="hchips">
+    <span class="hchip">
+      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Apr 24 – May 7, 2026
+    </span>
+    <span class="hchip">
+      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      14 live sessions
+    </span>
+    <span class="hchip">
+      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Cohort 10
+    </span>
+    <span class="hchip">
+      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      100% Complete
+    </span>
+  </div>
+
+  <div class="stats anim" style="animation-delay:120ms">
+    <div class="sblk"><div class="snum">14</div><div class="slbl">Days</div></div>
+    <div class="sblk"><div class="snum" id="tc">—</div><div class="slbl">Tools</div></div>
+    <div class="sblk"><div class="snum" id="cc">—</div><div class="slbl">Concepts</div></div>
+    <div class="sblk"><div class="snum">100%</div><div class="slbl">Complete</div></div>
+  </div>
+</section>
+
+<!-- PROGRESS -->
+<div class="pw">
+  <div class="ph">
+    <span class="pl">Program Progress</span>
+    <span class="pp">14 of 14 sessions completed</span>
+  </div>
+  <div class="pt"><div class="pf" id="pf"></div></div>
+</div>
+
+<!-- BADGES -->
+<div class="secw"><p class="sectitle">Achievement Badges</p></div>
+<div class="bw"><div class="bshelf" id="bshelf"></div></div>
+
+<!-- JOURNEY -->
+<div class="secw"><p class="sectitle">The Journey</p></div>
+<div class="jw"><div class="jgrid" id="jgrid"></div></div>
+
+<!-- TOOLS -->
+<div class="secw"><p class="sectitle">Tools Explored</p></div>
+<div class="tw"><div class="tcloud" id="tcloud"></div></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fi">
+    <div>
+      <div class="fb">Mariam Fatima</div>
+      <div class="fn">Outskill AIAP C10 &nbsp;·&nbsp; Apr – May 2026 &nbsp;·&nbsp; Built with curiosity and consistency</div>
+    </div>
+    <a class="btt" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+      <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+      Back to top
+    </a>
+  </div>
+</footer>
+
+<script>
+/* ── THEME TOGGLE ── */
+function toggleTheme() {
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch(e){}
+}
+(function() {
+  try {
+    const saved = localStorage.getItem('theme');
+    if (saved) document.documentElement.setAttribute('data-theme', saved);
+  } catch(e){}
+})();
+
+/* ── SESSION DATA ── */
+const SESSIONS = [
+  {
+    day:1, date:"Apr 24",
+    title:"LLMs, Meta-Prompting & RAG Systems",
+    summary:"Decoded the LLM black box, mastered meta-prompting, built a personal AI tutor in NotebookLM, and set up local LLMs for complete data privacy.",
+    tools:["ChatGPT","Claude","Gemini","NotebookLM","Ollama"],
+    concepts:["LLM Architecture","Meta-Prompting","RAG","Local LLMs","Hallucination Prevention"],
+    takeaway:"RAG solves hallucination by anchoring the model to your knowledge base. Local LLMs solve privacy. Master both on Day 1 and everything you build on top becomes exponentially more reliable.",
+    project:""
+  },
+  {
+    day:2, date:"Apr 25",
+    title:"AI Content Creation — Video, Voice & Digital Clone",
+    summary:"Built a video & voice digital clone, learned the scripting formula behind viral content, and mapped a complete AI content pipeline for Instagram and YouTube.",
+    tools:["HeyGen","WhisperFlow","Perplexity","Claude","Kling 3.0","Seed Dance"],
+    concepts:["Hook Writing","AI Video Clone","Voice Synthesis","Content Pipeline","Viral Mechanics"],
+    takeaway:"The workflow is the moat — not the individual tools. Hook → Script → Produce → Distribute. Master that pipeline and every new AI tool that launches just becomes another node you can plug in.",
+    project:""
+  },
+  {
+    day:3, date:"Apr 26",
+    title:"N8N Automation — Node-Based Workflow Foundations",
+    summary:"Set up N8N, learned node-based automation architecture, and built a first automated workflow from scratch — from empty canvas to a live triggered automation.",
+    tools:["N8N","Make.com","Zapier","OpenAI","Claude","Gemini"],
+    concepts:["Node-Based Automation","Triggers vs Actions","AI Nodes","Workflow Design","Agent Foundations"],
+    takeaway:"N8N's biggest advantage over managed tools is transparency — you can watch every node fire in real time. That visibility makes it the right foundation for production-grade AI agents you can actually trust.",
+    project:""
+  },
+  {
+    day:4, date:"Apr 27",
+    title:"Building AI Agents — RAG-Enabled Email Support",
+    summary:"Built a complete RAG-enabled email customer support agent in N8N — full architecture from knowledge base ingestion to automated, context-aware replies.",
+    tools:["N8N","OpenAI / GPT","Claude","Gemini","OpenRouter"],
+    concepts:["AI Agent Architecture","RAG in Agents","Memory & Context","Email Automation","LLM + Tools + Memory"],
+    takeaway:"Every modern AI product follows one architecture: LLM + tools + memory + loop. Internalize this and you can reverse-engineer — and rebuild — any AI product you see in the market.",
+    project:""
+  },
+  {
+    day:5, date:"Apr 28",
+    title:"MCP — Model Context Protocol & AI Connector Workflows",
+    summary:"Decoded MCP from first principles, connected live apps to Claude and ChatGPT, and built 3 end-to-end orchestration workflows including travel booking and meeting-to-Asana automation.",
+    tools:["Claude","ChatGPT","Claude Desktop","Canva MCP","Gmail MCP","Gamma MCP","Asana MCP"],
+    concepts:["MCP Architecture","API vs Webhook vs MCP","Orchestration","Workflow Design","AI Adoption Mindset"],
+    takeaway:"Don't bolt AI onto your existing processes — re-imagine them from first principles. The magic of MCP is orchestration: map your problem to connectors, then let the LLM coordinate everything. You are the judgment layer.",
+    project:""
+  },
+  {
+    day:6, date:"Apr 29",
+    title:"Voice Agents + Vibe Coding",
+    summary:"Built a live voice AI agent with appointment booking, then shipped a full MVP app — database, auth, AI task breakdown, and Stripe — using the EPB framework on Bolt.new.",
+    tools:["Retell AI","Cal.com","N8N","Bolt.new","Supabase","Stripe","GitHub","OpenAI GPT-3.5 Turbo"],
+    concepts:["Voice AI Pipeline","5-Part Agent Prompt","EPB Framework","Moscow Method","PRD","Vibe Coding"],
+    takeaway:"Voice agents and vibe coding are two sides of the same coin — both remove the technical barrier and let you build real products with ideas alone. The EPB framework turns any problem into a shipped product.",
+    project:""
+  },
+  {
+    day:7, date:"Apr 30",
+    title:"Building AI Executive Assistants",
+    summary:"Built Jerry — a multi-agent AI executive assistant handling email, calendar, and meetings in N8N — and explored the Three-Horizon Framework for navigating an AI-first career.",
+    tools:["N8N","Fireflies.ai","Gmail","Google Calendar","OpenAI","LibreChat","OpenRouter"],
+    concepts:["Master Orchestrator Pattern","Single Responsibility Principle","Multi-Agent System","Information Arbitrage","Three-Horizon Framework"],
+    takeaway:"The Master Orchestrator pattern is behind every serious AI product: one intelligent coordinator plus focused specialists. Your job is to define the logic — the agents execute.",
+    project:""
+  },
+  {
+    day:8, date:"May 1",
+    title:"Claude Code Mastery — Agentic Development",
+    summary:"Built a Studio Ghibli-themed CRM app from a 3-line prompt in 8 minutes, discovered the Skills.sh ecosystem with 91,000+ skills, and mastered the PRD-to-product workflow.",
+    tools:["Claude Code","Claude Desktop","Claude Pro","Skills.sh","ChatGPT Projects"],
+    concepts:["Claude Code vs Lovable/Bolt","Skills as Instructions","PRD Workflow","Bypass Permissions","Prompt-to-Product"],
+    takeaway:"Claude Code is not a chatbot — it's an autonomous developer on your machine. The skill + PRD combo turns a vague idea into a production-ready app without writing a single line of code.",
+    project:""
+  },
+  {
+    day:9, date:"May 2",
+    title:"Claude Cowork — Computer Use & Autonomous Agents",
+    summary:"Explored Claude Cowork — the feature that triggered a global IT stock sell-off — which autonomously operated a laptop to build a complete earnings analysis dashboard with zero human input.",
+    tools:["Claude Cowork","Claude Desktop","Claude Pro","Opus 4.6"],
+    concepts:["Computer Use","Local File Access","Cowork vs Code vs Chat","Folder-Scoped Access","AI Agent Autonomy"],
+    takeaway:"Claude Cowork shows AI can replace entire job functions, not just assist them. Your role shifts from doing the task to reviewing the output.",
+    project:""
+  },
+  {
+    day:10, date:"May 3",
+    title:"Advanced MCPs — Marketplaces, Skills & Custom Servers",
+    summary:"Navigated Smithery and MCP Market to find and install external MCP servers, built a custom MCP server from scratch, and set up a Gmail AI assistant through Claude Desktop.",
+    tools:["Smithery","MCP Market","Claude Code","OpenAI Codex","N8N","Claude Desktop","Gmail MCP"],
+    concepts:["MCP Marketplaces","Skills vs MCPs","Custom MCP Server","Rating-Based Selection","Gmail AI Assistant"],
+    takeaway:"The skill is your playbook; the MCP is your toolkit. The real unlock is combining both to create orchestrated AI systems that go far beyond chat.",
+    project:""
+  },
+  {
+    day:11, date:"May 4",
+    title:"N8N as Backend + GitHub for Team Collaboration",
+    summary:"Mastered API vs Webhook architecture, wired a Bolt.new frontend to an N8N backend, set up GitHub for team collaboration, and kicked off the 48-hour Hackathon.",
+    tools:["N8N","GitHub","Bolt.new","Lovable","Webhook"],
+    concepts:["API vs Webhook","Event-Based Architecture","Frontend-Backend Integration","GitHub Repository","Version Control"],
+    takeaway:"Bolt.new gives you the UI; N8N gives you the intelligence; webhooks are the bridge. Add GitHub and you have a full team-capable production stack.",
+    project:""
+  },
+  {
+    day:12, date:"May 5",
+    title:"Anti-Gravity — AI-Powered IDE (Advanced Vibe Coding)",
+    summary:"Discovered Anti-Gravity, Google's local AI IDE built on VS Code, used Gemini to build a real production dashboard, and scraped competitor websites into clean markdown with FireCrawl.",
+    tools:["Anti-Gravity","Gemini","FireCrawl","ShadCN","VS Code","GitHub"],
+    concepts:["AI IDE","Local Development","Advanced Vibe Coding","Web Scraping","ShadCN UI","Production-Grade Apps"],
+    takeaway:"Anti-Gravity removes the last barrier between idea and production app. Lovable is for rapid prototyping; Anti-Gravity is your production shipyard — same natural language, professional-grade output.",
+    project:""
+  },
+  {
+    day:13, date:"May 6",
+    title:"OpenClaw — Agentic AI Runtime",
+    summary:"Learned the critical distinction: OpenClaw is a runtime for agents (not an agent itself), explored proactive personal AI assistant architecture, and why OpenAI hired its founder to lead their assistant initiative.",
+    tools:["OpenClaw","Hostinger","VPS"],
+    concepts:["Agentic AI Runtime","Runtime vs Agent","Proactive AI","VPS Deployment","Autonomous Agents"],
+    takeaway:"OpenClaw represents AI's next phase: agents that don't wait for prompts. The winning position is building them before they become mainstream.",
+    project:""
+  },
+  {
+    day:14, date:"May 7",
+    title:"Graduation: Monetisation Masterclass + Hackathon Demo Day",
+    summary:"Completed a monetisation masterclass on landing the first paying AI client, celebrated cohort achievements, and watched top 3 Hackathon teams demo live — Travel Itinerary Planner took first place.",
+    tools:["Cold Email Automation","N8N Workflows","Bolt.new","AI Agency Stack","Voice Agents"],
+    concepts:["Value Equation","Two Lanes Model","Skills-to-Solutions Mapping","Market Validation","Sell Outcomes Not Features"],
+    takeaway:"The skills built over 14 days are worth $3,000–$7,000+ per project to the right business owner. Stop selling features, start selling outcomes. Pick one lane, one niche, make one offer this week.",
+    project:""
+  }
+];
+
+/* ── BADGE COLORS ── */
+const BC = [null,
+  ['#C8C8C8','#787878'],['#C89060','#7A4A28'],['#C8A830','#806010'],
+  ['#60B8E8','#2060A0'],['#E8C030','#908000'],['#B0D028','#607008'],
+  ['#78C068','#286030'],['#F0C800','#987800'],['#C8A060','#786030'],
+  ['#A870D8','#502890'],['#70D880','#207838'],['#C89090','#784040'],
+  ['#E060B8','#801068'],['#90E020','#407800']
+];
+function badgeSVG(d) {
+  const [c1,c2] = BC[d]||['#A78BFA','#5B21B6'];
+  const fs = d>=10?24:28;
+  const isDark = document.documentElement.getAttribute('data-theme')==='dark';
+  const hfill = isDark ? '#2A1A40' : '#EDE8FF';
+  const s=`<svg viewBox="0 0 140 108" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="w${d}" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/>
+    </linearGradient>
+    <radialGradient id="h${d}" cx="42%" cy="32%" r="68%">
+      <stop offset="0%" stop-color="${hfill}"/><stop offset="100%" stop-color="${isDark?'#080510':'#D8D0F8'}"/>
+    </radialGradient>
+  </defs>
+  <polygon points="103,54 86,24 54,24 37,54 54,84 86,84" fill="rgba(0,0,0,0.12)" transform="translate(2,3)"/>
+  <rect x="3"   y="52" width="30" height="7"  rx="3.5" fill="url(#w${d})"/>
+  <rect x="7"   y="42" width="24" height="6"  rx="3"   fill="url(#w${d})" opacity="0.9"/>
+  <rect x="12"  y="33" width="18" height="5"  rx="2.5" fill="url(#w${d})" opacity="0.75"/>
+  <rect x="107" y="52" width="30" height="7"  rx="3.5" fill="url(#w${d})"/>
+  <rect x="109" y="42" width="24" height="6"  rx="3"   fill="url(#w${d})" opacity="0.9"/>
+  <rect x="110" y="33" width="18" height="5"  rx="2.5" fill="url(#w${d})" opacity="0.75"/>
+  <polygon points="106,54 88,22 52,22 34,54 52,86 88,86" fill="${c2}" opacity="0.3"/>
+  <polygon points="104,54 87,25 53,25 36,54 53,83 87,83" fill="none" stroke="${c1}" stroke-width="3.5"/>
+  <polygon points="100,54 84,28 56,28 40,54 56,80 84,80" fill="url(#h${d})"/>
+  <ellipse cx="70" cy="38" rx="17" ry="9" fill="rgba(255,255,255,0.08)"/>
+  <text x="70" y="57" text-anchor="middle" dominant-baseline="middle"
+    font-family="Arial Black,Impact,sans-serif" font-size="${fs}" font-weight="900" fill="${c1}">${d}</text>
+</svg>`;
+  return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(s);
+}
+
+/* ── BUILD PAGE ── */
+const allTools    = [...new Set(SESSIONS.flatMap(s=>s.tools))];
+const allConcepts = [...new Set(SESSIONS.flatMap(s=>s.concepts))];
+document.getElementById('tc').textContent = allTools.length;
+document.getElementById('cc').textContent = allConcepts.length;
+setTimeout(()=>{ document.getElementById('pf').style.width='100%'; },500);
+
+// Badges
+const shelf = document.getElementById('bshelf');
+SESSIONS.forEach((s,i)=>{
+  const el = document.createElement('div');
+  el.className='bitem'; el.style.animationDelay=(i*38)+'ms';
+  el.innerHTML=`<div class="bimg"><img src="${badgeSVG(s.day)}" alt="Day ${s.day} badge"></div><span class="bday">Day ${s.day}</span>`;
+  shelf.appendChild(el);
+});
+
+// Cards
+const grid = document.getElementById('jgrid');
+SESSIONS.forEach((s,i)=>{
+  const el = document.createElement('div');
+  el.className='dcard'; el.style.animationDelay=(i*30)+'ms';
+  const proj = s.project
+    ? `<a class="proj-link" href="${s.project}" target="_blank" rel="noopener">
+         <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+         View Project
+       </a>` : '';
+  el.innerHTML=`
+    <div class="ch">
+      <div class="dayno">${String(s.day).padStart(2,'0')}</div>
+      <div class="cta-wrap">
+        <div class="cdate">${s.date}, 2026</div>
+        <div class="ctitle">${s.title}</div>
+      </div>
+    </div>
+    <div class="cb">
+      <p class="csummary">${s.summary}</p>
+      <div class="tags">${s.tools.map(t=>`<span class="ttool">${t}</span>`).join('')}</div>
+      <div class="tags">${s.concepts.map(c=>`<span class="tconcept">${c}</span>`).join('')}</div>
+      <div class="takeaway">
+        <div class="tklbl">Key Takeaway</div>
+        <div class="tktxt">${s.takeaway}</div>
+      </div>
+      ${proj}
+    </div>`;
+  grid.appendChild(el);
+});
+
+// Tools cloud
+const cloud = document.getElementById('tcloud');
+allTools.forEach(t=>{ const c=document.createElement('span'); c.className='tchip'; c.textContent=t; cloud.appendChild(c); });
+</script>
+</body>
+</html>
