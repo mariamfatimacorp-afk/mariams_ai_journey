@@ -336,28 +336,38 @@ textarea.notes:focus{outline:none;border-color:var(--acc)}
 const msalConfig = {
   auth: {
     clientId: 'e919f7e3-0803-40ba-8814-6a9c7c5f5a2c',
-    authority: 'https://login.microsoftonline.com/4ea06523-b132-4959-a89e-2e388d88664d',
+    // 'common' allows both organizational accounts (mfocorp.onmicrosoft.com)
+    // AND personal Microsoft accounts (Hotmail/Outlook). Gmail users must sign in
+    // at account.microsoft.com once to link their Gmail to a Microsoft account.
+    // Also update Azure App Registration → Supported account types →
+    //   "Accounts in any organizational directory and personal Microsoft accounts"
+    authority: 'https://login.microsoftonline.com/common',
     // This auto-detects the current URL — works on GitHub Pages, SharePoint, or localhost.
-    // You MUST add this URL to your Azure App Registration → Authentication → Redirect URIs.
+    // Add this URL to Azure App Registration → Authentication → Redirect URIs.
     redirectUri: window.location.origin + window.location.pathname,
   },
   cache: { cacheLocation: 'sessionStorage', storeAuthStateInCookie: true }
 };
 
 // ── ROLES CONFIG ─────────────────────────────────────────────────────────────
-// Fill in the mfocorp.com work email addresses for each person.
-// Admins: see all applications + can generate leases.
+// Admins: see ALL applications + can generate lease PDFs.
 // PMs: see only their own applications, lease generation is locked.
 // PM names must exactly match one of: 'Umair Lassi' | 'Tamir' | 'Mariam / Syed'
+//
+// GMAIL USERS (Umair, Tamir, Syed): must sign in with a Microsoft account.
+// If they don't have one, go to account.microsoft.com → "Create one" →
+// use their existing Gmail address. Then they sign in here with that Gmail.
 const ROLES = {
   admins: [
-    // 'mariam@mfocorp.com',
+    'mariam.fatima@hotmail.com',       // Mariam (personal Microsoft account)
+    'mariam@mfocorp.onmicrosoft.com',  // Mariam (work account)
+    'umairlasi@gmail.com',             // Umair Lassi (needs Microsoft account linked to Gmail)
   ],
   propertyManagers: {
-    // 'umair@mfocorp.com':  'Umair Lassi',
-    // 'tamir@mfocorp.com':  'Tamir',
-    // 'mariam@mfocorp.com': 'Mariam / Syed',
-    // 'syed@mfocorp.com':   'Mariam / Syed',
+    // Tamir — PM for his own applications only
+    't.alhabbal@gmail.com':  'Tamir',
+    // Syed — grouped under Mariam/Syed filter
+    'polypro786@gmail.com':  'Mariam / Syed',
   }
 };
 
@@ -383,12 +393,21 @@ async function initAuth() {
 }
 
 function handleAuthResponse(account) {
-  const email = account.username.toLowerCase();
+  // Check both username and idTokenClaims.email — external/guest accounts
+  // sometimes return a UPN in username that differs from the real email.
+  const candidates = [
+    account.username,
+    account.idTokenClaims?.email,
+    account.idTokenClaims?.preferred_username,
+  ].filter(Boolean).map(e => e.toLowerCase());
+
   const adminEmails = ROLES.admins.map(e => e.toLowerCase());
   const pmKeys = Object.keys(ROLES.propertyManagers);
-  const pmKey = pmKeys.find(k => k.toLowerCase() === email);
 
-  if (adminEmails.includes(email)) {
+  const isAdminMatch = candidates.some(e => adminEmails.includes(e));
+  const pmKey = !isAdminMatch && pmKeys.find(k => candidates.includes(k.toLowerCase()));
+
+  if (isAdminMatch) {
     currentUser = account; currentRole = 'admin'; isAdmin = true;
     activateApp(account.name || account.username, 'Admin', null);
   } else if (pmKey) {
