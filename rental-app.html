@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LassiP.management — Rental Applications</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://alcdn.msauth.net/browser/2.38.3/js/msal-browser.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -147,6 +148,24 @@ textarea.notes:focus{outline:none;border-color:var(--acc)}
 /* TOAST */
 .toast{position:fixed;bottom:18px;right:18px;background:var(--pri);color:#fff;padding:10px 18px;border-radius:8px;font-size:13px;box-shadow:0 4px 20px rgba(0,0,0,.2);transform:translateY(100px);transition:transform .3s;z-index:200}
 .toast.show{transform:translateY(0)}.toast.ok{background:var(--grn)}.toast.warn{background:var(--ylw)}
+
+/* AUTH SCREENS */
+.auth-screen{position:fixed;inset:0;background:var(--bg);z-index:300;align-items:center;justify-content:center}
+.auth-card{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:36px 40px;width:100%;max-width:380px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.10)}
+.auth-card h2{font-size:20px;font-weight:800;margin-bottom:6px;color:var(--txt)}
+.auth-sub{font-size:12px;color:var(--mut);margin-bottom:4px}
+.spinner{width:28px;height:28px;border:3px solid var(--bdr);border-top-color:var(--acc);border-radius:50%;animation:spin .8s linear infinite;margin:20px auto 0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ms-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:10px 18px;background:#0078d4;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;transition:.15s}
+.ms-btn:hover{background:#106ebe}
+.ms-btn svg{flex-shrink:0}
+/* USER INFO IN HEADER */
+.user-info{display:flex;align-items:center;gap:8px}
+.user-name{font-size:12px;opacity:.85;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.role-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;background:rgba(82,183,136,.2);color:#A7F3D0;border:1px solid rgba(82,183,136,.35);flex-shrink:0}
+.role-badge.pm{background:rgba(59,130,246,.2);color:#93C5FD;border-color:rgba(59,130,246,.35)}
+.btn-signout{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.85);font-size:11px;padding:4px 10px;border-radius:6px;cursor:pointer;transition:.15s;font-family:inherit}
+.btn-signout:hover{background:rgba(255,255,255,.2)}
 </style>
 </head>
 <body>
@@ -157,14 +176,47 @@ textarea.notes:focus{outline:none;border-color:var(--acc)}
   </div>
   <div class="hright">
     <span class="hcount" id="hcount"></span>
-    <div class="admin-pill" id="adminPill" onclick="toggleAdmin()" title="Toggle admin mode (will be replaced by Microsoft login)">
-      <div class="dot"></div>
-      <span id="adminLabel">Viewer mode</span>
+    <div class="user-info" id="userInfo" style="display:none">
+      <span class="user-name" id="userName"></span>
+      <span class="role-badge" id="roleBadge"></span>
+      <button class="btn-signout" onclick="logout()">Sign out</button>
     </div>
   </div>
 </header>
 
-<div class="layout">
+<!-- AUTH SCREENS -->
+<div id="screen-loading" class="auth-screen" style="display:flex">
+  <div class="auth-card">
+    <div class="hlogo" style="margin:0 auto 16px;width:48px;height:48px;font-size:24px;border-radius:10px">L</div>
+    <h2>LassiP.management</h2>
+    <p class="auth-sub">Rental Application Management</p>
+    <div class="spinner"></div>
+  </div>
+</div>
+
+<div id="screen-login" class="auth-screen" style="display:none">
+  <div class="auth-card">
+    <div class="hlogo" style="margin:0 auto 16px;width:48px;height:48px;font-size:24px;border-radius:10px">L</div>
+    <h2>LassiP.management</h2>
+    <p class="auth-sub">Rental Application Management</p>
+    <p style="font-size:13px;color:var(--mut);margin:16px 0 24px;line-height:1.5">Sign in with your Microsoft work account to access the application portal.</p>
+    <button class="ms-btn" onclick="login()">
+      <svg width="20" height="20" viewBox="0 0 21 21"><rect x="1" y="1" width="9" height="9" fill="#f25022"/><rect x="11" y="1" width="9" height="9" fill="#7fba00"/><rect x="1" y="11" width="9" height="9" fill="#00a4ef"/><rect x="11" y="11" width="9" height="9" fill="#ffb900"/></svg>
+      Sign in with Microsoft
+    </button>
+  </div>
+</div>
+
+<div id="screen-denied" class="auth-screen" style="display:none">
+  <div class="auth-card">
+    <div style="font-size:40px;margin-bottom:16px">🚫</div>
+    <h2>Access Denied</h2>
+    <p style="font-size:13px;color:var(--mut);margin:12px 0 24px;line-height:1.5">Your account is not authorized to access this application.<br>Please contact your administrator to be granted access.</p>
+    <button class="btn btn-out" onclick="logout()" style="width:100%;justify-content:center">Sign out &amp; try another account</button>
+  </div>
+</div>
+
+<div class="layout" id="appLayout" style="display:none">
   <aside>
     <div class="sbhead">
       <h2>Applications</h2>
@@ -179,7 +231,7 @@ textarea.notes:focus{outline:none;border-color:var(--acc)}
         </div>
       </div>
       <!-- Property Manager filter -->
-      <div class="filter-group">
+      <div class="filter-group" id="pm-filter-row">
         <div class="filter-label">By Property Manager</div>
         <div class="ftabs" id="pmTabs">
           <button class="ftab pm-tab on" onclick="setPM('all')">All PMs</button>
@@ -262,9 +314,9 @@ textarea.notes:focus{outline:none;border-color:var(--acc)}
             <div class="fg full"><label>Tenant 2 (Co-Applicant / Additional Adult)</label><input id="f_t2" type="text" placeholder="Leave blank if none"></div>
             <div class="fg full"><label>Tenant 3 (Additional Adult)</label><input id="f_t3" type="text" placeholder="Leave blank if none"></div>
             <div class="fg"><label>Max Occupants</label><input id="f_occ" type="number" value="4" min="1" max="15"></div>
-            <div class="fg"><label>Landlord Name/Company</label><input id="f_land" type="text" value="Asim Holding Inc."></div>
+            <div class="fg"><label>Landlord Name/Company</label><input id="f_land" type="text" value="LassiP Management Inc."></div>
             <div class="fg full"><label>Landlord Address</label><input id="f_laddr" type="text" value="156 Coral Springs Landing NE, Calgary, Alberta"></div>
-            <div class="fg full"><label>Landlord Email</label><input id="f_lemail" type="text" value="ASIMHOLDINGINC@GMAIL.COM"></div>
+            <div class="fg full"><label>Landlord Email</label><input id="f_lemail" type="text" value="lassipmanagement@gmail.com"></div>
           </div>
         </div>
       </div>
@@ -280,15 +332,108 @@ textarea.notes:focus{outline:none;border-color:var(--acc)}
 <div class="toast" id="toast"></div>
 
 <script>
-// ── ADMIN STATE ───────────────────────────────────────────────────────────────
-// Temporary toggle — will be replaced by Microsoft Azure AD login
+// ── MICROSOFT AUTHENTICATION (MSAL) ──────────────────────────────────────────
+const msalConfig = {
+  auth: {
+    clientId: 'e919f7e3-0803-40ba-8814-6a9c7c5f5a2c',
+    authority: 'https://login.microsoftonline.com/4ea06523-b132-4959-a89e-2e388d88664d',
+    // This auto-detects the current URL — works on GitHub Pages, SharePoint, or localhost.
+    // You MUST add this URL to your Azure App Registration → Authentication → Redirect URIs.
+    redirectUri: window.location.origin + window.location.pathname,
+  },
+  cache: { cacheLocation: 'sessionStorage', storeAuthStateInCookie: true }
+};
+
+// ── ROLES CONFIG ─────────────────────────────────────────────────────────────
+// Fill in the mfocorp.com work email addresses for each person.
+// Admins: see all applications + can generate leases.
+// PMs: see only their own applications, lease generation is locked.
+// PM names must exactly match one of: 'Umair Lassi' | 'Tamir' | 'Mariam / Syed'
+const ROLES = {
+  admins: [
+    // 'mariam@mfocorp.com',
+  ],
+  propertyManagers: {
+    // 'umair@mfocorp.com':  'Umair Lassi',
+    // 'tamir@mfocorp.com':  'Tamir',
+    // 'mariam@mfocorp.com': 'Mariam / Syed',
+    // 'syed@mfocorp.com':   'Mariam / Syed',
+  }
+};
+
+let msalInstance, currentUser = null, currentRole = null;
 let isAdmin = false;
-function toggleAdmin() {
-  isAdmin = !isAdmin;
-  document.getElementById('adminPill').classList.toggle('on', isAdmin);
-  document.getElementById('adminLabel').textContent = isAdmin ? 'Admin mode' : 'Viewer mode';
-  if (selId) selApp(selId); // re-render detail to update button state
-  toast(isAdmin ? 'Admin mode on — lease generation unlocked' : 'Viewer mode — lease generation locked', isAdmin ? 'ok' : '');
+
+async function initAuth() {
+  showScreen('loading');
+  try {
+    msalInstance = new msal.PublicClientApplication(msalConfig);
+    await msalInstance.initialize();
+    const resp = await msalInstance.handleRedirectPromise();
+    if (resp) {
+      handleAuthResponse(resp.account);
+    } else {
+      const accounts = msalInstance.getAllAccounts();
+      accounts.length > 0 ? handleAuthResponse(accounts[0]) : showScreen('login');
+    }
+  } catch (e) {
+    console.error('MSAL init error:', e);
+    showScreen('login');
+  }
+}
+
+function handleAuthResponse(account) {
+  const email = account.username.toLowerCase();
+  const adminEmails = ROLES.admins.map(e => e.toLowerCase());
+  const pmKeys = Object.keys(ROLES.propertyManagers);
+  const pmKey = pmKeys.find(k => k.toLowerCase() === email);
+
+  if (adminEmails.includes(email)) {
+    currentUser = account; currentRole = 'admin'; isAdmin = true;
+    activateApp(account.name || account.username, 'Admin', null);
+  } else if (pmKey) {
+    currentUser = account; currentRole = 'pm'; isAdmin = false;
+    activateApp(account.name || account.username, ROLES.propertyManagers[pmKey], ROLES.propertyManagers[pmKey]);
+  } else {
+    showScreen('denied');
+  }
+}
+
+function activateApp(displayName, roleLabel, pmName) {
+  hideAllScreens();
+  document.getElementById('userInfo').style.display = 'flex';
+  document.getElementById('userName').textContent = displayName;
+  const rb = document.getElementById('roleBadge');
+  rb.textContent = roleLabel;
+  rb.className = 'role-badge' + (currentRole === 'pm' ? ' pm' : '');
+  if (pmName) {
+    document.getElementById('pm-filter-row').style.display = 'none';
+    setPM(pmName);
+  } else {
+    renderList();
+  }
+}
+
+function showScreen(id) {
+  document.getElementById('screen-loading').style.display = id === 'loading' ? 'flex' : 'none';
+  document.getElementById('screen-login').style.display   = id === 'login'   ? 'flex' : 'none';
+  document.getElementById('screen-denied').style.display  = id === 'denied'  ? 'flex' : 'none';
+  document.getElementById('appLayout').style.display = 'none';
+}
+function hideAllScreens() {
+  ['screen-loading','screen-login','screen-denied'].forEach(
+    id => document.getElementById(id).style.display = 'none');
+  document.getElementById('appLayout').style.display = 'flex';
+}
+
+function login() {
+  msalInstance.loginRedirect({ scopes: ['User.Read'] });
+}
+function logout() {
+  currentUser = null; currentRole = null; isAdmin = false;
+  msalInstance.logoutRedirect({
+    postLogoutRedirectUri: window.location.origin + window.location.pathname
+  });
 }
 
 // ── PROPERTY MANAGERS ─────────────────────────────────────────────────────────
@@ -921,7 +1066,7 @@ function toast(msg,type=''){
   setTimeout(()=>t.classList.remove('show'),3200);
 }
 
-renderList();
+initAuth();
 </script>
 </body>
 </html>
