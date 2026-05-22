@@ -10,102 +10,128 @@
 :root{
   --pri:#1B4332;--pri2:#2D6A4F;--acc:#52B788;--bg:#F4F7F5;--card:#fff;
   --bdr:#DDE6E1;--txt:#1A2E22;--mut:#6B8474;--red:#DC2626;--ylw:#D97706;--grn:#059669;
-  --info:#0369A1;
 }
 body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--txt);height:100vh;display:flex;flex-direction:column;overflow:hidden}
+
 /* HEADER */
-header{background:var(--pri);color:#fff;padding:0 24px;height:58px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.18)}
-.hbrand{display:flex;align-items:center;gap:12px}
-.hlogo{width:34px;height:34px;background:var(--acc);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;color:#fff}
-.hbrand h1{font-size:15px;font-weight:700}
-.hbrand span{font-size:11px;opacity:.65;font-weight:400}
-.hinfo{font-size:12px;opacity:.7}
+header{background:var(--pri);color:#fff;padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.hbrand{display:flex;align-items:center;gap:11px}
+.hlogo{width:32px;height:32px;background:var(--acc);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff}
+.hbrand h1{font-size:15px;font-weight:700;letter-spacing:-.2px}
+.hbrand span{font-size:11px;opacity:.6;font-weight:400}
+.hright{display:flex;align-items:center;gap:10px}
+.hcount{font-size:12px;opacity:.65}
+/* Admin toggle pill */
+.admin-pill{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:4px 10px;font-size:11px;cursor:pointer;transition:.2s;user-select:none}
+.admin-pill:hover{background:rgba(255,255,255,.2)}
+.admin-pill .dot{width:8px;height:8px;border-radius:50%;background:#6B8474;transition:.2s}
+.admin-pill.on .dot{background:#52B788}
+.admin-pill.on{border-color:var(--acc)}
+
 /* LAYOUT */
 .layout{display:flex;flex:1;overflow:hidden}
+
 /* SIDEBAR */
-aside{width:290px;background:var(--card);border-right:1px solid var(--bdr);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
-.sbhead{padding:14px 16px 10px;border-bottom:1px solid var(--bdr)}
-.sbhead h2{font-size:13px;font-weight:700;margin-bottom:8px}
-.ftabs{display:flex;gap:4px;flex-wrap:wrap}
-.ftab{padding:3px 9px;border-radius:10px;font-size:11px;cursor:pointer;border:1px solid var(--bdr);background:transparent;color:var(--mut);transition:.15s}
+aside{width:288px;background:var(--card);border-right:1px solid var(--bdr);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
+.sbhead{padding:13px 14px 10px;border-bottom:1px solid var(--bdr)}
+.sbhead h2{font-size:12px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px}
+.filter-group{margin-bottom:7px}
+.filter-label{font-size:10px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px}
+.ftabs{display:flex;gap:3px;flex-wrap:wrap}
+.ftab{padding:3px 8px;border-radius:10px;font-size:11px;cursor:pointer;border:1px solid var(--bdr);background:transparent;color:var(--mut);transition:.15s;white-space:nowrap}
 .ftab.on{background:var(--pri);border-color:var(--pri);color:#fff}
+.ftab.pm-tab.on{background:#0369A1;border-color:#0369A1;color:#fff}
 .alist{flex:1;overflow-y:auto;padding:6px}
-.acard{padding:11px 13px;border-radius:8px;border:1.5px solid transparent;cursor:pointer;transition:.15s;margin-bottom:3px}
+.acard{padding:10px 12px;border-radius:8px;border:1.5px solid transparent;cursor:pointer;transition:.15s;margin-bottom:3px}
 .acard:hover{background:var(--bg);border-color:var(--bdr)}
 .acard.sel{background:#EAF7F0;border-color:var(--acc)}
 .acard-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:3px}
-.acard-name{font-weight:600;font-size:13px}
-.badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:8px;text-transform:uppercase;letter-spacing:.3px}
+.acard-name{font-weight:600;font-size:13px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-right:6px}
+.badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:8px;text-transform:uppercase;letter-spacing:.3px;flex-shrink:0}
 .b-new{background:#DBEAFE;color:#1D4ED8}
 .b-reviewed{background:#FEF3C7;color:#92400E}
 .b-approved{background:#D1FAE5;color:#065F46}
 .b-declined{background:#FEE2E2;color:#991B1B}
-.acard-sub{font-size:11px;color:var(--mut);display:flex;gap:10px;margin-top:2px}
+.acard-sub{font-size:11px;color:var(--mut);display:flex;gap:8px;margin-top:2px;flex-wrap:wrap}
+.pm-chip{font-size:10px;background:#EFF6FF;color:#1D4ED8;border-radius:6px;padding:1px 5px;font-weight:600}
+
 /* MAIN */
-main{flex:1;overflow-y:auto;padding:22px 24px}
+main{flex:1;overflow-y:auto;padding:20px 22px}
 .empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;color:var(--mut);gap:10px}
-.empty svg{opacity:.25}
+.empty svg{opacity:.22}
 .empty h3{font-size:17px;color:var(--txt);font-weight:600}
 .empty p{font-size:13px;max-width:300px;line-height:1.5}
-/* DETAIL HEADER */
-.dhead{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;gap:12px}
-.dname{font-size:20px;font-weight:700;margin-bottom:3px}
+
+/* DETAIL */
+.dhead{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;gap:12px}
+.dname{font-size:19px;font-weight:700;margin-bottom:3px}
 .dmeta{font-size:12px;color:var(--mut);display:flex;gap:12px;flex-wrap:wrap}
 .dacts{display:flex;gap:7px;flex-shrink:0}
-/* SECTION CARDS */
-.secgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
-.secgrid.three{grid-template-columns:1fr 1fr 1fr}
+
+/* CARDS */
+.secgrid{display:grid;gap:11px;margin-bottom:11px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:1fr 1fr 1fr}
+.g1{grid-template-columns:1fr}
 .scard{background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:14px}
 .scard.full{grid-column:1/-1}
-.scard h3{font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
-.scard h3 .icon{font-size:13px}
-.frow{display:flex;flex-direction:column;gap:1px;margin-bottom:7px}
+.scard h3{font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;display:flex;align-items:center;gap:5px}
+/* Two-col inside a card */
+.card-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+.col-divider{border-top:1px dashed var(--bdr);grid-column:1/-1;margin:10px 0}
+.col-title{font-size:10px;font-weight:700;color:var(--pri);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;grid-column:1/-1}
+.col-title.right{grid-column:2}
+
+.frow{display:flex;flex-direction:column;gap:1px;margin-bottom:6px}
 .frow:last-child{margin-bottom:0}
 .flbl{font-size:10px;color:var(--mut);font-weight:500;text-transform:uppercase;letter-spacing:.3px}
-.fval{font-size:13px;font-weight:500;line-height:1.4}
-.fval.good{color:var(--grn)}
-.fval.warn{color:var(--ylw)}
-.fval.bad{color:var(--red)}
+.fval{font-size:12.5px;font-weight:500;line-height:1.4}
+.fval.good{color:var(--grn)}.fval.warn{color:var(--ylw)}.fval.bad{color:var(--red)}
 .tag{display:inline-block;padding:1px 7px;border-radius:8px;font-size:11px;font-weight:600}
 .tag-no{background:#F0FDF4;color:#166534;border:1px solid #BBF7D0}
 .tag-yes{background:#FEF9C3;color:#854D0E;border:1px solid #FDE68A}
 .tag-bad{background:#FEF2F2;color:#991B1B;border:1px solid #FECACA}
-/* CREDIT FLAGS */
-.credit-row{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--bg);font-size:12px}
+.credit-row{display:flex;align-items:center;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--bg);font-size:12px}
 .credit-row:last-child{border-bottom:none}
+
 /* ACTION BAR */
-.abar{background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;margin-top:12px;gap:12px}
-.abar-txt strong{font-size:14px;display:block;margin-bottom:2px}
+.abar{background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:13px 16px;display:flex;align-items:center;justify-content:space-between;margin-top:11px;gap:12px}
+.abar-txt strong{font-size:13px;display:block;margin-bottom:2px}
 .abar-txt span{font-size:12px;color:var(--mut)}
-.abar-btns{display:flex;gap:8px;flex-shrink:0}
+.abar-btns{display:flex;gap:7px;flex-shrink:0;align-items:center}
+.lock-msg{font-size:11px;color:var(--mut);display:flex;align-items:center;gap:4px}
+
 /* NOTES */
-textarea.notes{width:100%;height:72px;border:1px solid var(--bdr);border-radius:6px;padding:8px 10px;font-family:inherit;font-size:12px;resize:vertical;color:var(--txt);background:var(--bg)}
+textarea.notes{width:100%;height:70px;border:1px solid var(--bdr);border-radius:6px;padding:8px 10px;font-family:inherit;font-size:12px;resize:vertical;color:var(--txt);background:var(--bg)}
 textarea.notes:focus{outline:none;border-color:var(--acc)}
+
 /* BUTTONS */
-.btn{padding:7px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;border:none;transition:.15s;display:inline-flex;align-items:center;gap:5px}
-.btn-pri{background:var(--pri);color:#fff}.btn-pri:hover{background:var(--pri2)}
-.btn-grn{background:var(--grn);color:#fff}.btn-grn:hover{background:#047857}
-.btn-red{background:var(--red);color:#fff}.btn-red:hover{background:#B91C1C}
-.btn-out{background:transparent;color:var(--txt);border:1.5px solid var(--bdr)}.btn-out:hover{border-color:var(--pri);color:var(--pri)}
-.btn-acc{background:var(--acc);color:#fff}.btn-acc:hover{background:#40916C}
-.btn-lg{padding:10px 20px;font-size:14px}
+.btn{padding:7px 13px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;border:none;transition:.15s;display:inline-flex;align-items:center;gap:5px}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-pri{background:var(--pri);color:#fff}.btn-pri:hover:not(:disabled){background:var(--pri2)}
+.btn-grn{background:var(--grn);color:#fff}.btn-grn:hover:not(:disabled){background:#047857}
+.btn-red{background:var(--red);color:#fff}.btn-red:hover:not(:disabled){background:#B91C1C}
+.btn-out{background:transparent;color:var(--txt);border:1.5px solid var(--bdr)}.btn-out:hover:not(:disabled){border-color:var(--pri);color:var(--pri)}
+.btn-acc{background:var(--acc);color:#fff}.btn-acc:hover:not(:disabled){background:#40916C}
+.btn-lg{padding:9px 18px;font-size:13px}
+
 /* MODAL */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px}
 .overlay.hide{display:none}
 .modal{background:var(--card);border-radius:12px;width:100%;max-width:600px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.3)}
-.mhead{padding:18px 22px 14px;border-bottom:1px solid var(--bdr);display:flex;align-items:flex-start;justify-content:space-between}
-.mhead h2{font-size:17px;font-weight:700}
+.mhead{padding:16px 20px 12px;border-bottom:1px solid var(--bdr);display:flex;align-items:flex-start;justify-content:space-between}
+.mhead h2{font-size:16px;font-weight:700}
 .mhead p{font-size:12px;color:var(--mut);margin-top:2px}
 .mclose{background:none;border:none;cursor:pointer;font-size:20px;color:var(--mut);line-height:1;padding:2px}
-.mbody{padding:18px 22px;overflow-y:auto;flex:1}
-.mfoot{padding:14px 22px;border-top:1px solid var(--bdr);display:flex;gap:8px;justify-content:flex-end}
-.steps{display:flex;gap:6px;margin-bottom:18px}
+.mbody{padding:16px 20px;overflow-y:auto;flex:1}
+.mfoot{padding:12px 20px;border-top:1px solid var(--bdr);display:flex;gap:8px;justify-content:flex-end}
+.steps{display:flex;gap:6px;margin-bottom:16px}
 .sdot{height:4px;flex:1;border-radius:2px;background:var(--bdr);transition:background .3s}
 .sdot.on{background:var(--acc)}.sdot.done{background:var(--pri)}
 .spanel{display:none}.spanel.on{display:block}
-.fsec{margin-bottom:20px}
-.ftitle{font-size:12px;font-weight:700;color:var(--pri);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;padding-bottom:5px;border-bottom:2px solid var(--acc)}
-.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fsec{margin-bottom:18px}
+.ftitle{font-size:11px;font-weight:700;color:var(--pri);text-transform:uppercase;letter-spacing:.5px;margin-bottom:9px;padding-bottom:5px;border-bottom:2px solid var(--acc)}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
 .fg{display:flex;flex-direction:column;gap:3px}
 .fg.full{grid-column:1/-1}
 .fg label{font-size:11px;font-weight:600;color:var(--mut)}
@@ -116,37 +142,61 @@ textarea.notes:focus{outline:none;border-color:var(--acc)}
 .hint{font-size:10px;color:var(--mut);margin-top:1px}
 .cbrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
 .alert{background:#FFFBEB;border:1px solid #FDE68A;border-radius:6px;padding:8px 12px;font-size:12px;color:#92400E;margin-top:8px}
+.info-box{background:#EFF6FF;border:1px solid #BFDBFE;border-radius:6px;padding:8px 12px;font-size:12px;color:#1D4ED8;margin-bottom:12px}
+
 /* TOAST */
 .toast{position:fixed;bottom:18px;right:18px;background:var(--pri);color:#fff;padding:10px 18px;border-radius:8px;font-size:13px;box-shadow:0 4px 20px rgba(0,0,0,.2);transform:translateY(100px);transition:transform .3s;z-index:200}
-.toast.show{transform:translateY(0)}.toast.ok{background:var(--grn)}
+.toast.show{transform:translateY(0)}.toast.ok{background:var(--grn)}.toast.warn{background:var(--ylw)}
 </style>
 </head>
 <body>
 <header>
   <div class="hbrand">
-    <div class="hlogo">A</div>
+    <div class="hlogo">L</div>
     <div><h1>LassiP.management</h1><span>Rental Application Management</span></div>
   </div>
-  <div class="hinfo" id="hcount"></div>
+  <div class="hright">
+    <span class="hcount" id="hcount"></span>
+    <div class="admin-pill" id="adminPill" onclick="toggleAdmin()" title="Toggle admin mode (will be replaced by Microsoft login)">
+      <div class="dot"></div>
+      <span id="adminLabel">Viewer mode</span>
+    </div>
+  </div>
 </header>
+
 <div class="layout">
   <aside>
     <div class="sbhead">
       <h2>Applications</h2>
-      <div class="ftabs">
-        <button class="ftab on" onclick="setFilter('all')">All</button>
-        <button class="ftab" onclick="setFilter('new')">New</button>
-        <button class="ftab" onclick="setFilter('reviewed')">Reviewed</button>
-        <button class="ftab" onclick="setFilter('approved')">Approved</button>
+      <!-- Status filter -->
+      <div class="filter-group">
+        <div class="filter-label">By Status</div>
+        <div class="ftabs" id="statusTabs">
+          <button class="ftab on" onclick="setStatus('all')">All</button>
+          <button class="ftab" onclick="setStatus('new')">New</button>
+          <button class="ftab" onclick="setStatus('reviewed')">Reviewed</button>
+          <button class="ftab" onclick="setStatus('approved')">Approved</button>
+        </div>
+      </div>
+      <!-- Property Manager filter -->
+      <div class="filter-group">
+        <div class="filter-label">By Property Manager</div>
+        <div class="ftabs" id="pmTabs">
+          <button class="ftab pm-tab on" onclick="setPM('all')">All PMs</button>
+          <button class="ftab pm-tab" onclick="setPM('Umair Lassi')">Umair</button>
+          <button class="ftab pm-tab" onclick="setPM('Tamir')">Tamir</button>
+          <button class="ftab pm-tab" onclick="setPM('Mariam / Syed')">Mariam/Syed</button>
+        </div>
       </div>
     </div>
     <div class="alist" id="alist"></div>
   </aside>
+
   <main id="main">
     <div class="empty" id="empty">
-      <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+      <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
       <h3>Select an application</h3>
-      <p>Pick a rental application from the sidebar to review all details, then generate the lease agreement PDF once approved.</p>
+      <p>Pick a rental application from the sidebar to review all details, then generate the lease once approved.</p>
     </div>
     <div id="detail" style="display:none"></div>
   </main>
@@ -196,17 +246,17 @@ textarea.notes:focus{outline:none;border-color:var(--acc)}
             <div class="fg"><label>Lease Start Date *</label><input id="f_start" type="date"></div>
             <div class="fg"><label>Lease End Date *</label><input id="f_end" type="date"></div>
             <div class="fg"><label>Monthly Rent (CAD) *</label><input id="f_rent" type="number" placeholder="2500" min="0" step="50"></div>
-            <div class="fg"><label>Security Deposit (CAD) *</label><input id="f_dep" type="number" placeholder="2500" min="0" step="50"><span class="hint">Typically equal to one month's rent</span></div>
+            <div class="fg"><label>Security Deposit (CAD) *</label><input id="f_dep" type="number" placeholder="2500" min="0" step="50"><span class="hint">Typically one month's rent</span></div>
             <div class="fg"><label>Late Penalty ($/day)</label><input id="f_late" type="number" value="20" min="0"></div>
             <div class="fg"><label>Re-rental Fee ($)</label><input id="f_rerent" type="number" value="2000" min="0"></div>
           </div>
         </div>
       </div>
-      <!-- Step 2: Tenants on Lease -->
+      <!-- Step 2: Tenants -->
       <div class="spanel" id="s2">
+        <div id="lease-alert"></div>
         <div class="fsec">
           <div class="ftitle">Tenants Named on Lease</div>
-          <div id="lease-alert"></div>
           <div class="fgrid">
             <div class="fg full"><label>Tenant 1 (Primary Applicant) *</label><input id="f_t1" type="text"></div>
             <div class="fg full"><label>Tenant 2 (Co-Applicant / Additional Adult)</label><input id="f_t2" type="text" placeholder="Leave blank if none"></div>
@@ -230,151 +280,104 @@ textarea.notes:focus{outline:none;border-color:var(--acc)}
 <div class="toast" id="toast"></div>
 
 <script>
-// ── APPLICATION DATA (mirrors Microsoft Forms rental application fields) ────────
+// ── ADMIN STATE ───────────────────────────────────────────────────────────────
+// Temporary toggle — will be replaced by Microsoft Azure AD login
+let isAdmin = false;
+function toggleAdmin() {
+  isAdmin = !isAdmin;
+  document.getElementById('adminPill').classList.toggle('on', isAdmin);
+  document.getElementById('adminLabel').textContent = isAdmin ? 'Admin mode' : 'Viewer mode';
+  if (selId) selApp(selId); // re-render detail to update button state
+  toast(isAdmin ? 'Admin mode on — lease generation unlocked' : 'Viewer mode — lease generation locked', isAdmin ? 'ok' : '');
+}
+
+// ── PROPERTY MANAGERS ─────────────────────────────────────────────────────────
+const PM_LIST = ['Umair Lassi', 'Tamir', 'Mariam / Syed'];
+
+// ── APPLICATION DATA ──────────────────────────────────────────────────────────
 const apps = [
   {
     id: 1,
     submittedAt: "2026-05-18",
     status: "approved",
     notes: "Verified 2-year tenancy with Tanveer Sidhu. Left for more space & garage — positive reason. Employment confirmed at MG Collision. Monthly wage $4,800 + adult children contributing income. No credit flags. Approved for Upper Unit.",
-
-    // Property section
-    propertyAddress: "339 Coral Reef Manor NE",
     propertyManager: "Mariam / Syed",
+
+    propertyAddress: "339 Coral Reef Manor NE",
     desiredOccupancy: "2026-06-01",
-    maxOccupants: 7,
-    adults: 5,
+    maxOccupants: 7, adults: 5,
     children: "Mohammad (age 6), Sayed Jamal (age 11)",
 
-    // Section 1 — Primary Applicant
+    // Primary applicant
     name: "Sikandar Shah Shah",
-    sin: "",
-    currentAddress: "20 Falshire Way NE, Calgary, AB",
-    email: "sekandar32974@gmail.com",
-    phone1: "902-401-4912",
-    phone2: "902-401-8501",
-    dob: "1982-11-02",
-
-    // Section 2 — Co-Applicant
-    coName: "Sayed Agha Shah",
-    coCurrentAddress: "20 Falshire Way NE, Calgary, AB",
-    coEmail: "sayedaghashah@gmail.com",
-    coPhone1: "403-899-5597",
-    coPhone2: "",
-    coDob: "",
-
-    // Section 3 — Previous Tenancy
-    prevLandlordName: "Tanveer Sidhu",
-    prevLandlordPhone: "403-632-7771",
-    prevAddress: "20 Falshire Way NE, Calgary, AB",
-    prevStay: "2 years",
-    prevRent: "2400",
-    prevReason: "Less space, no garage",
-
-    // Section 4 — Employment
-    empStatus: "Full-time",
-    empEmployer: "MG Collision",
+    sin: "", currentAddress: "20 Falshire Way NE, Calgary, AB",
+    email: "sekandar32974@gmail.com", phone1: "902-401-4912", phone2: "902-401-8501", dob: "1982-11-02",
+    // Primary employment
+    empStatus: "Full-time", empEmployer: "MG Collision",
     empAddress: "933B 48 Ave SE, Calgary, AB T2G 2A7",
-    empSupervisor: "Ahmad Fawad",
-    empSupPhone: "587-718-7615",
-    empLength: "2 years",
-    empWage: 4800,
-    empPosition: "Body Repair",
-    empOther: "Son is also working full time and daughter is also working full time",
+    empSupervisor: "Ahmad Fawad", empSupPhone: "587-718-7615",
+    empLength: "2 years", empWage: 4800, empPosition: "Body Repair",
+    empOther: "Son and daughter both working full time",
 
-    // Section 5 — Co-Applicant Employment
-    coEmpEmployer: "",
-    coEmpAddress: "",
-    coEmpSupervisor: "",
-    coEmpSupPhone: "",
-    coEmpLength: "",
-    coEmpWage: "",
-    coEmpPosition: "",
+    // Co-applicant
+    coName: "Sayed Agha Shah", coCurrentAddress: "20 Falshire Way NE, Calgary, AB",
+    coEmail: "sayedaghashah@gmail.com", coPhone1: "403-899-5597", coPhone2: "", coDob: "",
+    // Co-applicant employment
+    coEmpEmployer: "", coEmpAddress: "", coEmpSupervisor: "", coEmpSupPhone: "",
+    coEmpLength: "", coEmpWage: "", coEmpPosition: "",
 
-    // Section 6 — Credit History
-    crBankruptcy: "No",
-    crEviction: "No",
-    crLatePayments: "No",
-    crRefused: "No",
-    crExplanation: "",
+    // Previous tenancy
+    prevLandlordName: "Tanveer Sidhu", prevLandlordPhone: "403-632-7771",
+    prevAddress: "20 Falshire Way NE, Calgary, AB",
+    prevStay: "2 years", prevRent: "2400", prevReason: "Less space, no garage",
 
-    // Section 7 — Additional Info
-    hasPets: "No",
-    petDesc: "",
-    smokes: "No",
-    hasInsurance: "No",
+    // Credit
+    crBankruptcy: "No", crEviction: "No", crLatePayments: "No", crRefused: "No", crExplanation: "",
 
-    // Section 8 — References
+    // Additional
+    hasPets: "No", petDesc: "", smokes: "No", hasInsurance: "No",
+
+    // References
     ref1Name: "", ref1Rel: "", ref1Phone: "",
     ref2Name: "", ref2Rel: "", ref2Phone: "",
     ref3Name: "", ref3Rel: "", ref3Phone: "",
 
-    // Section 9 — Emergency Contact
+    // Emergency
     emgName: "", emgAddress: "", emgPhone: "", emgRel: ""
   },
   {
     id: 2,
     submittedAt: "2026-05-12",
     status: "reviewed",
-    notes: "Income adequate. Waiting on employment verification from AHS. One late payment flag — needs explanation. References not yet contacted.",
+    notes: "Income adequate. Waiting on AHS employment verification. One late payment flag (COVID 2021 — explained). References not yet contacted.",
+    propertyManager: "Umair Lassi",
 
     propertyAddress: "339 Coral Reef Manor NE",
-    propertyManager: "Mariam / Syed",
     desiredOccupancy: "2026-06-01",
-    maxOccupants: 2,
-    adults: 2,
-    children: "",
+    maxOccupants: 2, adults: 2, children: "",
 
-    name: "Maria Garcia",
-    sin: "",
-    currentAddress: "15 Saddleback Road SW, Calgary, AB",
-    email: "maria.garcia@hotmail.com",
-    phone1: "403-555-2847",
-    phone2: "",
-    dob: "1990-03-15",
-
-    coName: "Diego Garcia",
-    coCurrentAddress: "15 Saddleback Road SW, Calgary, AB",
-    coEmail: "diego.garcia@gmail.com",
-    coPhone1: "403-555-9901",
-    coPhone2: "",
-    coDob: "1993-07-22",
-
-    prevLandlordName: "James Whitmore",
-    prevLandlordPhone: "403-555-1234",
-    prevAddress: "15 Saddleback Road SW, Calgary, AB",
-    prevStay: "1 year",
-    prevRent: "2100",
-    prevReason: "Upgrading to larger unit",
-
-    empStatus: "Full-time",
-    empEmployer: "Alberta Health Services",
+    name: "Maria Garcia", sin: "", currentAddress: "15 Saddleback Road SW, Calgary, AB",
+    email: "maria.garcia@hotmail.com", phone1: "403-555-2847", phone2: "", dob: "1990-03-15",
+    empStatus: "Full-time", empEmployer: "Alberta Health Services",
     empAddress: "10101 Southport Rd SW, Calgary, AB",
-    empSupervisor: "Dr. Linda Wong",
-    empSupPhone: "403-555-3344",
-    empLength: "3 years",
-    empWage: 5800,
-    empPosition: "Administrative Coordinator",
+    empSupervisor: "Dr. Linda Wong", empSupPhone: "403-555-3344",
+    empLength: "3 years", empWage: 5800, empPosition: "Administrative Coordinator",
     empOther: "",
 
-    coEmpEmployer: "City of Calgary",
-    coEmpAddress: "800 Macleod Trail SE, Calgary, AB",
-    coEmpSupervisor: "Mark Peters",
-    coEmpSupPhone: "403-555-7890",
-    coEmpLength: "2 years",
-    coEmpWage: 4200,
-    coEmpPosition: "Parks Technician",
+    coName: "Diego Garcia", coCurrentAddress: "15 Saddleback Road SW, Calgary, AB",
+    coEmail: "diego.garcia@gmail.com", coPhone1: "403-555-9901", coPhone2: "", coDob: "1993-07-22",
+    coEmpEmployer: "City of Calgary", coEmpAddress: "800 Macleod Trail SE, Calgary, AB",
+    coEmpSupervisor: "Mark Peters", coEmpSupPhone: "403-555-7890",
+    coEmpLength: "2 years", coEmpWage: 4200, coEmpPosition: "Parks Technician",
 
-    crBankruptcy: "No",
-    crEviction: "No",
-    crLatePayments: "Yes",
-    crRefused: "No",
-    crExplanation: "One late payment during COVID-19 layoff period (2021), since recovered",
+    prevLandlordName: "James Whitmore", prevLandlordPhone: "403-555-1234",
+    prevAddress: "15 Saddleback Road SW, Calgary, AB",
+    prevStay: "1 year", prevRent: "2100", prevReason: "Upgrading to larger unit",
 
-    hasPets: "No",
-    petDesc: "",
-    smokes: "No",
-    hasInsurance: "Yes",
+    crBankruptcy: "No", crEviction: "No", crLatePayments: "Yes", crRefused: "No",
+    crExplanation: "One late payment during COVID-19 layoff (2021), since recovered",
+
+    hasPets: "No", petDesc: "", smokes: "No", hasInsurance: "Yes",
 
     ref1Name: "Carlos Rivera", ref1Rel: "Former Landlord", ref1Phone: "403-555-7721",
     ref2Name: "Dr. Linda Wong", ref2Rel: "Employer", ref2Phone: "403-555-3344",
@@ -387,64 +390,33 @@ const apps = [
     submittedAt: "2026-05-14",
     status: "new",
     notes: "",
+    propertyManager: "Tamir",
 
     propertyAddress: "339 Coral Reef Manor NE",
-    propertyManager: "Mariam / Syed",
     desiredOccupancy: "2026-06-01",
-    maxOccupants: 5,
-    adults: 3,
-    children: "Sara (age 9)",
+    maxOccupants: 5, adults: 3, children: "Sara (age 9)",
 
-    name: "Ahmed Hassan",
-    sin: "",
-    currentAddress: "88 Whitehorn Drive NE, Calgary, AB",
-    email: "ahmed.hassan@outlook.com",
-    phone1: "587-555-0391",
-    phone2: "587-555-0392",
-    dob: "1985-06-10",
-
-    coName: "Fatima Hassan",
-    coCurrentAddress: "88 Whitehorn Drive NE, Calgary, AB",
-    coEmail: "fatima.hassan@gmail.com",
-    coPhone1: "587-555-0393",
-    coPhone2: "",
-    coDob: "1988-09-25",
-
-    prevLandlordName: "Ibrahim Al-Amin",
-    prevLandlordPhone: "403-555-8810",
-    prevAddress: "88 Whitehorn Drive NE, Calgary, AB",
-    prevStay: "3 years",
-    prevRent: "2200",
-    prevReason: "Landlord selling property",
-
-    empStatus: "Full-time",
-    empEmployer: "CN Rail",
+    name: "Ahmed Hassan", sin: "", currentAddress: "88 Whitehorn Drive NE, Calgary, AB",
+    email: "ahmed.hassan@outlook.com", phone1: "587-555-0391", phone2: "587-555-0392", dob: "1985-06-10",
+    empStatus: "Full-time", empEmployer: "CN Rail",
     empAddress: "101 Station Way SW, Calgary, AB",
-    empSupervisor: "Karen Thompson",
-    empSupPhone: "587-555-0022",
-    empLength: "5 years",
-    empWage: 7200,
-    empPosition: "Rail Operations Supervisor",
+    empSupervisor: "Karen Thompson", empSupPhone: "587-555-0022",
+    empLength: "5 years", empWage: 7200, empPosition: "Rail Operations Supervisor",
     empOther: "",
 
-    coEmpEmployer: "TD Bank",
-    coEmpAddress: "200 8th Ave SW, Calgary, AB",
-    coEmpSupervisor: "Rachel Singh",
-    coEmpSupPhone: "587-555-4411",
-    coEmpLength: "4 years",
-    coEmpWage: 4600,
-    coEmpPosition: "Customer Service Rep",
+    coName: "Fatima Hassan", coCurrentAddress: "88 Whitehorn Drive NE, Calgary, AB",
+    coEmail: "fatima.hassan@gmail.com", coPhone1: "587-555-0393", coPhone2: "", coDob: "1988-09-25",
+    coEmpEmployer: "TD Bank", coEmpAddress: "200 8th Ave SW, Calgary, AB",
+    coEmpSupervisor: "Rachel Singh", coEmpSupPhone: "587-555-4411",
+    coEmpLength: "4 years", coEmpWage: 4600, coEmpPosition: "Customer Service Rep",
 
-    crBankruptcy: "No",
-    crEviction: "No",
-    crLatePayments: "No",
-    crRefused: "No",
-    crExplanation: "",
+    prevLandlordName: "Ibrahim Al-Amin", prevLandlordPhone: "403-555-8810",
+    prevAddress: "88 Whitehorn Drive NE, Calgary, AB",
+    prevStay: "3 years", prevRent: "2200", prevReason: "Landlord selling property",
 
-    hasPets: "No",
-    petDesc: "",
-    smokes: "No",
-    hasInsurance: "Yes",
+    crBankruptcy: "No", crEviction: "No", crLatePayments: "No", crRefused: "No", crExplanation: "",
+
+    hasPets: "No", petDesc: "", smokes: "No", hasInsurance: "Yes",
 
     ref1Name: "Ibrahim Al-Amin", ref1Rel: "Former Landlord", ref1Phone: "403-555-8810",
     ref2Name: "Karen Thompson", ref2Rel: "Employer", ref2Phone: "587-555-0022",
@@ -457,64 +429,31 @@ const apps = [
     submittedAt: "2026-05-19",
     status: "new",
     notes: "",
+    propertyManager: "Umair Lassi",
 
     propertyAddress: "339 Coral Reef Manor NE",
-    propertyManager: "Mariam / Syed",
     desiredOccupancy: "2026-07-01",
-    maxOccupants: 1,
-    adults: 1,
-    children: "",
+    maxOccupants: 1, adults: 1, children: "",
 
-    name: "Jennifer Kim",
-    sin: "",
-    currentAddress: "200 Cranston Road SE, Calgary, AB",
-    email: "j.kim@gmail.com",
-    phone1: "403-555-6614",
-    phone2: "",
-    dob: "1994-01-30",
-
-    coName: "",
-    coCurrentAddress: "",
-    coEmail: "",
-    coPhone1: "",
-    coPhone2: "",
-    coDob: "",
-
-    prevLandlordName: "Robert Kim",
-    prevLandlordPhone: "403-555-4490",
-    prevAddress: "200 Cranston Road SE, Calgary, AB",
-    prevStay: "2 years",
-    prevRent: "1800",
-    prevReason: "Moving closer to work",
-
-    empStatus: "Self-employed",
-    empEmployer: "Kim Consulting Ltd.",
+    name: "Jennifer Kim", sin: "", currentAddress: "200 Cranston Road SE, Calgary, AB",
+    email: "j.kim@gmail.com", phone1: "403-555-6614", phone2: "", dob: "1994-01-30",
+    empStatus: "Self-employed", empEmployer: "Kim Consulting Ltd.",
     empAddress: "1200 17th Ave SW, Calgary, AB",
-    empSupervisor: "N/A",
-    empSupPhone: "",
-    empLength: "4 years",
-    empWage: 9000,
-    empPosition: "Business Consultant",
+    empSupervisor: "N/A", empSupPhone: "",
+    empLength: "4 years", empWage: 9000, empPosition: "Business Consultant",
     empOther: "",
 
-    coEmpEmployer: "",
-    coEmpAddress: "",
-    coEmpSupervisor: "",
-    coEmpSupPhone: "",
-    coEmpLength: "",
-    coEmpWage: "",
-    coEmpPosition: "",
+    coName: "", coCurrentAddress: "", coEmail: "", coPhone1: "", coPhone2: "", coDob: "",
+    coEmpEmployer: "", coEmpAddress: "", coEmpSupervisor: "", coEmpSupPhone: "",
+    coEmpLength: "", coEmpWage: "", coEmpPosition: "",
 
-    crBankruptcy: "No",
-    crEviction: "No",
-    crLatePayments: "No",
-    crRefused: "No",
-    crExplanation: "",
+    prevLandlordName: "Robert Kim", prevLandlordPhone: "403-555-4490",
+    prevAddress: "200 Cranston Road SE, Calgary, AB",
+    prevStay: "2 years", prevRent: "1800", prevReason: "Moving closer to work",
 
-    hasPets: "No",
-    petDesc: "",
-    smokes: "No",
-    hasInsurance: "Yes",
+    crBankruptcy: "No", crEviction: "No", crLatePayments: "No", crRefused: "No", crExplanation: "",
+
+    hasPets: "No", petDesc: "", smokes: "No", hasInsurance: "Yes",
 
     ref1Name: "Michelle Park", ref1Rel: "Professional Contact", ref1Phone: "403-555-2278",
     ref2Name: "Robert Kim", ref2Rel: "Former Landlord", ref2Phone: "403-555-4490",
@@ -524,175 +463,204 @@ const apps = [
   }
 ];
 
-let filter = 'all', selId = null, step = 0, leaseApp = null;
+let statusFilter = 'all', pmFilter = 'all', selId = null, step = 0, leaseApp = null;
 
 // ── LIST ──────────────────────────────────────────────────────────────────────
 function renderList() {
-  const shown = filter === 'all' ? apps : apps.filter(a => a.status === filter);
-  document.getElementById('alist').innerHTML = shown.map(a => `
+  let shown = apps;
+  if (statusFilter !== 'all') shown = shown.filter(a => a.status === statusFilter);
+  if (pmFilter !== 'all') shown = shown.filter(a => a.propertyManager === pmFilter);
+
+  document.getElementById('alist').innerHTML = shown.length === 0
+    ? '<div style="padding:16px;text-align:center;font-size:12px;color:var(--mut)">No applications match filters</div>'
+    : shown.map(a => `
     <div class="acard ${selId === a.id ? 'sel' : ''}" onclick="selApp(${a.id})">
       <div class="acard-top">
         <span class="acard-name">${a.name}</span>
         <span class="badge b-${a.status}">${a.status}</span>
       </div>
-      <div class="acard-sub"><span>${a.propertyAddress.includes('339') ? 'Upper/Bsmt TBD' : a.propertyAddress}</span></div>
-      <div class="acard-sub"><span>Move-in: ${a.desiredOccupancy}</span><span>Submitted ${a.submittedAt}</span></div>
+      <div class="acard-sub">
+        <span class="pm-chip">${a.propertyManager}</span>
+        <span>Move-in: ${a.desiredOccupancy}</span>
+      </div>
+      <div class="acard-sub"><span>${a.propertyAddress}</span></div>
     </div>`).join('');
-  document.getElementById('hcount').textContent = apps.length + ' applications';
+
+  document.getElementById('hcount').textContent = shown.length + ' of ' + apps.length + ' applications';
 }
 
-function setFilter(f) {
-  filter = f;
-  document.querySelectorAll('.ftab').forEach((t, i) => {
-    t.classList.toggle('on', ['all','new','reviewed','approved'].indexOf(f) === i);
+function setStatus(f) {
+  statusFilter = f;
+  document.querySelectorAll('#statusTabs .ftab').forEach(t =>
+    t.classList.toggle('on', t.textContent.toLowerCase() === f || (f === 'all' && t.textContent === 'All')));
+  renderList();
+}
+function setPM(f) {
+  pmFilter = f;
+  document.querySelectorAll('#pmTabs .ftab').forEach(t => {
+    const match = f === 'all' ? t.textContent === 'All PMs' : t.textContent.trim() === (f === 'Mariam / Syed' ? 'Mariam/Syed' : f);
+    t.classList.toggle('on', match);
   });
   renderList();
 }
 
-// ── DETAIL VIEW ───────────────────────────────────────────────────────────────
+// ── DETAIL ────────────────────────────────────────────────────────────────────
 function selApp(id) {
   selId = id;
   renderList();
   const a = apps.find(x => x.id === id);
   document.getElementById('empty').style.display = 'none';
-  const d = document.getElementById('detail');
-  d.style.display = 'block';
+  const det = document.getElementById('detail');
+  det.style.display = 'block';
 
   const totalIncome = (a.empWage || 0) + (parseFloat(a.coEmpWage) || 0);
-  const incomeRatio = totalIncome > 0 ? Math.round(totalIncome / 2500 * 100) : 0;
-  const anyFlag = a.crBankruptcy === 'Yes' || a.crEviction === 'Yes' || a.crLatePayments === 'Yes' || a.crRefused === 'Yes';
-
-  function frow(lbl, val, cls = '') {
-    return val ? `<div class="frow"><span class="flbl">${lbl}</span><span class="fval ${cls}">${val}</span></div>` : '';
-  }
-  function yn(val) {
-    if (!val) return '';
-    return val === 'No' ? `<span class="tag tag-no">No</span>` : `<span class="tag tag-bad">Yes</span>`;
-  }
-  function creditRow(label, val) {
-    const ok = val === 'No';
-    return `<div class="credit-row"><span>${label}</span>${yn(val)}</div>`;
-  }
-
+  const ratio = totalIncome > 0 ? Math.round(totalIncome / 2500 * 100) : 0;
+  const anyFlag = a.crBankruptcy==='Yes' || a.crEviction==='Yes' || a.crLatePayments==='Yes' || a.crRefused==='Yes';
   const hasCoApp = !!a.coName;
-  const hasRefs = a.ref1Name || a.ref2Name || a.ref3Name;
-  const hasEmg = !!a.emgName;
-  const hasCrExpl = !!a.crExplanation;
+  const hasCoEmp = !!a.coEmpEmployer;
 
-  d.innerHTML = `
+  function fr(lbl, val, cls) {
+    if (!val) return '';
+    return `<div class="frow"><span class="flbl">${lbl}</span><span class="fval ${cls||''}">${val}</span></div>`;
+  }
+  function yn(v) {
+    if (!v) return '';
+    return v==='No' ? '<span class="tag tag-no">No</span>' : '<span class="tag tag-bad">Yes ⚠</span>';
+  }
+  function cr(lbl, v) {
+    return `<div class="credit-row"><span>${lbl}</span>${yn(v)}</div>`;
+  }
+
+  // Combined applicant+employment card (two columns inside one card)
+  const primaryCard = `
+    <div class="scard full">
+      <h3><span>👤</span> Primary Applicant &amp; Employment</h3>
+      <div class="card-cols">
+        <div class="col-title">Personal Information</div>
+        <div class="col-title right">Employment</div>
+        ${fr('Full Name', a.name)}
+        ${fr('Status', a.empStatus)}
+        ${fr('Date of Birth', a.dob)}
+        ${fr('Employer', a.empEmployer)}
+        ${fr('Email', a.email)}
+        ${fr('Position', a.empPosition)}
+        ${fr('Phone 1', a.phone1)}
+        ${fr('Length', a.empLength)}
+        ${a.phone2 ? fr('Phone 2', a.phone2) : '<div></div>'}
+        ${fr('Monthly Wage', a.empWage ? '<span class="fval '+(ratio>=250?'good':'warn')+'">$'+a.empWage.toLocaleString()+' '+(ratio>=250?'✓':'⚠')+'</span>' : '—')}
+        ${fr('Current Address', a.currentAddress)}
+        ${fr('Employer Address', a.empAddress)}
+        ${a.empSupervisor ? fr('', '') : ''}
+        ${fr('Supervisor', a.empSupervisor + (a.empSupPhone ? ' · '+a.empSupPhone : ''))}
+        ${a.empOther ? `<div class="frow" style="grid-column:1/-1"><span class="flbl">Other Income Sources</span><span class="fval">${a.empOther}</span></div>` : ''}
+      </div>
+    </div>`;
+
+  const coCard = hasCoApp ? `
+    <div class="scard full">
+      <h3><span>👤</span> Co-Applicant &amp; Employment</h3>
+      <div class="card-cols">
+        <div class="col-title">Personal Information</div>
+        <div class="col-title right">${hasCoEmp ? 'Employment' : 'No Employment Info Provided'}</div>
+        ${fr('Full Name', a.coName)}
+        ${hasCoEmp ? fr('Employer', a.coEmpEmployer) : '<div></div>'}
+        ${a.coDob ? fr('Date of Birth', a.coDob) : '<div></div>'}
+        ${hasCoEmp ? fr('Position', a.coEmpPosition) : '<div></div>'}
+        ${fr('Email', a.coEmail)}
+        ${hasCoEmp ? fr('Length', a.coEmpLength) : '<div></div>'}
+        ${fr('Phone', a.coPhone1)}
+        ${hasCoEmp && a.coEmpWage ? fr('Monthly Wage', '$'+parseFloat(a.coEmpWage).toLocaleString()) : '<div></div>'}
+        ${fr('Address', a.coCurrentAddress)}
+        ${hasCoEmp ? fr('Supervisor', a.coEmpSupervisor + (a.coEmpSupPhone ? ' · '+a.coEmpSupPhone : '')) : '<div></div>'}
+      </div>
+    </div>` : '';
+
+  const leaseBtn = isAdmin
+    ? `<button class="btn btn-acc btn-lg" onclick="openModal(${a.id})">Generate Lease PDF &rarr;</button>`
+    : `<button class="btn btn-acc btn-lg" disabled title="Admin access required">&#128274; Generate Lease</button>
+       <span class="lock-msg">&#128274; Admin only</span>`;
+
+  det.innerHTML = `
     <div class="dhead">
       <div>
         <div class="dname">${a.name}</div>
         <div class="dmeta">
-          <span>${a.email}</span><span>${a.phone1}</span><span>Applied ${a.submittedAt}</span>
+          <span>${a.email}</span><span>${a.phone1}</span>
+          <span class="pm-chip" style="font-size:12px;padding:2px 8px">${a.propertyManager}</span>
+          <span>Applied ${a.submittedAt}</span>
         </div>
       </div>
       <div class="dacts">
-        ${a.status !== 'declined' ? `<button class="btn btn-red" onclick="setStatus(${a.id},'declined')">Decline</button>` : ''}
-        ${a.status !== 'approved' ? `<button class="btn btn-grn" onclick="setStatus(${a.id},'approved')">&#10003; Approve</button>` : '<span class="badge b-approved" style="font-size:12px;padding:5px 10px">&#10003; Approved</span>'}
+        ${a.status !== 'declined' ? `<button class="btn btn-red" onclick="setAppStatus(${a.id},'declined')">Decline</button>` : ''}
+        ${a.status !== 'approved' ? `<button class="btn btn-grn" onclick="setAppStatus(${a.id},'approved')">&#10003; Approve</button>`
+          : '<span class="badge b-approved" style="font-size:12px;padding:5px 10px">&#10003; Approved</span>'}
       </div>
     </div>
 
-    <!-- Row 1: Property + Applicant + Co-Applicant -->
-    <div class="secgrid ${hasCoApp ? 'three' : ''}">
+    <!-- Application summary row -->
+    <div class="secgrid g3">
       <div class="scard">
-        <h3><span class="icon">🏠</span> Application Summary</h3>
-        ${frow('Property', a.propertyAddress)}
-        ${frow('Property Manager', a.propertyManager)}
-        ${frow('Desired Move-in', a.desiredOccupancy)}
-        ${frow('Max Occupants', a.maxOccupants)}
-        ${frow('Adults', a.adults)}
-        ${a.children ? frow('Children', a.children) : ''}
+        <h3><span>🏠</span> Application Summary</h3>
+        ${fr('Property', a.propertyAddress)}
+        ${fr('Property Manager', a.propertyManager)}
+        ${fr('Desired Move-in', a.desiredOccupancy)}
+        ${fr('Max Occupants', a.maxOccupants + ' (' + a.adults + ' adults' + (a.children ? ', children: ' + a.children : '') + ')')}
       </div>
       <div class="scard">
-        <h3><span class="icon">👤</span> Primary Applicant</h3>
-        ${frow('Name', a.name)}
-        ${frow('Date of Birth', a.dob)}
-        ${frow('Email', a.email)}
-        ${frow('Phone 1', a.phone1)}
-        ${a.phone2 ? frow('Phone 2', a.phone2) : ''}
-        ${frow('Current Address', a.currentAddress)}
+        <h3><span>🏡</span> Previous Tenancy</h3>
+        ${fr('Landlord', a.prevLandlordName + (a.prevLandlordPhone ? ' · '+a.prevLandlordPhone : ''))}
+        ${fr('Previous Address', a.prevAddress)}
+        ${fr('Length of Stay', a.prevStay + (a.prevRent ? ' · $'+a.prevRent+'/mo' : ''))}
+        ${fr('Reason for Leaving', a.prevReason)}
       </div>
-      ${hasCoApp ? `
       <div class="scard">
-        <h3><span class="icon">👤</span> Co-Applicant</h3>
-        ${frow('Name', a.coName)}
-        ${a.coDob ? frow('Date of Birth', a.coDob) : ''}
-        ${a.coEmail ? frow('Email', a.coEmail) : ''}
-        ${a.coPhone1 ? frow('Phone', a.coPhone1) : ''}
-        ${a.coCurrentAddress ? frow('Address', a.coCurrentAddress) : ''}
-      </div>` : ''}
+        <h3><span>📋</span> Screening Flags</h3>
+        ${cr('Declared bankruptcy (7 yrs)?', a.crBankruptcy)}
+        ${cr('Ever evicted?', a.crEviction)}
+        ${cr('2+ late payments (12 mo)?', a.crLatePayments)}
+        ${cr('Ever refused rent?', a.crRefused)}
+        ${a.crExplanation ? `<div style="margin-top:6px;font-size:11px;color:var(--mut);font-style:italic">${a.crExplanation}</div>` : ''}
+        <div style="margin-top:6px;font-size:11px;font-weight:600;color:${anyFlag?'var(--ylw)':'var(--grn)'}">${anyFlag?'⚠ Flags present — review explanation':'✓ No credit flags'}</div>
+      </div>
     </div>
 
-    <!-- Row 2: Previous Tenancy + Employment + Co-Emp -->
-    <div class="secgrid ${a.coEmpEmployer ? 'three' : ''}">
-      <div class="scard">
-        <h3><span class="icon">🏡</span> Previous Tenancy</h3>
-        ${frow('Landlord', a.prevLandlordName)}
-        ${frow('Landlord Phone', a.prevLandlordPhone)}
-        ${frow('Address', a.prevAddress)}
-        ${frow('Length of Stay', a.prevStay)}
-        ${frow('Monthly Rent', a.prevRent ? '$' + a.prevRent : '')}
-        ${frow('Reason for Leaving', a.prevReason)}
-      </div>
-      <div class="scard">
-        <h3><span class="icon">💼</span> Employment</h3>
-        ${frow('Status', a.empStatus)}
-        ${frow('Employer', a.empEmployer)}
-        ${frow('Position', a.empPosition)}
-        ${frow('Length', a.empLength)}
-        <div class="frow"><span class="flbl">Monthly Wage</span>
-          <span class="fval ${incomeRatio >= 250 ? 'good' : 'warn'}">
-            $${(a.empWage || 0).toLocaleString()} ${incomeRatio >= 250 ? '✓' : '⚠'} (${incomeRatio}% of rent target)
-          </span>
-        </div>
-        ${frow('Supervisor', a.empSupervisor + (a.empSupPhone ? ' · ' + a.empSupPhone : ''))}
-        ${a.empOther ? frow('Other Income', a.empOther) : ''}
-      </div>
-      ${a.coEmpEmployer ? `
-      <div class="scard">
-        <h3><span class="icon">💼</span> Co-Applicant Employment</h3>
-        ${frow('Employer', a.coEmpEmployer)}
-        ${frow('Position', a.coEmpPosition)}
-        ${frow('Length', a.coEmpLength)}
-        ${a.coEmpWage ? frow('Monthly Wage', '$' + parseFloat(a.coEmpWage).toLocaleString()) : ''}
-        ${a.coEmpSupervisor ? frow('Supervisor', a.coEmpSupervisor) : ''}
-      </div>` : ''}
-    </div>
+    <!-- Primary applicant + employment (combined) -->
+    <div class="secgrid g1">${primaryCard}</div>
 
-    <!-- Row 3: Credit + Additional + References/Emergency -->
-    <div class="secgrid three">
+    <!-- Co-applicant + employment (combined, only if exists) -->
+    ${hasCoApp ? `<div class="secgrid g1">${coCard}</div>` : ''}
+
+    <!-- Additional info + References + Emergency -->
+    <div class="secgrid g3">
       <div class="scard">
-        <h3><span class="icon">📋</span> Credit History</h3>
-        ${creditRow('Declared bankruptcy (7 yrs)?', a.crBankruptcy)}
-        ${creditRow('Ever evicted?', a.crEviction)}
-        ${creditRow('2+ late payments (12 mo)?', a.crLatePayments)}
-        ${creditRow('Ever refused to pay rent?', a.crRefused)}
-        ${hasCrExpl ? `<div style="margin-top:8px;font-size:11px;color:var(--mut);font-style:italic">${a.crExplanation}</div>` : ''}
-        ${!anyFlag ? '<div style="margin-top:8px;font-size:11px;color:var(--grn);font-weight:600">✓ No credit flags</div>' : '<div style="margin-top:8px;font-size:11px;color:var(--ylw);font-weight:600">⚠ See flags above</div>'}
-      </div>
-      <div class="scard">
-        <h3><span class="icon">ℹ️</span> Additional Info</h3>
-        <div class="frow"><span class="flbl">Pets</span><span class="fval">${yn(a.hasPets)} ${a.petDesc ? '— ' + a.petDesc : ''}</span></div>
+        <h3><span>ℹ️</span> Additional Info</h3>
+        <div class="frow"><span class="flbl">Pets</span><span class="fval">${yn(a.hasPets)}${a.petDesc?' — '+a.petDesc:''}</span></div>
         <div class="frow"><span class="flbl">Smoking</span><span class="fval">${yn(a.smokes)}</span></div>
-        <div class="frow"><span class="flbl">Has Insurance</span><span class="fval">${a.hasInsurance === 'Yes' ? '<span class="tag tag-no">Yes ✓</span>' : '<span class="tag tag-bad">No</span>'}</span></div>
+        <div class="frow"><span class="flbl">Has Insurance</span><span class="fval">${a.hasInsurance==='Yes'?'<span class="tag tag-no">Yes ✓</span>':'<span class="tag tag-bad">No — required by lease</span>'}</span></div>
+        <div style="border-top:1px solid var(--bg);margin:8px 0"></div>
+        <div class="frow"><span class="flbl">Combined Monthly Income</span>
+          <span class="fval ${ratio>=250?'good':'warn'}">${ratio>=250?'✓':'⚠'} $${totalIncome.toLocaleString()} (${ratio}% of $2,500 target)</span>
+        </div>
       </div>
       <div class="scard">
-        <h3><span class="icon">📞</span> References &amp; Emergency</h3>
-        ${a.ref1Name ? frow('Ref 1', `${a.ref1Name} (${a.ref1Rel}) · ${a.ref1Phone}`) : '<div class="frow"><span class="flbl">References</span><span class="fval" style="color:var(--mut)">None provided</span></div>'}
-        ${a.ref2Name ? frow('Ref 2', `${a.ref2Name} (${a.ref2Rel}) · ${a.ref2Phone}`) : ''}
-        ${a.ref3Name ? frow('Ref 3', `${a.ref3Name} (${a.ref3Rel}) · ${a.ref3Phone}`) : ''}
-        ${hasEmg ? `<div style="border-top:1px solid var(--bg);margin:8px 0"></div>
-          ${frow('Emergency Contact', a.emgName)}
-          ${frow('Relationship', a.emgRel)}
-          ${frow('Phone', a.emgPhone)}` : ''}
+        <h3><span>📞</span> References</h3>
+        ${a.ref1Name ? fr('Reference 1', a.ref1Name+' ('+a.ref1Rel+') · '+a.ref1Phone) : '<div class="frow"><span class="flbl">References</span><span class="fval" style="color:var(--mut)">None provided</span></div>'}
+        ${a.ref2Name ? fr('Reference 2', a.ref2Name+' ('+a.ref2Rel+') · '+a.ref2Phone) : ''}
+        ${a.ref3Name ? fr('Reference 3', a.ref3Name+' ('+a.ref3Rel+') · '+a.ref3Phone) : ''}
+      </div>
+      <div class="scard">
+        <h3><span>🆘</span> Emergency Contact</h3>
+        ${a.emgName ? fr('Name', a.emgName) : '<div class="frow"><span class="fval" style="color:var(--mut)">Not provided</span></div>'}
+        ${a.emgRel ? fr('Relationship', a.emgRel) : ''}
+        ${a.emgPhone ? fr('Phone', a.emgPhone) : ''}
+        ${a.emgAddress ? fr('Address', a.emgAddress) : ''}
       </div>
     </div>
 
-    <!-- Notes + Action Bar -->
-    <div class="secgrid" style="grid-template-columns:1fr">
+    <!-- Notes -->
+    <div class="secgrid g1">
       <div class="scard">
-        <h3><span class="icon">📝</span> Review Notes</h3>
+        <h3><span>📝</span> Review Notes</h3>
         <textarea class="notes" id="notes_${a.id}">${a.notes}</textarea>
         <button class="btn btn-out" style="margin-top:7px;font-size:11px" onclick="saveNotes(${a.id})">Save Notes</button>
       </div>
@@ -700,25 +668,23 @@ function selApp(id) {
 
     <div class="abar">
       <div class="abar-txt">
-        <strong>${a.status === 'approved' ? '✓ Ready to Generate Lease' : 'Generate Lease Agreement'}</strong>
-        <span>${a.status === 'approved'
-          ? 'This application is approved. Click to generate the Alberta Residential Tenancy Agreement PDF.'
-          : 'Approve this application first, or generate a draft to review.'}</span>
+        <strong>${a.status==='approved' ? '✓ Application Approved' : 'Lease Generation'}</strong>
+        <span>${isAdmin
+          ? (a.status==='approved' ? 'Ready to generate the Alberta Residential Tenancy Agreement PDF.' : 'Approve this application before generating a lease.')
+          : 'Only admins can generate lease agreements. Toggle admin mode in the top-right corner.'}</span>
       </div>
       <div class="abar-btns">
-        ${a.status !== 'approved' && a.status !== 'declined' ? `<button class="btn btn-out" onclick="setStatus(${a.id},'reviewed')">Mark Reviewed</button>` : ''}
-        <button class="btn btn-acc btn-lg" onclick="openModal(${a.id})">Generate Lease PDF &rarr;</button>
+        ${a.status!=='approved'&&a.status!=='declined'?`<button class="btn btn-out" onclick="setAppStatus(${a.id},'reviewed')">Mark Reviewed</button>`:''}
+        ${leaseBtn}
       </div>
     </div>`;
 }
 
-function setStatus(id, s) {
+function setAppStatus(id, s) {
   apps.find(a => a.id === id).status = s;
-  renderList();
-  selApp(id);
+  renderList(); selApp(id);
   toast(s === 'approved' ? 'Application approved' : 'Marked as ' + s, s === 'approved' ? 'ok' : '');
 }
-
 function saveNotes(id) {
   apps.find(a => a.id === id).notes = document.getElementById('notes_' + id).value;
   toast('Notes saved', 'ok');
@@ -726,171 +692,143 @@ function saveNotes(id) {
 
 // ── MODAL ─────────────────────────────────────────────────────────────────────
 function openModal(id) {
+  if (!isAdmin) { toast('Admin access required to generate leases', 'warn'); return; }
   leaseApp = apps.find(a => a.id === id);
   step = 0;
-
-  // Pre-fill from application
   document.getElementById('f_agdate').value = new Date().toISOString().split('T')[0];
   document.getElementById('f_addr').value = leaseApp.propertyAddress + ', Calgary, Alberta';
   document.getElementById('f_t1').value = leaseApp.name;
   document.getElementById('f_t2').value = leaseApp.coName || '';
   document.getElementById('f_t3').value = '';
   document.getElementById('f_occ').value = leaseApp.maxOccupants;
-
-  // Parse desired occupancy date
-  const oc = leaseApp.desiredOccupancy;
-  const od = new Date(oc + 'T12:00:00');
+  const od = new Date(leaseApp.desiredOccupancy + 'T12:00:00');
   if (!isNaN(od)) {
     document.getElementById('f_start').value = od.toISOString().split('T')[0];
-    const ed = new Date(od);
-    ed.setFullYear(ed.getFullYear() + 1);
-    ed.setDate(ed.getDate() - 1);
+    const ed = new Date(od); ed.setFullYear(ed.getFullYear() + 1); ed.setDate(ed.getDate() - 1);
     document.getElementById('f_end').value = ed.toISOString().split('T')[0];
   }
-
-  // Show insurance alert if no insurance
-  const alertEl = document.getElementById('lease-alert');
-  if (leaseApp.hasInsurance === 'No') {
-    alertEl.innerHTML = '<div class="alert">⚠ Applicant indicated they do not currently have tenant insurance. Lease clause 13 requires them to obtain it.</div>';
-  } else {
-    alertEl.innerHTML = '';
-  }
-
+  const al = document.getElementById('lease-alert');
+  al.innerHTML = leaseApp.hasInsurance === 'No'
+    ? '<div class="alert">⚠ Applicant has no tenant insurance. Remind them — lease clause 13 requires it before move-in.</div>' : '';
   document.getElementById('msub').textContent = `${leaseApp.name} — ${leaseApp.propertyAddress}`;
   syncStep();
   document.getElementById('modal').classList.remove('hide');
 }
-
 function closeModal() { document.getElementById('modal').classList.add('hide'); }
 function mNext() { if (step < 2) { step++; syncStep(); } }
 function mBack() { if (step > 0) { step--; syncStep(); } }
-
 function syncStep() {
-  ['s0','s1','s2'].forEach((id, i) => document.getElementById(id).classList.toggle('on', i === step));
-  ['d0','d1','d2'].forEach((id, i) => {
-    document.getElementById(id).classList.toggle('on', i === step);
-    document.getElementById(id).classList.toggle('done', i < step);
+  ['s0','s1','s2'].forEach((id,i) => document.getElementById(id).classList.toggle('on', i===step));
+  ['d0','d1','d2'].forEach((id,i) => {
+    document.getElementById(id).classList.toggle('on', i===step);
+    document.getElementById(id).classList.toggle('done', i<step);
   });
-  document.getElementById('bbk').style.display = step > 0 ? 'inline-flex' : 'none';
-  document.getElementById('bnx').style.display = step < 2 ? 'inline-flex' : 'none';
-  document.getElementById('bgen').style.display = step === 2 ? 'inline-flex' : 'none';
+  document.getElementById('bbk').style.display = step>0 ? 'inline-flex' : 'none';
+  document.getElementById('bnx').style.display = step<2 ? 'inline-flex' : 'none';
+  document.getElementById('bgen').style.display = step===2 ? 'inline-flex' : 'none';
 }
 
 // ── GENERATE ──────────────────────────────────────────────────────────────────
 function doGen() {
-  const addr    = document.getElementById('f_addr').value.trim();
-  const utype   = document.querySelector('input[name="utype"]:checked').value;
-  const appliances = [...document.querySelectorAll('.ap:checked')].map(c => c.value).join(', ');
-  const agdate  = document.getElementById('f_agdate').value;
-  const start   = document.getElementById('f_start').value;
-  const end     = document.getElementById('f_end').value;
-  const rent    = parseFloat(document.getElementById('f_rent').value) || 0;
-  const dep     = parseFloat(document.getElementById('f_dep').value) || rent;
-  const late    = parseFloat(document.getElementById('f_late').value) || 20;
-  const rerent  = parseFloat(document.getElementById('f_rerent').value) || 2000;
-  const t1      = document.getElementById('f_t1').value.trim();
-  const t2      = document.getElementById('f_t2').value.trim();
-  const t3      = document.getElementById('f_t3').value.trim();
-  const occ     = document.getElementById('f_occ').value;
-  const land    = document.getElementById('f_land').value.trim();
-  const laddr   = document.getElementById('f_laddr').value.trim();
-  const lemail  = document.getElementById('f_lemail').value.trim();
-
-  if (!addr || !agdate || !start || !end || !rent || !t1) {
-    toast('Please fill in all required fields'); return;
-  }
-  const tenants = [t1, t2, t3].filter(Boolean);
-  buildPDF({ addr, utype, appliances, agdate, start, end, rent, dep, late, rerent, tenants, occ, land, laddr, lemail, app: leaseApp });
+  const addr = document.getElementById('f_addr').value.trim();
+  const utype = document.querySelector('input[name="utype"]:checked').value;
+  const appliances = [...document.querySelectorAll('.ap:checked')].map(c=>c.value).join(', ');
+  const agdate = document.getElementById('f_agdate').value;
+  const start = document.getElementById('f_start').value;
+  const end = document.getElementById('f_end').value;
+  const rent = parseFloat(document.getElementById('f_rent').value) || 0;
+  const dep = parseFloat(document.getElementById('f_dep').value) || rent;
+  const late = parseFloat(document.getElementById('f_late').value) || 20;
+  const rerent = parseFloat(document.getElementById('f_rerent').value) || 2000;
+  const t1 = document.getElementById('f_t1').value.trim();
+  const t2 = document.getElementById('f_t2').value.trim();
+  const t3 = document.getElementById('f_t3').value.trim();
+  const occ = document.getElementById('f_occ').value;
+  const land = document.getElementById('f_land').value.trim();
+  const laddr = document.getElementById('f_laddr').value.trim();
+  const lemail = document.getElementById('f_lemail').value.trim();
+  if (!addr||!agdate||!start||!end||!rent||!t1) { toast('Please fill in all required fields'); return; }
+  const tenants = [t1,t2,t3].filter(Boolean);
+  buildPDF({ addr,utype,appliances,agdate,start,end,rent,dep,late,rerent,tenants,occ,land,laddr,lemail,app:leaseApp });
   closeModal();
-  toast('PDF downloaded!', 'ok');
+  toast('Lease PDF downloaded!', 'ok');
 }
 
 // ── HELPERS ───────────────────────────────────────────────────────────────────
-function $$(n) {
-  return '$' + Number(n).toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-}
-function longDate(s) {
-  return new Date(s + 'T12:00:00').toLocaleDateString('en-CA', { month: 'long', day: 'numeric', year: 'numeric' });
-}
+function $$(n) { return '$'+Number(n).toLocaleString('en-CA',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function longDate(s) { return new Date(s+'T12:00:00').toLocaleDateString('en-CA',{month:'long',day:'numeric',year:'numeric'}); }
 function signDate(s) {
-  const d = new Date(s + 'T12:00:00'), day = d.getDate();
-  const suf = day===1||day===21||day===31?'st':day===2||day===22?'nd':day===3||day===23?'rd':'th';
+  const d=new Date(s+'T12:00:00'), day=d.getDate();
+  const suf=day===1||day===21||day===31?'st':day===2||day===22?'nd':day===3||day===23?'rd':'th';
   return `${day}${suf} day of ${d.toLocaleDateString('en-CA',{month:'long'})}, ${d.getFullYear()}`;
 }
-function upperDate(s) {
-  return new Date(s + 'T12:00:00').toLocaleDateString('en-CA', { day: 'numeric', month: 'long', year: 'numeric' }).toUpperCase();
-}
+function upperDate(s) { return new Date(s+'T12:00:00').toLocaleDateString('en-CA',{day:'numeric',month:'long',year:'numeric'}).toUpperCase(); }
 
-// ── PDF BUILDER ───────────────────────────────────────────────────────────────
+// ── PDF (LOCKED TEMPLATE — DO NOT MODIFY CLAUSE TEXT) ────────────────────────
 function buildPDF(d) {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF({ unit: 'mm', format: 'letter' });
-  const PW=215.9, PH=279.4, ML=22, MR=18, MT=22, MB=22;
-  const CW = PW - ML - MR;
-  const LX=ML, LW=40, NX=ML+LW+1, NW=7, TX=ML+LW+NW+2, TW=CW-LW-NW-2;
-  const LH=5.2, FS=10;
-  let y = MT;
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({unit:'mm',format:'letter'});
+  const PW=215.9,PH=279.4,ML=22,MR=18,MT=22,MB=22,CW=PW-ML-MR;
+  const LX=ML,LW=40,NX=ML+LW+1,NW=7,TX=ML+LW+NW+2,TW=CW-LW-NW-2;
+  const LH=5.2,FS=10;
+  let y=MT;
 
-  function np() { doc.addPage(); y = MT; }
-  function chk(n) { if (y + (n||8) > PH-MB) np(); }
-  function line(x1,y1,x2,y2) { doc.setDrawColor(0); doc.line(x1,y1,x2,y2); }
+  function np(){doc.addPage();y=MT;}
+  function chk(n){if(y+(n||8)>PH-MB)np();}
+  function ln(x1,y1,x2,y2){doc.setDrawColor(0);doc.line(x1,y1,x2,y2);}
 
-  function cl(lbl, num, body) {
-    doc.setFontSize(FS); doc.setFont('times','normal');
-    const blines = doc.splitTextToSize(body, TW);
-    chk(Math.max(blines.length, 1) * LH + 4);
-    const sy = y;
-    if (lbl) {
-      doc.setFont('times','bold');
-      doc.splitTextToSize(lbl, LW).forEach((l, i) => doc.text(l, LX, sy + i*LH));
-    }
-    if (num !== '') { doc.setFont('times','normal'); doc.text(String(num)+'.', NX, sy); }
+  function cl(lbl,num,body){
+    doc.setFontSize(FS);doc.setFont('times','normal');
+    const bl=doc.splitTextToSize(body,TW);
+    chk(Math.max(bl.length,1)*LH+4);
+    const sy=y;
+    if(lbl){doc.setFont('times','bold');doc.splitTextToSize(lbl,LW).forEach((l,i)=>doc.text(l,LX,sy+i*LH));}
+    if(num!==''){doc.setFont('times','normal');doc.text(String(num)+'.',NX,sy);}
     doc.setFont('times','normal');
-    let ly = sy;
-    blines.forEach(l => { if (ly > PH-MB) { np(); ly = y; } doc.text(l, TX, ly); ly += LH; });
-    y = ly + 2;
+    let ly=sy;
+    bl.forEach(l=>{if(ly>PH-MB){np();ly=y;}doc.text(l,TX,ly);ly+=LH;});
+    y=ly+2;
+  }
+  function ot(num,body){
+    doc.setFontSize(FS);doc.setFont('times','normal');
+    const ls=doc.splitTextToSize(body,TW+NW);
+    chk(ls.length*LH+3);
+    doc.text(String(num)+'.',NX,y);
+    let ly=y;
+    ls.forEach(l=>{if(ly>PH-MB){np();ly=y;}doc.text(l,TX,ly);ly+=LH;});
+    y=ly+2;
   }
 
-  function ot(num, body) {
-    doc.setFontSize(FS); doc.setFont('times','normal');
-    const ls = doc.splitTextToSize(body, TW+NW);
-    chk(ls.length * LH + 3);
-    doc.text(String(num)+'.', NX, y);
-    let ly = y;
-    ls.forEach(l => { if (ly > PH-MB) { np(); ly = y; } doc.text(l, TX, ly); ly += LH; });
-    y = ly + 2;
-  }
-
-  // ── TITLE ──
-  doc.setFontSize(14); doc.setFont('times','bold');
-  doc.text('RESIDENTIAL TENANCY AGREEMENT', PW/2, y, {align:'center'}); y+=7;
-  doc.setFontSize(11); doc.setFont('times','normal');
-  doc.text('(Fixed Term Tenancy)', PW/2, y, {align:'center'}); y+=12;
+  // TITLE & PARTIES
+  doc.setFontSize(14);doc.setFont('times','bold');
+  doc.text('RESIDENTIAL TENANCY AGREEMENT',PW/2,y,{align:'center'});y+=7;
+  doc.setFontSize(11);doc.setFont('times','normal');
+  doc.text('(Fixed Term Tenancy)',PW/2,y,{align:'center'});y+=12;
   doc.setFontSize(FS);
-  doc.text(`THIS AGREEMENT made in duplicate the ${signDate(d.agdate)}.`, ML, y); y+=8;
-  doc.setFont('times','bold'); doc.text('BETWEEN:', ML, y); y+=10;
-  doc.setFontSize(12); doc.setFont('times','bold');
-  doc.text(d.land, PW/2, y, {align:'center'}); y+=6;
-  doc.setFontSize(FS); doc.setFont('times','normal'); doc.text('[Landlord]', PW/2, y, {align:'center'}); y+=7;
-  doc.text('AND', PW/2, y, {align:'center'}); y+=7;
-  doc.setFontSize(11); doc.setFont('times','bold');
-  doc.splitTextToSize(d.tenants.join(' AND '), CW).forEach(l => { doc.text(l, PW/2, y, {align:'center'}); y+=6; });
-  doc.setFontSize(FS); doc.setFont('times','normal'); doc.text('[Tenants]', PW/2, y, {align:'center'}); y+=5;
-  doc.text('(hereinafter either individually or collectively referred to as the "Tenant")', PW/2, y, {align:'center'}); y+=10;
-  doc.setDrawColor(180); doc.line(ML, y, PW-MR, y); y+=6;
+  doc.text(`THIS AGREEMENT made in duplicate the ${signDate(d.agdate)}.`,ML,y);y+=8;
+  doc.setFont('times','bold');doc.text('BETWEEN:',ML,y);y+=10;
+  doc.setFontSize(12);doc.setFont('times','bold');
+  doc.text(d.land,PW/2,y,{align:'center'});y+=6;
+  doc.setFontSize(FS);doc.setFont('times','normal');doc.text('[Landlord]',PW/2,y,{align:'center'});y+=7;
+  doc.text('AND',PW/2,y,{align:'center'});y+=7;
+  doc.setFontSize(11);doc.setFont('times','bold');
+  doc.splitTextToSize(d.tenants.join(' AND '),CW).forEach(l=>{doc.text(l,PW/2,y,{align:'center'});y+=6;});
+  doc.setFontSize(FS);doc.setFont('times','normal');doc.text('[Tenants]',PW/2,y,{align:'center'});y+=5;
+  doc.text('(hereinafter either individually or collectively referred to as the "Tenant")',PW/2,y,{align:'center'});y+=10;
+  doc.setDrawColor(180);doc.line(ML,y,PW-MR,y);y+=6;
 
-  const uFull = (d.utype==='upper' ? 'Upper Unit, ' : 'Basement, ') + d.addr;
-  const uShare = d.utype==='upper' ? '65' : '35';
-  const uOther = d.utype==='upper' ? '35' : '65';
-  const uWord = d.utype==='upper' ? 'upstairs' : 'basement';
-  const uWordOther = d.utype==='upper' ? 'basement' : 'upstairs';
-  const startL = longDate(d.start), endL = longDate(d.end), signD = upperDate(d.agdate);
+  const uFull=(d.utype==='upper'?'Upper Unit, ':'Basement, ')+d.addr;
+  const uShare=d.utype==='upper'?'65':'35';
+  const uOther=d.utype==='upper'?'35':'65';
+  const uWord=d.utype==='upper'?'upstairs':'basement';
+  const uWordO=d.utype==='upper'?'basement':'upstairs';
+  const startL=longDate(d.start),endL=longDate(d.end),signD=upperDate(d.agdate);
 
   cl(1,'PREMISES',`The Landlord hereby leases to the Tenant the residential premises described as: ${uFull} (hereinafter referred to as the "premises") for use and occupation as residential premises only, subject to the terms and conditions of this Agreement and of the Residential Tenancies Act of the Province of Alberta.`);
   cl('','RENTAL TERM',`Unless earlier terminated in accordance with the provisions of this Agreement or with the expressed written consent of the Landlord, this Agreement shall be for a fixed term commencing at 12 o'clock noon on the ${startL} and ending at 12 o'clock noon on the ${endL} and no notice shall be required for either the Landlord or Tenant to terminate the tenancy at the end of the fixed term.`);
   cl(3,'RENT',`The Tenant shall pay monthly, in advance, by way of post-dated cheques, bank to bank transfer or via E transfer, to the Landlord at a rental of ${$$(d.rent)} CAD per month on or before the first day of each and every month of the term of this Agreement. The Tenant shall provide post-dated cheques in advance for each month of the term. In the event any TWO rent amount is not paid when due, all remaining rent payments over the unexpired term of this Agreement shall, at the discretion of the Landlord, become immediately due and payable OR landlord may TERMINATE the lease if rent is not received on time twice during term of the lease.`);
   cl('3A','LATE RENT PENALTY',`If rent is not received by the Landlord on or before the first day of each month, a late rent penalty of ${$$(d.late)} CAD per day will be charged for each day the rent remains unpaid after the due date. This late penalty shall be immediately due and payable and may be deducted from the security deposit or recovered as additional rent. The Tenant acknowledges that this penalty is intended to compensate the Landlord for the inconvenience and costs associated with late payment and is not a waiver of the Landlord's right to terminate the tenancy for non-payment of rent.`);
-  cl(4,'UTILITIES',`The rental rate prescribed above DOES NOT include the costs of providing electricity, gas, water, sewer, and garbage services to the premises, which shall be the obligation of the Tenant. The utility bill is under the Landlord's name. The ${uWord} tenant shall pay ${uShare}% and the ${uWordOther} tenant shall pay ${uOther}% of the total monthly utility bill.`);
+  cl(4,'UTILITIES',`The rental rate prescribed above DOES NOT include the costs of providing electricity, gas, water, sewer, and garbage services to the premises, which shall be the obligation of the Tenant. The utility bill is under the Landlord's name. The ${uWord} tenant shall pay ${uShare}% and the ${uWordO} tenant shall pay ${uOther}% of the total monthly utility bill.`);
   cl(5,'CABLE, INTERNET AND TELEPHONE',`The Tenant agrees to pay on demand to the appropriate authority, or Landlord for those services billed directly to the Landlord by the appropriate authority, and to be fully responsible for the costs of all other services not specifically mentioned in Paragraph 4 above, including, without limitation, the costs of cable, internet and telephone services.`);
   cl(6,'APPLIANCES',`The Landlord agrees that throughout the term of this Agreement, the Landlord will supply for the Tenant's use ${d.appliances} in the premises.`);
   cl(7,'OTHER OCCUPANTS',`The Landlord and the Tenant agree that the premises will only be occupied by the Tenant and their children, unless the Landlord consents in writing to the occupation of the premises by some other or an additional person or persons. Consent from landlord is required for guests staying for more than 7 days.`);
@@ -917,132 +855,70 @@ function buildPDF(d) {
   cl(28,'HEADINGS',`The headings in this Agreement are inserted for convenience of reference only and shall not affect the construction of this Agreement.`);
   cl(29,'CONFLICTS',`The tenancy created by this Residential Tenancy Agreement is governed by the Residential Tenancies Act and if there is a conflict between this Residential Tenancy Agreement and the Act, the Act prevails.`);
 
-  // Other Terms
-  chk(10);
-  doc.setFontSize(FS); doc.setFont('times','bold'); doc.text('OTHER TERMS:', LX, y); y += LH;
+  chk(10);doc.setFontSize(FS);doc.setFont('times','bold');doc.text('OTHER TERMS:',LX,y);y+=LH;
   ot(30,'Tenant is not allowed to keep any pets in the property without landlord approval.');
   ot(31,'No smoking inside the house or garage is permitted.');
   ot(32,"Tenant will follow city of Calgary bylaws. In the event tenant doesn't follow the rules of the bylaws then they will be responsible for paying all fines levied due to them not following the rules.");
   ot(33,'Landlord or its agent can enter the unit by giving tenant 24 hours written notice.');
-  if (d.utype === 'basement') ot(34,'Basement tenant is responsible for removing snow from entrance of the basement to the front of the house.');
+  if(d.utype==='basement') ot(34,'Basement tenant is responsible for removing snow from entrance of the basement to the front of the house.');
   ot(35,'The upstairs tenant has full use of the driveway and parking pad. The garage is for the exclusive use of the upstairs tenant. The basement tenant does not have access to the driveway, parking pad, or garage. The backyard is shared between the upstairs and basement tenants, subject to reasonable use and any written rules provided by the Landlord. Both tenants are responsible for general maintenance of the yard.');
-  if (d.utype === 'upper') ot(36,'Upstairs tenant is responsible for cleaning snow from the front of the house including but not limited to city sidewalk.');
+  if(d.utype==='upper') ot(36,'Upstairs tenant is responsible for cleaning snow from the front of the house including but not limited to city sidewalk.');
   ot(37,`Max number of occupants not to exceed ${d.occ} (the number of occupants provided in the rental application) unless otherwise agreed by the landlord.`);
   ot(38,'Tenant is not allowed to keep or grow any plants indoor in the property without landlord approval as this may cause allergies to downstair habitants or any future Tenants.');
 
-  // ── SIGNATURES ──
-  chk(80); y += 8;
-  doc.setFontSize(FS); doc.setFont('times','bold');
-  const wiw = 'IN WITNESS WHEREOF the parties hereto have executed this Agreement as of the day and year first above written.';
-  doc.splitTextToSize(wiw, CW).forEach(l => { doc.text(l, ML, y); y += LH; }); y+=3;
-  doc.splitTextToSize(wiw, CW).forEach(l => { doc.text(l, ML, y); y += LH; }); y+=6;
-  doc.text(`Signed by the Landlord on ${signD}`, ML, y);
-  doc.text(`Signed by the Tenant ON ${signD}`, ML+CW/2+4, y); y += 12;
-  line(ML, y, ML+CW/2-4, y);
-  doc.setFont('times','normal'); doc.setFontSize(9); doc.text('Signature of the Landlord', ML, y+5);
-  let ty = y;
-  d.tenants.forEach(name => {
-    line(ML+CW/2+4, ty, PW-MR, ty);
-    doc.setFontSize(9); doc.setFont('times','normal');
-    doc.text(`Signature of Tenant (${name})`, ML+CW/2+4, ty+5);
-    ty += 18;
-  });
-  y = Math.max(y+22, ty) + 6;
-  chk(35);
-  doc.setFontSize(FS); doc.setFont('times','bold'); doc.text('RECEIPT OF RESIDENTIAL LEASE', ML, y); y+=5;
-  doc.setFont('times','normal'); doc.setFontSize(FS);
-  doc.text(`I hereby acknowledge receipt of a DUPLICATE ORIGINAL OF THIS TENANCY AGREEMENT this day of ${signD}`, ML, y, {maxWidth:CW}); y+=10;
-  d.tenants.forEach((name, i) => {
-    const tx = ML + i*90;
-    if (tx+80 < PW-MR) {
-      line(tx, y+6, tx+80, y+6);
-      doc.setFontSize(9); doc.setFont('times','normal');
-      doc.text(name, tx, y+11); doc.text("Tenant's Signature", tx, y+15);
-    }
-  });
-  y += 22;
+  // SIGNATURES
+  chk(80);y+=8;
+  doc.setFontSize(FS);doc.setFont('times','bold');
+  const wiw='IN WITNESS WHEREOF the parties hereto have executed this Agreement as of the day and year first above written.';
+  doc.splitTextToSize(wiw,CW).forEach(l=>{doc.text(l,ML,y);y+=LH;});y+=3;
+  doc.splitTextToSize(wiw,CW).forEach(l=>{doc.text(l,ML,y);y+=LH;});y+=6;
+  doc.text(`Signed by the Landlord on ${signD}`,ML,y);
+  doc.text(`Signed by the Tenant ON ${signD}`,ML+CW/2+4,y);y+=12;
+  ln(ML,y,ML+CW/2-4,y);
+  doc.setFont('times','normal');doc.setFontSize(9);doc.text('Signature of the Landlord',ML,y+5);
+  let ty=y;
+  d.tenants.forEach(name=>{ln(ML+CW/2+4,ty,PW-MR,ty);doc.setFontSize(9);doc.setFont('times','normal');doc.text(`Signature of Tenant (${name})`,ML+CW/2+4,ty+5);ty+=18;});
+  y=Math.max(y+22,ty)+6;
+  chk(35);doc.setFontSize(FS);doc.setFont('times','bold');doc.text('RECEIPT OF RESIDENTIAL LEASE',ML,y);y+=5;
+  doc.setFont('times','normal');doc.setFontSize(FS);
+  doc.text(`I hereby acknowledge receipt of a DUPLICATE ORIGINAL OF THIS TENANCY AGREEMENT this day of ${signD}`,ML,y,{maxWidth:CW});y+=10;
+  d.tenants.forEach((name,i)=>{const tx=ML+i*90;if(tx+80<PW-MR){ln(tx,y+6,tx+80,y+6);doc.setFontSize(9);doc.setFont('times','normal');doc.text(name,tx,y+11);doc.text("Tenant's Signature",tx,y+15);}});
+  y+=22;
 
-  // ── RULES & REGULATIONS ──
+  // RULES & REGULATIONS
   np();
-  doc.setFontSize(13); doc.setFont('times','bold');
-  doc.text('RULES AND REGULATIONS', PW/2, y, {align:'center'}); y+=12;
-  const rules = [
-    {sec:'MAINTENANCE', items:[
-      'The Tenant shall dispose of all garbage from the premises in a proper manner.',
-      'The Tenant shall use the decks, entrance and walks in a proper manner.',
-      "If windows or doors are left open on the premises by the Tenant or by any person invited on the premises by the Tenant, causing plumbing to freeze, damage by rain or water damage to floors or walls, the Tenant shall be responsible for any damage occasioned by such action.",
-      'The Tenant agrees to immediately report to the Landlord any and all damage that may occur to the premises.',
-      'Only small picture hooks and small nails may be used for the hanging of pictures in the premises.',
-      'The Tenant shall be responsible for replacing glass with glass of a kind and quality similar to that, which may be broken, cracked or damaged due to the negligence, or wilful misconduct of Tenant or any other person or persons invited on the premises by the Tenant.',
-      'The hallways, passages, and stairs of the building in which the premises are situated shall be used for no purpose other than going to and from the premises and the Tenant shall not encumber those areas with boxes, furniture or other material or place or leave rubbish in those areas.',
-      "Boots and rubbers which are soiled or wet shall be removed at the entrance to the building in which the premises are located and taken into the Tenant's premises.",
-      'No structural alterations, painting, papering or redecorating shall be done by the Tenant without the prior written consent of the Landlord.',
-      'Neither the Tenant nor the Landlord shall add to or change locks on doors giving access to the premises without the prior written consent of the other party. After consent is given by the Landlord, the Tenant is required to provide the Landlord with a key for any locks installed or changed by the Tenant.',
-      'The Tenant will place plastic or other soft sliders/protectors on the bottom of each leg of furniture.',
-    ]},
-    {sec:'SAFETY', items:[
-      'The Tenant must keep and observe all health, fire and police regulations of the Province and city, town or municipality in which the premises are located.',
-      'No additional electric wiring or heating units shall be installed in the premises without the prior written consent of the Landlord.',
-      'No combustible material or flammable liquid shall be kept on the premises except in small quantities and in containers approved for this purpose.',
-      'If the Tenant is absent from the premises and the premises are unoccupied for a period of fourteen (14) days or longer, the Tenant shall notify the Landlord and arrange for a regular inspection by a competent person.',
-      'The Tenant must obtain the approval of the Landlord before a waterbed or waterbeds are used on the premises.',
-    ]},
-    {sec:'CONSIDERATION\nOF OTHERS', items:[
-      'Noise shall not be permitted in the premises which, in the opinion of the Landlord, disturbs the comfort of the neighbors to the premises.',
-      'No pets, animals, reptiles or birds of any kind shall be allowed or kept in or about the premises either on a permanent or temporary basis.',
-      'The Tenant will not leave guests in charge of the premises or have guests stay longer than four (4) weeks without notifying the Landlord.',
-      "If parking facilities are provided, they are provided at the Tenant's own risk and the Tenant is required to park in the stall allotted to the Tenant. Unlicensed or inoperable vehicles parked on the Landlord's property will be removed at the Tenant's expense.",
-      'The Tenant shall not place or expose anywhere in the premises any placard, notice plate or sign for advertising purposes, nor shall the Tenant affix to the premises or erect thereon any radio or TV antenna or towers, without the prior written consent of the Landlord.',
-      'Upstairs tenant is responsible for cleaning snow from the front of the house including but not limited to city sidewalk AND basement tenant is responsible for cleaning snow from basement entrance to the front of the house.',
-    ]}
+  doc.setFontSize(13);doc.setFont('times','bold');doc.text('RULES AND REGULATIONS',PW/2,y,{align:'center'});y+=12;
+  const rules=[
+    {sec:'MAINTENANCE',items:['The Tenant shall dispose of all garbage from the premises in a proper manner.','The Tenant shall use the decks, entrance and walks in a proper manner.',"If windows or doors are left open on the premises by the Tenant or by any person invited on the premises by the Tenant, causing plumbing to freeze, damage by rain or water damage to floors or walls, the Tenant shall be responsible for any damage occasioned by such action.",'The Tenant agrees to immediately report to the Landlord any and all damage that may occur to the premises.','Only small picture hooks and small nails may be used for the hanging of pictures in the premises.','The Tenant shall be responsible for replacing glass with glass of a kind and quality similar to that, which may be broken, cracked or damaged due to the negligence, or wilful misconduct of Tenant or any other person or persons invited on the premises by the Tenant.','The hallways, passages, and stairs of the building in which the premises are situated shall be used for no purpose other than going to and from the premises and the Tenant shall not encumber those areas with boxes, furniture or other material or place or leave rubbish in those areas.',"Boots and rubbers which are soiled or wet shall be removed at the entrance to the building in which the premises are located and taken into the Tenant's premises.",'No structural alterations, painting, papering or redecorating shall be done by the Tenant without the prior written consent of the Landlord.','Neither the Tenant nor the Landlord shall add to or change locks on doors giving access to the premises without the prior written consent of the other party. After consent is given by the Landlord, the Tenant is required to provide the Landlord with a key for any locks installed or changed by the Tenant.','The Tenant will place plastic or other soft sliders/protectors on the bottom of each leg of furniture.']},
+    {sec:'SAFETY',items:['The Tenant must keep and observe all health, fire and police regulations of the Province and city, town or municipality in which the premises are located.','No additional electric wiring or heating units shall be installed in the premises without the prior written consent of the Landlord.','No combustible material or flammable liquid shall be kept on the premises except in small quantities and in containers approved for this purpose.','If the Tenant is absent from the premises and the premises are unoccupied for a period of fourteen (14) days or longer, the Tenant shall notify the Landlord and arrange for a regular inspection by a competent person.','The Tenant must obtain the approval of the Landlord before a waterbed or waterbeds are used on the premises.']},
+    {sec:'CONSIDERATION\nOF OTHERS',items:['Noise shall not be permitted in the premises which, in the opinion of the Landlord, disturbs the comfort of the neighbors to the premises.','No pets, animals, reptiles or birds of any kind shall be allowed or kept in or about the premises either on a permanent or temporary basis.','The Tenant will not leave guests in charge of the premises or have guests stay longer than four (4) weeks without notifying the Landlord.',"If parking facilities are provided, they are provided at the Tenant's own risk and the Tenant is required to park in the stall allotted to the Tenant. Unlicensed or inoperable vehicles parked on the Landlord's property will be removed at the Tenant's expense.",'The Tenant shall not place or expose anywhere in the premises any placard, notice plate or sign for advertising purposes, nor shall the Tenant affix to the premises or erect thereon any radio or TV antenna or towers, without the prior written consent of the Landlord.','Upstairs tenant is responsible for cleaning snow from the front of the house including but not limited to city sidewalk AND basement tenant is responsible for cleaning snow from basement entrance to the front of the house.']}
   ];
-  let rn = 1;
-  rules.forEach(section => {
-    chk(12);
-    doc.setFontSize(FS); doc.setFont('times','bold'); doc.text(section.sec, LX, y); y += LH;
-    section.items.forEach(item => {
-      const ls = doc.splitTextToSize(item, TW+NW);
-      chk(ls.length * LH + 3);
-      doc.setFont('times','normal'); doc.setFontSize(FS);
-      doc.text(rn+'.', NX, y);
-      let ly = y;
-      ls.forEach(l => { if(ly > PH-MB){np();ly=y;} doc.text(l, TX, ly); ly += LH; });
-      y = ly + 1.5; rn++;
-    });
-    y += 3;
+  let rn=1;
+  rules.forEach(section=>{
+    chk(12);doc.setFontSize(FS);doc.setFont('times','bold');doc.text(section.sec,LX,y);y+=LH;
+    section.items.forEach(item=>{
+      const ls=doc.splitTextToSize(item,TW+NW);chk(ls.length*LH+3);
+      doc.setFont('times','normal');doc.setFontSize(FS);doc.text(rn+'.',NX,y);
+      let ly=y;ls.forEach(l=>{if(ly>PH-MB){np();ly=y;}doc.text(l,TX,ly);ly+=LH;});y=ly+1.5;rn++;
+    });y+=3;
   });
-
-  chk(60); y += 6;
-  doc.setFontSize(FS); doc.setFont('times','bold');
-  doc.text(`Signed by the Landlord on ${signD}`, ML, y); y += 12;
-  line(ML+CW/2, y, PW-MR, y);
-  doc.setFontSize(9); doc.setFont('times','normal');
-  doc.text("Signature of Landlord or Landlord's Agent", ML+CW/2, y+5); y += 18;
-  doc.setFontSize(FS); doc.setFont('times','bold');
-  doc.text(`Signed by the Tenant on ${signD}`, ML, y); y += 12;
-  d.tenants.forEach(name => {
-    chk(16);
-    line(ML+CW/2, y, PW-MR, y);
-    doc.setFontSize(9); doc.setFont('times','normal');
-    doc.text('Signature of Tenant', ML+CW/2, y+5); y += 16;
-  });
-  y += 4;
-  doc.setFontSize(FS); doc.setFont('times','bold');
-  doc.text('Tenants: ' + d.tenants.join(', '), ML, y); y += 6;
-  if (d.app) {
-    doc.setFont('times','normal'); doc.setFontSize(9);
-    doc.text(`${d.app.name}: ${d.app.email} | ${d.app.phone1}`, ML, y); y += 5;
-  }
-  y += 4; doc.setFontSize(9); doc.setFont('times','normal'); doc.text('Page 2 of 2', ML, y);
+  chk(60);y+=6;
+  doc.setFontSize(FS);doc.setFont('times','bold');doc.text(`Signed by the Landlord on ${signD}`,ML,y);y+=12;
+  ln(ML+CW/2,y,PW-MR,y);doc.setFontSize(9);doc.setFont('times','normal');doc.text("Signature of Landlord or Landlord's Agent",ML+CW/2,y+5);y+=18;
+  doc.setFontSize(FS);doc.setFont('times','bold');doc.text(`Signed by the Tenant on ${signD}`,ML,y);y+=12;
+  d.tenants.forEach(name=>{chk(16);ln(ML+CW/2,y,PW-MR,y);doc.setFontSize(9);doc.setFont('times','normal');doc.text('Signature of Tenant',ML+CW/2,y+5);y+=16;});
+  y+=4;doc.setFontSize(FS);doc.setFont('times','bold');doc.text('Tenants: '+d.tenants.join(', '),ML,y);y+=6;
+  if(d.app){doc.setFont('times','normal');doc.setFontSize(9);doc.text(`${d.app.name}: ${d.app.email} | ${d.app.phone1}`,ML,y);y+=5;}
+  y+=4;doc.setFontSize(9);doc.setFont('times','normal');doc.text('Page 2 of 2',ML,y);
 
   doc.save(`Lease_${d.utype==='upper'?'Upper':'Basement'}_${d.tenants[0].replace(/ /g,'_')}.pdf`);
 }
 
 // ── TOAST ─────────────────────────────────────────────────────────────────────
-function toast(msg, type='') {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.className = 'toast show' + (type?' '+type:'');
-  setTimeout(() => t.classList.remove('show'), 3000);
+function toast(msg,type=''){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.className='toast show'+(type?' '+type:'');
+  setTimeout(()=>t.classList.remove('show'),3200);
 }
 
 renderList();
