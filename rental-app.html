@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LassiP.management — Rental Applications</title>
+<title>Lasi P. Management — Rental Applications</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://alcdn.msauth.net/browser/2.38.3/js/msal-browser.min.js"></script>
 <style>
@@ -80,8 +80,31 @@ main{flex:1;overflow-y:auto;padding:20px 22px}
 /* Two-col inside a card */
 .card-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
 .col-divider{border-top:1px dashed var(--bdr);grid-column:1/-1;margin:10px 0}
-.col-title{font-size:10px;font-weight:700;color:var(--pri);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;grid-column:1/-1}
+.col-title{font-size:10px;font-weight:700;color:var(--pri);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px}
 .col-title.right{grid-column:2}
+
+/* DOCS MODAL */
+.docs-tabs{display:flex;gap:4px;margin-bottom:14px;border-bottom:1px solid var(--bdr);padding-bottom:1px}
+.dtab{padding:5px 12px;border:none;background:none;font-size:12px;font-weight:600;color:var(--mut);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;font-family:inherit;transition:.15s}
+.dtab.on{color:var(--pri);border-bottom-color:var(--pri)}
+.dpanel{display:none}.dpanel.on{display:block}
+.doc-section{margin-bottom:14px}
+.doc-section h4{font-size:11px;font-weight:700;color:var(--pri);text-transform:uppercase;letter-spacing:.4px;margin-bottom:7px;border-bottom:1px solid var(--bdr);padding-bottom:4px}
+.doc-item{display:flex;gap:8px;font-size:12.5px;line-height:1.5;margin-bottom:5px;color:var(--txt)}
+.doc-item::before{content:"•";color:var(--acc);font-weight:900;flex-shrink:0}
+.doc-sub{margin-left:16px;margin-top:3px}
+.doc-sub .doc-item::before{content:"–";color:var(--mut)}
+.email-tpl{background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:14px;font-size:12.5px;line-height:1.7;color:var(--txt);white-space:pre-wrap;font-family:inherit}
+.copy-bar{display:flex;justify-content:flex-end;margin-bottom:8px}
+.doc-note{background:#FFFBEB;border:1px solid #FDE68A;border-radius:6px;padding:8px 12px;font-size:11.5px;color:#92400E;margin-top:10px}
+/* DOCS SIDEBAR BUTTON */
+.sb-docs-btn{display:flex;align-items:center;gap:7px;width:100%;padding:8px 14px;border:none;background:none;font-size:12px;font-weight:600;color:var(--pri);cursor:pointer;border-top:1px solid var(--bdr);font-family:inherit;transition:.15s}
+.sb-docs-btn:hover{background:var(--bg)}
+/* PM ASSIGN SELECT */
+.pm-assign{display:flex;align-items:center;gap:6px;margin-top:6px;padding-top:6px;border-top:1px dashed var(--bdr)}
+.pm-assign label{font-size:10px;color:var(--mut);font-weight:600;text-transform:uppercase;white-space:nowrap}
+.pm-assign select{flex:1;padding:4px 7px;border:1.5px solid var(--bdr);border-radius:5px;font-family:inherit;font-size:12px;color:var(--txt)}
+.pm-assign select:focus{outline:none;border-color:var(--acc)}
 
 .frow{display:flex;flex-direction:column;gap:1px;margin-bottom:6px}
 .frow:last-child{margin-bottom:0}
@@ -172,7 +195,7 @@ textarea.notes:focus{outline:none;border-color:var(--acc)}
 <header>
   <div class="hbrand">
     <div class="hlogo">L</div>
-    <div><h1>LassiP.management</h1><span>Rental Application Management</span></div>
+    <div><h1>Lasi P. Management</h1><span>Rental Application Management</span></div>
   </div>
   <div class="hright">
     <span class="hcount" id="hcount"></span>
@@ -188,7 +211,7 @@ textarea.notes:focus{outline:none;border-color:var(--acc)}
 <div id="screen-loading" class="auth-screen" style="display:flex">
   <div class="auth-card">
     <div class="hlogo" style="margin:0 auto 16px;width:48px;height:48px;font-size:24px;border-radius:10px">L</div>
-    <h2>LassiP.management</h2>
+    <h2>Lasi P. Management</h2>
     <p class="auth-sub">Rental Application Management</p>
     <div class="spinner"></div>
   </div>
@@ -197,7 +220,7 @@ textarea.notes:focus{outline:none;border-color:var(--acc)}
 <div id="screen-login" class="auth-screen" style="display:none">
   <div class="auth-card">
     <div class="hlogo" style="margin:0 auto 16px;width:48px;height:48px;font-size:24px;border-radius:10px">L</div>
-    <h2>LassiP.management</h2>
+    <h2>Lasi P. Management</h2>
     <p class="auth-sub">Rental Application Management</p>
     <p style="font-size:13px;color:var(--mut);margin:16px 0 24px;line-height:1.5">Sign in with your Microsoft work account to access the application portal.</p>
     <button class="ms-btn" onclick="login()">
@@ -242,6 +265,10 @@ textarea.notes:focus{outline:none;border-color:var(--acc)}
       </div>
     </div>
     <div class="alist" id="alist"></div>
+    <button class="sb-docs-btn" onclick="openDocs()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+      Required Documents
+    </button>
   </aside>
 
   <main id="main">
@@ -252,6 +279,81 @@ textarea.notes:focus{outline:none;border-color:var(--acc)}
     </div>
     <div id="detail" style="display:none"></div>
   </main>
+</div>
+
+<!-- REQUIRED DOCUMENTS MODAL -->
+<div class="overlay hide" id="docsModal">
+  <div class="modal" style="max-width:580px">
+    <div class="mhead">
+      <div><h2>Required Documents</h2><p>Checklist &amp; tenant communication template</p></div>
+      <button class="mclose" onclick="closeDocs()">&times;</button>
+    </div>
+    <div class="mbody">
+      <div class="docs-tabs">
+        <button class="dtab on" onclick="switchDocTab(0)">Applicant Checklist</button>
+        <button class="dtab" onclick="switchDocTab(1)">Tenant Email Template</button>
+      </div>
+
+      <!-- Tab 0: Checklist -->
+      <div class="dpanel on" id="dt0">
+        <div class="doc-section">
+          <h4>1. Government-Issued Photo ID</h4>
+          <div class="doc-item">One valid photo ID for each adult applicant (18+)</div>
+          <div class="doc-sub">
+            <div class="doc-item">Driver's licence</div>
+            <div class="doc-item">Passport</div>
+            <div class="doc-item">Provincial ID card</div>
+          </div>
+        </div>
+        <div class="doc-section">
+          <h4>2. Credit Report (within last 30 days)</h4>
+          <div class="doc-item">Required for each adult applicant — free options:</div>
+          <div class="doc-sub">
+            <div class="doc-item">Your bank's mobile app — TD, RBC, BMO, Scotiabank, CIBC (screenshot accepted)</div>
+            <div class="doc-item">Credit Karma — creditkarma.ca</div>
+            <div class="doc-item">Equifax Canada — equifax.ca</div>
+          </div>
+        </div>
+        <div class="doc-section">
+          <h4>3. Proof of Income</h4>
+          <div class="doc-item">Employed: two most recent pay stubs (must show employer name, your name, payment dates)</div>
+          <div class="doc-item">Self-employed: last two months of personal or business bank statements showing regular income deposits</div>
+        </div>
+        <div class="doc-note">⚠ Incomplete applications will not be reviewed. All documents are kept confidential and used for tenancy screening purposes only.</div>
+      </div>
+
+      <!-- Tab 1: Email template -->
+      <div class="dpanel" id="dt1">
+        <div class="copy-bar">
+          <button class="btn btn-out" style="font-size:11px" onclick="copyTemplate()">Copy to clipboard</button>
+        </div>
+        <div class="email-tpl" id="emailTpl">Hi [Tenant Name],
+
+Thank you for your interest in the rental unit! To move forward with your application, please send me the following documents for all adult applicants:
+
+1. Photo ID — a government-issued photo ID (driver's licence, passport, or provincial ID) for each applicant.
+
+2. Credit Report — a recent credit report for each applicant. You can get one for free using any of the following:
+   • Your bank's mobile app (a screenshot is fine)
+   • Credit Karma — creditkarma.ca
+   • Equifax Canada — equifax.ca
+
+3. Proof of Income:
+   • If employed — your two most recent pay stubs
+   • If self-employed — bank statements from the last two months
+
+Please send all documents at your earliest convenience so I can complete your application review.
+
+Looking forward to hearing from you!
+
+[Your Name]
+[Your Phone Number]</div>
+      </div>
+    </div>
+    <div class="mfoot">
+      <button class="btn btn-out" onclick="closeDocs()">Close</button>
+    </div>
+  </div>
 </div>
 
 <!-- LEASE MODAL -->
@@ -314,7 +416,7 @@ textarea.notes:focus{outline:none;border-color:var(--acc)}
             <div class="fg full"><label>Tenant 2 (Co-Applicant / Additional Adult)</label><input id="f_t2" type="text" placeholder="Leave blank if none"></div>
             <div class="fg full"><label>Tenant 3 (Additional Adult)</label><input id="f_t3" type="text" placeholder="Leave blank if none"></div>
             <div class="fg"><label>Max Occupants</label><input id="f_occ" type="number" value="4" min="1" max="15"></div>
-            <div class="fg"><label>Landlord Name/Company</label><input id="f_land" type="text" value="LassiP Management Inc."></div>
+            <div class="fg"><label>Landlord Name/Company</label><input id="f_land" type="text" value="Lasi P. Management"></div>
             <div class="fg full"><label>Landlord Address</label><input id="f_laddr" type="text" value="156 Coral Springs Landing NE, Calgary, Alberta"></div>
             <div class="fg full"><label>Landlord Email</label><input id="f_lemail" type="text" value="lassipmanagement@gmail.com"></div>
           </div>
@@ -714,8 +816,8 @@ function selApp(id) {
         ${fr('Monthly Wage', a.empWage ? '<span class="fval '+(ratio>=250?'good':'warn')+'">$'+a.empWage.toLocaleString()+' '+(ratio>=250?'✓':'⚠')+'</span>' : '—')}
         ${fr('Current Address', a.currentAddress)}
         ${fr('Employer Address', a.empAddress)}
-        ${a.empSupervisor ? fr('', '') : ''}
-        ${fr('Supervisor', a.empSupervisor + (a.empSupPhone ? ' · '+a.empSupPhone : ''))}
+        ${a.empSupervisor ? `<div></div>${fr('Supervisor', a.empSupervisor)}` : ''}
+        ${a.empSupPhone ? `<div></div>${fr('Supervisor Phone', a.empSupPhone)}` : ''}
         ${a.empOther ? `<div class="frow" style="grid-column:1/-1"><span class="flbl">Other Income Sources</span><span class="fval">${a.empOther}</span></div>` : ''}
       </div>
     </div>`;
@@ -766,9 +868,17 @@ function selApp(id) {
       <div class="scard">
         <h3><span>🏠</span> Application Summary</h3>
         ${fr('Property', a.propertyAddress)}
-        ${fr('Property Manager', a.propertyManager)}
         ${fr('Desired Move-in', a.desiredOccupancy)}
         ${fr('Max Occupants', a.maxOccupants + ' (' + a.adults + ' adults' + (a.children ? ', children: ' + a.children : '') + ')')}
+        <div class="pm-assign">
+          <label>Property Manager</label>
+          <select onchange="assignPM(${a.id}, this.value)">
+            <option value="" ${!a.propertyManager?'selected':''}>— Unassigned —</option>
+            <option value="Umair Lassi" ${a.propertyManager==='Umair Lassi'?'selected':''}>Umair Lassi</option>
+            <option value="Tamir" ${a.propertyManager==='Tamir'?'selected':''}>Tamir</option>
+            <option value="Mariam / Syed" ${a.propertyManager==='Mariam / Syed'?'selected':''}>Mariam / Syed</option>
+          </select>
+        </div>
       </div>
       <div class="scard">
         <h3><span>🏡</span> Previous Tenancy</h3>
@@ -798,7 +908,8 @@ function selApp(id) {
     <div class="secgrid g3">
       <div class="scard">
         <h3><span>ℹ️</span> Additional Info</h3>
-        <div class="frow"><span class="flbl">Pets</span><span class="fval">${yn(a.hasPets)}${a.petDesc?' — '+a.petDesc:''}</span></div>
+        <div class="frow"><span class="flbl">Pets</span><span class="fval">${yn(a.hasPets)}</span></div>
+        ${a.petDesc ? `<div class="frow"><span class="flbl">Pet Description</span><span class="fval">${a.petDesc}</span></div>` : ''}
         <div class="frow"><span class="flbl">Smoking</span><span class="fval">${yn(a.smokes)}</span></div>
         <div class="frow"><span class="flbl">Has Insurance</span><span class="fval">${a.hasInsurance==='Yes'?'<span class="tag tag-no">Yes ✓</span>':'<span class="tag tag-bad">No — required by lease</span>'}</span></div>
         <div style="border-top:1px solid var(--bg);margin:8px 0"></div>
@@ -1076,6 +1187,32 @@ function buildPDF(d) {
   y+=4;doc.setFontSize(9);doc.setFont('times','normal');doc.text('Page 2 of 2',ML,y);
 
   doc.save(`Lease_${d.utype==='upper'?'Upper':'Basement'}_${d.tenants[0].replace(/ /g,'_')}.pdf`);
+}
+
+// ── PM ASSIGNMENT ─────────────────────────────────────────────────────────────
+function assignPM(id, pmName) {
+  const app = apps.find(a => a.id === id);
+  app.propertyManager = pmName;
+  renderList();
+  // Re-render detail to update the header chip
+  const chip = document.querySelector('.dmeta .pm-chip');
+  if (chip) chip.textContent = pmName || 'Unassigned';
+  toast(pmName ? 'Assigned to ' + pmName : 'PM removed', 'ok');
+}
+
+// ── REQUIRED DOCUMENTS MODAL ──────────────────────────────────────────────────
+function openDocs() { document.getElementById('docsModal').classList.remove('hide'); }
+function closeDocs() { document.getElementById('docsModal').classList.add('hide'); }
+function switchDocTab(i) {
+  document.querySelectorAll('.dtab').forEach((t,j) => t.classList.toggle('on', j===i));
+  document.querySelectorAll('.dpanel').forEach((p,j) => p.classList.toggle('on', j===i));
+}
+function copyTemplate() {
+  const text = document.getElementById('emailTpl').innerText;
+  navigator.clipboard.writeText(text).then(
+    () => toast('Email template copied to clipboard', 'ok'),
+    () => toast('Could not copy — please select and copy manually')
+  );
 }
 
 // ── TOAST ─────────────────────────────────────────────────────────────────────
