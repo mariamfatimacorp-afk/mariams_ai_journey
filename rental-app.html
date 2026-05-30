@@ -83,24 +83,48 @@ main{flex:1;overflow-y:auto;padding:20px 22px}
 .col-title{font-size:10px;font-weight:700;color:var(--pri);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px}
 .col-title.right{grid-column:2}
 
-/* DOCS MODAL */
-.docs-tabs{display:flex;gap:4px;margin-bottom:14px;border-bottom:1px solid var(--bdr);padding-bottom:1px}
+/* SIDEBAR NAV TABS */
+.sb-nav{display:flex;border-bottom:1px solid var(--bdr);flex-shrink:0}
+.sbn{flex:1;padding:9px 4px;border:none;background:none;font-size:11.5px;font-weight:600;color:var(--mut);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;font-family:inherit;transition:.15s}
+.sbn.on{color:var(--pri);border-bottom-color:var(--pri)}
+.sbn:hover:not(.on){color:var(--txt);background:var(--bg)}
+/* PROCESS SIDEBAR LIST */
+.proc-sb-list{padding:8px 6px;display:flex;flex-direction:column;gap:2px}
+.proc-sb-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:7px;border:none;background:none;cursor:pointer;font-size:12.5px;font-weight:500;color:var(--txt);font-family:inherit;width:100%;text-align:left;transition:.12s}
+.proc-sb-item:hover{background:var(--bg)}
+.proc-sb-item .pi{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;background:var(--bg);flex-shrink:0}
+/* PROCESS MAIN VIEW */
+.proc-view{padding:20px 22px;overflow-y:auto;flex:1}
+.proc-grid{display:grid;gap:14px}
+.proc-card{background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:18px 20px}
+.proc-card-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px}
+.proc-icon{width:40px;height:40px;border-radius:9px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;border:1px solid var(--bdr)}
+.proc-card-head h3{font-size:14px;font-weight:700;margin-bottom:3px;color:var(--txt)}
+.proc-card-head p{font-size:12px;color:var(--mut);line-height:1.45}
+.proc-pick{margin-bottom:12px}
+.proc-pick label{font-size:10px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.3px;display:block;margin-bottom:5px}
+.proc-pick select{width:100%;padding:7px 10px;border:1.5px solid var(--bdr);border-radius:6px;font-family:inherit;font-size:13px;color:var(--txt)}
+.proc-pick select:focus{outline:none;border-color:var(--acc)}
+.proc-preview{background:var(--bg);border-radius:7px;padding:10px 13px;margin-bottom:12px;font-size:12.5px;line-height:1.65;display:none}
+.proc-preview.show{display:block}
+.proc-preview .pl{font-size:10px;color:var(--mut);font-weight:700;text-transform:uppercase;letter-spacing:.3px;display:block;margin-bottom:2px}
+.n8n-cfg{background:#FFF7ED;border:1px solid #FDBA74;border-radius:6px;padding:9px 12px;font-size:11.5px;color:#9A3412;margin-top:12px;line-height:1.6}
+.n8n-cfg code{background:#FDBA74;border-radius:3px;padding:0 4px;font-size:11px}
+.n8n-configured{background:#F0FDF4;border:1px solid #BBF7D0;border-radius:6px;padding:7px 12px;font-size:11.5px;color:#166534;margin-top:12px}
+/* DOCS INSIDE PROCESS CARDS */
+.docs-tabs{display:flex;gap:4px;margin-bottom:12px;border-bottom:1px solid var(--bdr);padding-bottom:1px}
 .dtab{padding:5px 12px;border:none;background:none;font-size:12px;font-weight:600;color:var(--mut);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;font-family:inherit;transition:.15s}
 .dtab.on{color:var(--pri);border-bottom-color:var(--pri)}
 .dpanel{display:none}.dpanel.on{display:block}
-.doc-section{margin-bottom:14px}
-.doc-section h4{font-size:11px;font-weight:700;color:var(--pri);text-transform:uppercase;letter-spacing:.4px;margin-bottom:7px;border-bottom:1px solid var(--bdr);padding-bottom:4px}
-.doc-item{display:flex;gap:8px;font-size:12.5px;line-height:1.5;margin-bottom:5px;color:var(--txt)}
+.doc-section{margin-bottom:12px}
+.doc-section h4{font-size:10px;font-weight:700;color:var(--pri);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;border-bottom:1px solid var(--bdr);padding-bottom:3px}
+.doc-item{display:flex;gap:7px;font-size:12.5px;line-height:1.5;margin-bottom:4px;color:var(--txt)}
 .doc-item::before{content:"•";color:var(--acc);font-weight:900;flex-shrink:0}
-.doc-sub{margin-left:16px;margin-top:3px}
+.doc-sub{margin-left:14px;margin-top:2px}
 .doc-sub .doc-item::before{content:"–";color:var(--mut)}
-.email-tpl{background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:14px;font-size:12.5px;line-height:1.7;color:var(--txt);white-space:pre-wrap;font-family:inherit}
+.email-tpl{background:var(--bg);border:1px solid var(--bdr);border-radius:7px;padding:13px;font-size:12px;line-height:1.7;color:var(--txt);white-space:pre-wrap;font-family:inherit;max-height:280px;overflow-y:auto}
 .copy-bar{display:flex;justify-content:flex-end;margin-bottom:8px}
-.doc-note{background:#FFFBEB;border:1px solid #FDE68A;border-radius:6px;padding:8px 12px;font-size:11.5px;color:#92400E;margin-top:10px}
-/* DOCS SIDEBAR BUTTON */
-.sb-docs-btn{display:flex;align-items:center;gap:7px;width:100%;padding:8px 14px;border:none;background:none;font-size:12px;font-weight:600;color:var(--pri);cursor:pointer;border-top:1px solid var(--bdr);font-family:inherit;transition:.15s}
-.sb-docs-btn:hover{background:var(--bg)}
-/* PM ASSIGN SELECT */
+.doc-note{background:#FFFBEB;border:1px solid #FDE68A;border-radius:6px;padding:7px 11px;font-size:11.5px;color:#92400E;margin-top:8px}
 .pm-assign{display:flex;align-items:center;gap:6px;margin-top:6px;padding-top:6px;border-top:1px dashed var(--bdr)}
 .pm-assign label{font-size:10px;color:var(--mut);font-weight:600;text-transform:uppercase;white-space:nowrap}
 .pm-assign select{flex:1;padding:4px 7px;border:1.5px solid var(--bdr);border-radius:5px;font-family:inherit;font-size:12px;color:var(--txt)}
@@ -241,93 +265,138 @@ textarea.notes:focus{outline:none;border-color:var(--acc)}
 
 <div class="layout" id="appLayout" style="display:none">
   <aside>
-    <div class="sbhead">
-      <h2>Applications</h2>
-      <!-- Status filter -->
-      <div class="filter-group">
-        <div class="filter-label">By Status</div>
-        <div class="ftabs" id="statusTabs">
-          <button class="ftab on" onclick="setStatus('all')">All</button>
-          <button class="ftab" onclick="setStatus('new')">New</button>
-          <button class="ftab" onclick="setStatus('reviewed')">Reviewed</button>
-          <button class="ftab" onclick="setStatus('approved')">Approved</button>
+    <!-- Top nav: Applications | Processes -->
+    <div class="sb-nav">
+      <button class="sbn on" id="sbn-apps" onclick="switchView('apps')">Applications</button>
+      <button class="sbn" id="sbn-proc" onclick="switchView('proc')">Processes</button>
+    </div>
+
+    <!-- APPLICATIONS SIDEBAR -->
+    <div id="vsa" style="display:flex;flex-direction:column;flex:1;overflow:hidden">
+      <div class="sbhead">
+        <div class="filter-group">
+          <div class="filter-label">By Status</div>
+          <div class="ftabs" id="statusTabs">
+            <button class="ftab on" onclick="setStatus('all')">All</button>
+            <button class="ftab" onclick="setStatus('new')">New</button>
+            <button class="ftab" onclick="setStatus('reviewed')">Reviewed</button>
+            <button class="ftab" onclick="setStatus('approved')">Approved</button>
+          </div>
+        </div>
+        <div class="filter-group" id="pm-filter-row">
+          <div class="filter-label">By Property Manager</div>
+          <div class="ftabs" id="pmTabs">
+            <button class="ftab pm-tab on" onclick="setPM('all')">All PMs</button>
+            <button class="ftab pm-tab" onclick="setPM('Umair Lassi')">Umair</button>
+            <button class="ftab pm-tab" onclick="setPM('Tamir')">Tamir</button>
+            <button class="ftab pm-tab" onclick="setPM('Mariam / Syed')">Mariam/Syed</button>
+          </div>
         </div>
       </div>
-      <!-- Property Manager filter -->
-      <div class="filter-group" id="pm-filter-row">
-        <div class="filter-label">By Property Manager</div>
-        <div class="ftabs" id="pmTabs">
-          <button class="ftab pm-tab on" onclick="setPM('all')">All PMs</button>
-          <button class="ftab pm-tab" onclick="setPM('Umair Lassi')">Umair</button>
-          <button class="ftab pm-tab" onclick="setPM('Tamir')">Tamir</button>
-          <button class="ftab pm-tab" onclick="setPM('Mariam / Syed')">Mariam/Syed</button>
-        </div>
+      <div class="alist" id="alist"></div>
+    </div>
+
+    <!-- PROCESSES SIDEBAR -->
+    <div id="vsp" style="display:none;flex:1;overflow-y:auto">
+      <div class="sbhead" style="padding-bottom:8px"><h2>Processes</h2></div>
+      <div class="proc-sb-list">
+        <button class="proc-sb-item on" id="psb-send" onclick="focusProc('proc-send-req','psb-send')">
+          <span class="pi">📧</span>Send Requirements
+        </button>
+        <button class="proc-sb-item" id="psb-docs" onclick="focusProc('proc-docs','psb-docs')">
+          <span class="pi">📋</span>Required Documents
+        </button>
       </div>
     </div>
-    <div class="alist" id="alist"></div>
-    <button class="sb-docs-btn" onclick="openDocs()">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-      Required Documents
-    </button>
   </aside>
 
   <main id="main">
-    <div class="empty" id="empty">
-      <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-      <h3>Select an application</h3>
-      <p>Pick a rental application from the sidebar to review all details, then generate the lease once approved.</p>
-    </div>
-    <div id="detail" style="display:none"></div>
-  </main>
-</div>
-
-<!-- REQUIRED DOCUMENTS MODAL -->
-<div class="overlay hide" id="docsModal">
-  <div class="modal" style="max-width:580px">
-    <div class="mhead">
-      <div><h2>Required Documents</h2><p>Checklist &amp; tenant communication template</p></div>
-      <button class="mclose" onclick="closeDocs()">&times;</button>
-    </div>
-    <div class="mbody">
-      <div class="docs-tabs">
-        <button class="dtab on" onclick="switchDocTab(0)">Applicant Checklist</button>
-        <button class="dtab" onclick="switchDocTab(1)">Tenant Email Template</button>
+    <!-- APPLICATIONS VIEW -->
+    <div id="vma">
+      <div class="empty" id="empty">
+        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        <h3>Select an application</h3>
+        <p>Pick a rental application from the sidebar to review all details, then generate the lease once approved.</p>
       </div>
+      <div id="detail" style="display:none"></div>
+    </div>
 
-      <!-- Tab 0: Checklist -->
-      <div class="dpanel on" id="dt0">
-        <div class="doc-section">
-          <h4>1. Government-Issued Photo ID</h4>
-          <div class="doc-item">One valid photo ID for each adult applicant (18+)</div>
-          <div class="doc-sub">
-            <div class="doc-item">Driver's licence</div>
-            <div class="doc-item">Passport</div>
-            <div class="doc-item">Provincial ID card</div>
-          </div>
+    <!-- PROCESSES VIEW -->
+    <div id="vmp" class="proc-view" style="display:none">
+      <div style="max-width:700px;margin:0 auto">
+        <div style="margin-bottom:18px">
+          <h2 style="font-size:17px;font-weight:700;margin-bottom:3px">Team Processes</h2>
+          <p style="font-size:12px;color:var(--mut)">Workflows and communication templates for the Lasi P. Management team.</p>
         </div>
-        <div class="doc-section">
-          <h4>2. Credit Report (within last 30 days)</h4>
-          <div class="doc-item">Required for each adult applicant — free options:</div>
-          <div class="doc-sub">
-            <div class="doc-item">Your bank's mobile app — TD, RBC, BMO, Scotiabank, CIBC (screenshot accepted)</div>
-            <div class="doc-item">Credit Karma — creditkarma.ca</div>
-            <div class="doc-item">Equifax Canada — equifax.ca</div>
-          </div>
-        </div>
-        <div class="doc-section">
-          <h4>3. Proof of Income</h4>
-          <div class="doc-item">Employed: two most recent pay stubs (must show employer name, your name, payment dates)</div>
-          <div class="doc-item">Self-employed: last two months of personal or business bank statements showing regular income deposits</div>
-        </div>
-        <div class="doc-note">⚠ Incomplete applications will not be reviewed. All documents are kept confidential and used for tenancy screening purposes only.</div>
-      </div>
+        <div class="proc-grid">
 
-      <!-- Tab 1: Email template -->
-      <div class="dpanel" id="dt1">
-        <div class="copy-bar">
-          <button class="btn btn-out" style="font-size:11px" onclick="copyTemplate()">Copy to clipboard</button>
-        </div>
-        <div class="email-tpl" id="emailTpl">Hi [Tenant Name],
+          <!-- PROCESS CARD 1: Send Requirements -->
+          <div class="proc-card" id="proc-send-req">
+            <div class="proc-card-head">
+              <div class="proc-icon">📧</div>
+              <div>
+                <h3>Send Requirements to Tenant</h3>
+                <p>Trigger an N8n workflow to automatically email the document requirements checklist to an applicant.</p>
+              </div>
+            </div>
+            <div class="proc-pick">
+              <label>Select Applicant</label>
+              <select id="req-app-select" onchange="updateReqPreview()">
+                <option value="">— choose applicant —</option>
+              </select>
+            </div>
+            <div class="proc-preview" id="req-preview"></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button id="req-send-btn" class="btn btn-pri" onclick="triggerSendRequirements()">Send via N8n</button>
+              <button class="btn btn-out" style="font-size:11px" onclick="copyTplText()">Copy email template</button>
+            </div>
+            <div id="n8n-status"></div>
+          </div>
+
+          <!-- PROCESS CARD 2: Required Documents -->
+          <div class="proc-card" id="proc-docs">
+            <div class="proc-card-head">
+              <div class="proc-icon">📋</div>
+              <div>
+                <h3>Required Documents</h3>
+                <p>Checklist and tenant email template for collecting application supporting documents.</p>
+              </div>
+            </div>
+            <div class="docs-tabs">
+              <button class="dtab on" onclick="switchDocTab(this,0)">Applicant Checklist</button>
+              <button class="dtab" onclick="switchDocTab(this,1)">Tenant Email Template</button>
+            </div>
+            <div class="dpanel on" id="dp0">
+              <div class="doc-section">
+                <h4>1. Government-Issued Photo ID</h4>
+                <div class="doc-item">One valid photo ID for each adult applicant (18+)</div>
+                <div class="doc-sub">
+                  <div class="doc-item">Driver's licence</div>
+                  <div class="doc-item">Passport</div>
+                  <div class="doc-item">Provincial ID card</div>
+                </div>
+              </div>
+              <div class="doc-section">
+                <h4>2. Credit Report (within last 30 days)</h4>
+                <div class="doc-item">Required for each adult applicant — free options:</div>
+                <div class="doc-sub">
+                  <div class="doc-item">Your bank's mobile app — TD, RBC, BMO, Scotiabank, CIBC (screenshot accepted)</div>
+                  <div class="doc-item">Credit Karma — creditkarma.ca</div>
+                  <div class="doc-item">Equifax Canada — equifax.ca</div>
+                </div>
+              </div>
+              <div class="doc-section">
+                <h4>3. Proof of Income</h4>
+                <div class="doc-item">Employed: two most recent pay stubs (must show employer name, your name, payment dates)</div>
+                <div class="doc-item">Self-employed: last two months of bank statements showing regular income deposits</div>
+              </div>
+              <div class="doc-note">⚠ Incomplete applications will not be reviewed. All documents are kept confidential and used for tenancy screening purposes only.</div>
+            </div>
+            <div class="dpanel" id="dp1">
+              <div class="copy-bar">
+                <button class="btn btn-out" style="font-size:11px" onclick="copyTplText()">Copy to clipboard</button>
+              </div>
+              <pre class="email-tpl" id="emailTpl">Hi [Tenant Name],
 
 Thank you for your interest in the rental unit! To move forward with your application, please send me the following documents for all adult applicants:
 
@@ -347,13 +416,14 @@ Please send all documents at your earliest convenience so I can complete your ap
 Looking forward to hearing from you!
 
 [Your Name]
-[Your Phone Number]</div>
+[Your Phone Number]</pre>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
-    <div class="mfoot">
-      <button class="btn btn-out" onclick="closeDocs()">Close</button>
-    </div>
-  </div>
+  </main>
 </div>
 
 <!-- LEASE MODAL -->
@@ -950,6 +1020,7 @@ function selApp(id) {
       </div>
       <div class="abar-btns">
         ${a.status!=='approved'&&a.status!=='declined'?`<button class="btn btn-out" onclick="setAppStatus(${a.id},'reviewed')">Mark Reviewed</button>`:''}
+        ${a.status==='approved'?`<button class="btn btn-out" title="Send required documents checklist to tenant via N8n" onclick="quickSend(${a.id})">📧 Send Requirements</button>`:''}
         ${leaseBtn}
       </div>
     </div>`;
@@ -1200,14 +1271,113 @@ function assignPM(id, pmName) {
   toast(pmName ? 'Assigned to ' + pmName : 'PM removed', 'ok');
 }
 
-// ── REQUIRED DOCUMENTS MODAL ──────────────────────────────────────────────────
-function openDocs() { document.getElementById('docsModal').classList.remove('hide'); }
-function closeDocs() { document.getElementById('docsModal').classList.add('hide'); }
-function switchDocTab(i) {
-  document.querySelectorAll('.dtab').forEach((t,j) => t.classList.toggle('on', j===i));
-  document.querySelectorAll('.dpanel').forEach((p,j) => p.classList.toggle('on', j===i));
+// ── CONFIG — N8n webhook URLs ─────────────────────────────────────────────────
+// To set up the "Send Requirements" flow in N8n:
+// 1. Create a new workflow in N8n
+// 2. Add a "Webhook" trigger node, set method to POST, copy the URL
+// 3. Add a Send Email node (Gmail / Outlook / SMTP)
+// 4. Map fields: tenantName, tenantEmail, tenantPhone, propertyAddress, applicationId
+// 5. Paste the webhook URL below
+const CONFIG = {
+  n8nSendRequirements: '', // e.g. 'https://your-n8n.app.n8n.cloud/webhook/send-requirements'
+};
+
+// ── VIEW SWITCHING ────────────────────────────────────────────────────────────
+function switchView(v) {
+  const isApps = v === 'apps';
+  document.getElementById('vsa').style.display  = isApps ? 'flex' : 'none';
+  document.getElementById('vsp').style.display  = isApps ? 'none' : 'flex';
+  document.getElementById('vma').style.display  = isApps ? '' : 'none';
+  document.getElementById('vmp').style.display  = isApps ? 'none' : '';
+  document.getElementById('sbn-apps').classList.toggle('on', isApps);
+  document.getElementById('sbn-proc').classList.toggle('on', !isApps);
+  if (!isApps) populateReqSelect();
 }
-function copyTemplate() {
+function focusProc(cardId, btnId) {
+  document.querySelectorAll('.proc-sb-item').forEach(b => b.classList.remove('on'));
+  document.getElementById(btnId).classList.add('on');
+  document.getElementById(cardId).scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ── PROCESSES ─────────────────────────────────────────────────────────────────
+function populateReqSelect() {
+  const sel = document.getElementById('req-app-select');
+  sel.innerHTML = '<option value="">— choose applicant —</option>' +
+    apps.map(a => `<option value="${a.id}">${a.name} — ${a.propertyAddress} (${a.status})</option>`).join('');
+}
+function updateReqPreview() {
+  const id = parseInt(document.getElementById('req-app-select').value);
+  const preview = document.getElementById('req-preview');
+  if (!id) { preview.classList.remove('show'); return; }
+  const a = apps.find(x => x.id === id);
+  preview.classList.add('show');
+  preview.innerHTML = `
+    <span class="pl">Will send to</span>
+    <strong>${a.name}</strong><br>
+    ${a.email} &nbsp;·&nbsp; ${a.phone1}<br>
+    <span style="color:var(--mut);font-size:12px">${a.propertyAddress} &nbsp;·&nbsp; PM: ${a.propertyManager || 'Unassigned'}</span>
+  `;
+  updateN8nStatus();
+}
+function updateN8nStatus() {
+  const el = document.getElementById('n8n-status');
+  if (!el) return;
+  el.innerHTML = CONFIG.n8nSendRequirements
+    ? '<div class="n8n-configured">✓ N8n webhook configured — ready to send</div>'
+    : `<div class="n8n-cfg"><strong>N8n not configured yet.</strong> Paste your webhook URL into <code>CONFIG.n8nSendRequirements</code> in the app code to enable automatic sending.</div>`;
+}
+async function triggerSendRequirements() {
+  const id = parseInt(document.getElementById('req-app-select').value);
+  if (!id) { toast('Select an applicant first'); return; }
+  if (!CONFIG.n8nSendRequirements) {
+    toast('Paste your N8n webhook URL into CONFIG.n8nSendRequirements first', 'warn'); return;
+  }
+  const a = apps.find(x => x.id === id);
+  const btn = document.getElementById('req-send-btn');
+  btn.disabled = true; btn.textContent = 'Sending…';
+  try {
+    await fetch(CONFIG.n8nSendRequirements, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        tenantName: a.name, tenantEmail: a.email, tenantPhone: a.phone1,
+        propertyAddress: a.propertyAddress, propertyManager: a.propertyManager,
+        applicationId: a.id, desiredMoveIn: a.desiredOccupancy,
+      })
+    });
+    toast('Requirements sent to ' + a.name + '!', 'ok');
+    btn.textContent = '✓ Sent';
+    setTimeout(() => { btn.disabled = false; btn.textContent = 'Send via N8n'; }, 3000);
+  } catch (e) {
+    toast('N8n trigger failed — check webhook URL', '');
+    btn.disabled = false; btn.textContent = 'Send via N8n';
+  }
+}
+async function quickSend(id) {
+  if (!CONFIG.n8nSendRequirements) {
+    toast('Go to Processes tab → set up N8n webhook first', 'warn'); return;
+  }
+  const a = apps.find(x => x.id === id);
+  try {
+    await fetch(CONFIG.n8nSendRequirements, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        tenantName: a.name, tenantEmail: a.email, tenantPhone: a.phone1,
+        propertyAddress: a.propertyAddress, propertyManager: a.propertyManager, applicationId: a.id,
+      })
+    });
+    toast('Requirements sent to ' + a.name + '!', 'ok');
+  } catch (e) { toast('N8n trigger failed', ''); }
+}
+
+// ── DOCS TAB SWITCHER ─────────────────────────────────────────────────────────
+function switchDocTab(btn, i) {
+  const card = btn.closest('.proc-card');
+  card.querySelectorAll('.dtab').forEach((t,j) => t.classList.toggle('on', j===i));
+  card.querySelectorAll('.dpanel').forEach((p,j) => p.classList.toggle('on', j===i));
+}
+function copyTplText() {
   const text = document.getElementById('emailTpl').innerText;
   navigator.clipboard.writeText(text).then(
     () => toast('Email template copied to clipboard', 'ok'),
