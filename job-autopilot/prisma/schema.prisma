@@ -1,0 +1,96 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String
+  createdAt DateTime @default(now())
+
+  profile      Profile?
+  applications Application[]
+
+  @@map("users")
+}
+
+model Profile {
+  id            String  @id @default(cuid())
+  userId        String  @unique
+  user          User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  resumeText    String?
+  resumeFileName String?
+
+  // JSON: { roles: string[], keywords: string[], locations: string[],
+  //         salaryMin: number, remote: boolean, jobType: "full_time"|"contract"|"any" }
+  preferences   String  @default("{}")
+
+  // JSON: { linkedin: { email, password }, indeed: { email, password } }
+  // Values are base64-encoded for basic obfuscation (add real encryption in prod)
+  credentials   String  @default("{}")
+
+  phone         String?
+  linkedinUrl   String?
+  portfolioUrl  String?
+  yearsExp      Int?
+  city          String?
+
+  updatedAt DateTime @updatedAt
+
+  @@map("profiles")
+}
+
+model Job {
+  id          String    @id @default(cuid())
+  source      String    // canada_job_bank | indeed | greenhouse | lever | linkedin
+  externalId  String
+  url         String
+  title       String
+  company     String
+  location    String
+  remote      Boolean   @default(false)
+  salaryMin   Float?
+  salaryMax   Float?
+  salaryText  String?
+  description String
+  postedAt    DateTime?
+  discoveredAt DateTime @default(now())
+
+  applications Application[]
+
+  @@unique([source, externalId])
+  @@map("jobs")
+}
+
+model Application {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  jobId  String
+  job    Job    @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  // pending_review | approved | rejected | submitting | submitted | failed
+  status String @default("pending_review")
+
+  tailoredResume String?
+  coverLetter    String?
+  matchScore     Float?
+  matchReasons   String? // JSON string[]
+
+  submittedAt  DateTime?
+  errorMessage String?
+  notes        String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, jobId])
+  @@map("applications")
+}
