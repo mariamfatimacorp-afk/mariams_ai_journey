@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StoryMagic · Personalized Rhymes & Bedtime Stories for Your Child</title>
+<meta name="description" content="Type your child's name and get a magical personalized rhyme or bedtime story in seconds. Read it aloud, print it as a keepsake.">
+<meta property="og:title" content="StoryMagic · Your Child is the Star of the Story">
+<meta property="og:description" content="Personalized rhymes & bedtime stories in seconds — with read-aloud and printable keepsakes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFF8EE; --bg2:#FFEFD6;
+    --ink:#3B2A1A; --ink-soft:#7A6248;
+    --sun:#FFB53E; --sun-deep:#F09000;
+    --berry:#E85D8A; --sky:#5BB8E8; --leaf:#6FBF73;
+    --card:#FFFFFF; --line:rgba(150,100,40,.16);
+    --r:22px; --shadow:0 6px 28px rgba(150,90,20,.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;background:
+    radial-gradient(circle at 15% 10%, #FFE9C4 0%, transparent 40%),
+    radial-gradient(circle at 90% 20%, #FFE0EC 0%, transparent 35%),
+    var(--bg);
+    color:var(--ink);min-height:100vh}
+  .wrap{max-width:880px;margin:0 auto;padding:32px 20px 80px}
+
+  header{text-align:center;padding:28px 0 8px}
+  .logo{font-family:'Baloo 2',cursive;font-weight:800;font-size:2.6rem;line-height:1.1}
+  .logo .m{color:var(--sun-deep)} .logo .s{color:var(--berry)}
+  .tagline{color:var(--ink-soft);font-size:1.08rem;margin-top:6px}
+  .stars{font-size:1.3rem;letter-spacing:.4em;margin-top:4px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:26px;margin-top:26px}
+
+  form .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:600px){form .grid{grid-template-columns:1fr}}
+  label{display:block;font-weight:700;font-size:.92rem;margin-bottom:6px}
+  input,select{width:100%;padding:12px 14px;border:2px solid var(--line);border-radius:14px;font:inherit;font-size:1rem;background:#FFFDF8;color:var(--ink)}
+  input:focus,select:focus{outline:none;border-color:var(--sun)}
+  .field{margin-bottom:4px}
+  .hint{font-size:.8rem;color:var(--ink-soft);margin-top:4px}
+
+  .type-row{display:flex;gap:10px;margin:18px 0 6px;flex-wrap:wrap}
+  .type-btn{flex:1;min-width:140px;padding:14px;border-radius:16px;border:2px solid var(--line);background:#FFFDF8;font:inherit;font-weight:700;cursor:pointer;transition:.15s}
+  .type-btn.active{border-color:var(--berry);background:#FFF0F5;color:var(--berry)}
+  .type-btn:first-child.active{border-color:var(--sky);background:#EEF8FE;color:#1E7DB0}
+
+  .go{width:100%;margin-top:18px;padding:16px;border:none;border-radius:16px;cursor:pointer;
+      font-family:'Baloo 2',cursive;font-weight:800;font-size:1.25rem;color:#fff;
+      background:linear-gradient(135deg,var(--sun) 0%,var(--sun-deep) 100%);
+      box-shadow:0 6px 18px rgba(240,144,0,.35);transition:.15s}
+  .go:hover{transform:translateY(-2px)}
+  .go:disabled{opacity:.6;cursor:wait;transform:none}
+
+  /* result */
+  #result{display:none}
+  .story-title{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.7rem;color:var(--sun-deep);text-align:center;margin-bottom:4px}
+  .story-sub{text-align:center;color:var(--ink-soft);font-size:.9rem;margin-bottom:18px}
+  .story-body{font-size:1.12rem;line-height:1.85;white-space:pre-wrap}
+  .story-body.rhyme{text-align:center;font-style:italic}
+  .glossary{margin-top:16px;padding:12px 16px;background:var(--bg2);border-radius:14px;font-size:.88rem;color:var(--ink-soft)}
+  .actions{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+  .act{flex:1;min-width:130px;padding:12px;border-radius:14px;border:2px solid var(--line);background:#FFFDF8;font:inherit;font-weight:700;cursor:pointer;transition:.15s}
+  .act:hover{border-color:var(--sun)}
+  .free-note{text-align:center;font-size:.85rem;color:var(--ink-soft);margin-top:14px}
+
+  /* upsell modal */
+  .modal-bg{display:none;position:fixed;inset:0;background:rgba(60,40,10,.45);z-index:50;align-items:center;justify-content:center;padding:20px}
+  .modal{background:#fff;border-radius:var(--r);max-width:440px;width:100%;padding:30px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+  .modal h3{font-family:'Baloo 2',cursive;font-size:1.5rem;color:var(--berry);margin-bottom:10px}
+  .modal p{color:var(--ink-soft);line-height:1.6;margin-bottom:18px}
+  .modal .buy{display:block;padding:14px;border-radius:14px;background:linear-gradient(135deg,var(--berry),#C93A6C);color:#fff;font-weight:800;text-decoration:none;font-size:1.05rem;margin-bottom:10px}
+  .modal .later{background:none;border:none;color:var(--ink-soft);font:inherit;cursor:pointer;text-decoration:underline}
+
+  footer{text-align:center;margin-top:40px;color:var(--ink-soft);font-size:.85rem;line-height:1.7}
+  footer a{color:var(--sun-deep)}
+
+  @media print{
+    body{background:#fff}
+    header .tagline,.stars,form,.actions,.free-note,footer,.card.input-card{display:none!important}
+    .card{box-shadow:none;border:none}
+    .story-body{font-size:1.2rem}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="logo"><span class="m">Story</span><span class="s">Magic</span> ✨</div>
+    <p class="tagline">Your child is the star of tonight's story</p>
+    <div class="stars">⭐ 🌙 ⭐</div>
+  </header>
+
+  <div class="card input-card">
+    <form id="form" onsubmit="return false">
+      <div class="grid">
+        <div class="field">
+          <label for="name">Child's name</label>
+          <input id="name" placeholder="e.g. Ayaan" maxlength="20" required>
+        </div>
+        <div class="field">
+          <label for="age">Age</label>
+          <select id="age">
+            <option value="2">2 years</option><option value="3" selected>3 years</option>
+            <option value="4">4 years</option><option value="5">5 years</option>
+            <option value="6">6 years</option><option value="7">7 years</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="animal">Favourite animal or friend</label>
+          <input id="animal" placeholder="e.g. bunny, dino, kitten" maxlength="20" required>
+        </div>
+        <div class="field">
+          <label for="flavor">Language style</label>
+          <select id="flavor">
+            <option value="en" selected>English</option>
+            <option value="ur">English + Urdu words 🌙</option>
+          </select>
+          <div class="hint">Urdu mode sprinkles in pyara words with meanings</div>
+        </div>
+      </div>
+
+      <div class="type-row">
+        <button type="button" class="type-btn active" data-type="rhyme" onclick="setType(this)">🎵 Rhyme</button>
+        <button type="button" class="type-btn" data-type="story" onclick="setType(this)">📖 Bedtime Story</button>
+      </div>
+
+      <button class="go" id="go" onclick="generate()">✨ Make the Magic</button>
+    </form>
+  </div>
+
+  <div class="card" id="result">
+    <div class="story-title" id="rTitle"></div>
+    <div class="story-sub" id="rSub"></div>
+    <div class="story-body" id="rBody"></div>
+    <div class="glossary" id="rGloss" style="display:none"></div>
+    <div class="actions">
+      <button class="act" onclick="readAloud()" id="speakBtn">🔊 Read aloud</button>
+      <button class="act" onclick="window.print()">🖨️ Print keepsake</button>
+      <button class="act" onclick="copyText()">📋 Copy</button>
+      <button class="act" onclick="generate()">🎲 Another one</button>
+    </div>
+    <p class="free-note" id="freeNote"></p>
+  </div>
+
+  <footer>
+    Made with ❤️ by Mariam · <a href="../../index.html">My AI journey</a><br>
+    StoryMagic never stores your child's name — everything happens on your device.
+  </footer>
+</div>
+
+<!-- upsell -->
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <h3>You've made 5 free stories! 🌟</h3>
+    <p>Get the <b>StoryMagic Pack</b>: unlimited stories, 20 printable coloring-page story templates, and a personalized "Star of the Story" certificate for your little one.</p>
+    <a class="buy" href="#" id="buyLink" target="_blank" rel="noopener">Get the Pack · $4.99</a>
+    <button class="later" onclick="closeModal()">Maybe later</button>
+  </div>
+</div>
+
+<script>
+/* ─────────────────── config ─────────────────── */
+const FREE_LIMIT = 5;                 // free generations before upsell shows
+const BUY_URL = "#";                  // TODO: replace with your Lemon Squeezy / Gumroad link
+document.getElementById('buyLink').href = BUY_URL;
+
+/* ─────────────────── helpers ─────────────────── */
+const pick = a => a[Math.floor(Math.random()*a.length)];
+const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+let currentType = 'rhyme';
+
+function setType(btn){
+  document.querySelectorAll('.type-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  currentType = btn.dataset.type;
+}
+
+/* Urdu sprinkle words: [urdu, meaning] */
+const URDU = {
+  moon:["chanda","moon"], dear:["pyara","dear"], mom:["Ammi","Mom"],
+  sleep:["so jao","go to sleep"], star:["sitara","star"], friend:["dost","friend"],
+  heart:["dil","heart"], beautiful:["khoobsurat","beautiful"]
+};
+
+/* ─────────────────── rhyme templates ───────────────────
+   Placeholders {N}=name {A}=animal {AGE}=age.
+   Animal & name sit mid-line so any word keeps the rhyme. */
+const RHYMES = [
+  {title:"{N} and the Little {A}",
+   verses:[
+"{N} and the little {A} went out to play one day,\nThey danced beneath the golden sun and laughed the hours away.",
+"They found a shiny pebble and a leaf as green as spring,\nThe little {A} did a wiggle-dance and {N} began to sing!",
+"\"Oh what a day, oh what a day!\" they shouted with a cheer,\n\"The very best adventures happen when my friend is near!\"",
+"So when the {WORD_moon} rose up so high and stars began to peep,\n{N} hugged the little {A} tight and both fell fast asleep."]},
+  {title:"The {A} Who Loved {N}",
+   verses:[
+"There once was a {A}, so fluffy and small,\nWho loved little {N} the most of them all.",
+"It followed {N} here, it followed {N} there,\nUp the big staircase and down the front stair!",
+"\"Why do you follow me?\" {N} asked with a grin.\nThe {A} just giggled, \"Because you're my {WORD_friend}!\"",
+"Now every night when the {WORD_star}s twinkle bright,\nThe {A} tells {N}, \"{WORD_sleep}... sweet dreams, good night!\""]},
+  {title:"{N}'s Big {AGE}-Year-Old Adventure",
+   verses:[
+"{N} is {AGE}, so big and so brave,\nWith a {A} for a friend and a smile and a wave!",
+"They marched through the garden, they hopped on one shoe,\nThey roared like a lion and mooed like a moo!",
+"They counted to {AGE} on fingers so small,\nThen shouted together, \"We counted them ALL!\"",
+"And when {WORD_mom} called out, \"It's time for bed soon!\"\n{N} and the {A} blew a kiss to the {WORD_moon}."]}
+];
+
+/* ─────────────────── story templates ─────────────────── */
+const STORIES = [
+  {title:"{N} and the Sleepy {A}",
+   parts:[
+"Once upon a time, in a cozy little house with a red front door, there lived a wonderful child named {N}. {N} was {AGE} years old — big enough to be brave, and small enough to fit perfectly in a goodnight hug.",
+"One evening, {N} heard a tiny sound by the window. *Tap, tap, tap.* And who do you think was there? A sleepy little {A}! \"I can't fall asleep,\" the {A} yawned. \"Will you help me, {WORD_dear} {N}?\"",
+"{N} knew just what to do. \"First, we take three deep breaths,\" said {N}. Whooo... whooo... whooo. \"Then we say goodnight to everything we love.\" So they said goodnight to the toys, goodnight to the {WORD_moon}, and goodnight to every twinkling {WORD_star}.",
+"The little {A}'s eyes grew heavy. \"You are the kindest friend in the whole world, {N},\" it whispered, snuggling close.",
+"And as the {WORD_moon} smiled down through the window, {N} and the little {A} drifted off to the land of dreams — where tomorrow's adventures were already waiting. Goodnight, {N}. Sweet dreams. 🌙"]},
+  {title:"The Day {N} Saved the {A}",
+   parts:[
+"In a green and giggly meadow, just past the big oak tree, lived a small {A} with the shiniest eyes you ever saw. And this is the story of the day it met {N} — the kindest {AGE}-year-old in all the land.",
+"That morning, the little {A} had climbed too high on a haystack and couldn't get down! \"Help, help!\" it squeaked. {N} heard it right away, because {N} had wonderful listening ears.",
+"\"Don't be scared!\" called {N}. \"I'm coming!\" {N} stacked one cushion, two cushions, three cushions high, climbed up carefully — one step, two steps — and gently lifted the little {A} down. \"You saved me!\" cheered the {A}, dancing in a happy circle.",
+"From that day on, the {A} and {N} were the very best of {WORD_friend}s. They shared snacks, told jokes, and always helped anyone who needed it — because that's what heroes with kind {WORD_heart}s do.",
+"And every night, when the {WORD_star}s came out, the little {A} would whisper: \"Thank you, {N}. You are my hero.\" The end. 💛"]}
+];
+
+/* ─────────────────── engine ─────────────────── */
+let glossUsed = [];
+
+function fill(t, name, animal, age, urduMode){
+  return t
+    .replace(/{N}/g, name)
+    .replace(/{A}/g, animal)
+    .replace(/{AGE}/g, age)
+    .replace(/{WORD_(\w+)}/g, (_, key)=>{
+      const w = URDU[key];
+      if(urduMode && w){ if(!glossUsed.find(g=>g[0]===w[0])) glossUsed.push(w); return w[0]; }
+      return key === 'mom' ? 'Mom' : key;
+    });
+}
+
+function generate(){
+  const name = cap(document.getElementById('name').value.trim());
+  const animal = document.getElementById('animal').value.trim().toLowerCase();
+  const age = document.getElementById('age').value;
+  const urduMode = document.getElementById('flavor').value === 'ur';
+  if(!name || !animal){ document.getElementById('name').reportValidity(); return; }
+
+  // free-limit counter (soft paywall)
+  const used = (parseInt(localStorage.getItem('sm_count'))||0) + 1;
+  localStorage.setItem('sm_count', used);
+  if(used > FREE_LIMIT && BUY_URL !== "#"){ openModal(); }
+
+  glossUsed = [];
+  const isRhyme = currentType === 'rhyme';
+  const tpl = pick(isRhyme ? RHYMES : STORIES);
+  const chunks = (isRhyme ? tpl.verses : tpl.parts).map(p => fill(p, name, animal, age, urduMode));
+
+  document.getElementById('rTitle').textContent = fill(tpl.title, name, cap(animal), age, false).replace(/{WORD_(\w+)}/g,'$1');
+  document.getElementById('rSub').textContent = (isRhyme ? 'A rhyme' : 'A bedtime story') + ` made just for ${name}, age ${age} ✨`;
+  const body = document.getElementById('rBody');
+  body.textContent = chunks.join('\n\n');
+  body.classList.toggle('rhyme', isRhyme);
+
+  const gl = document.getElementById('rGloss');
+  if(urduMode && glossUsed.length){
+    gl.style.display='block';
+    gl.innerHTML = '🌙 <b>Urdu words:</b> ' + glossUsed.map(w=>`<b>${w[0]}</b> = ${w[1]}`).join(' · ');
+  } else gl.style.display='none';
+
+  const left = Math.max(0, FREE_LIMIT - used);
+  document.getElementById('freeNote').textContent =
+    left > 0 ? `${left} free ${left===1?'story':'stories'} left today ✨` : `Enjoying StoryMagic? The Story Pack keeps the magic unlimited 💛`;
+
+  document.getElementById('result').style.display='block';
+  document.getElementById('result').scrollIntoView({behavior:'smooth'});
+}
+
+/* read aloud — free, built into every browser */
+let speaking = false;
+function readAloud(){
+  const synth = window.speechSynthesis;
+  if(!synth){ alert('Read-aloud is not supported in this browser.'); return; }
+  if(speaking){ synth.cancel(); speaking=false; document.getElementById('speakBtn').textContent='🔊 Read aloud'; return; }
+  const u = new SpeechSynthesisUtterance(document.getElementById('rTitle').textContent + '. ' + document.getElementById('rBody').textContent);
+  u.rate = 0.88; u.pitch = 1.15;
+  u.onend = ()=>{ speaking=false; document.getElementById('speakBtn').textContent='🔊 Read aloud'; };
+  speaking = true; document.getElementById('speakBtn').textContent='⏹️ Stop';
+  synth.speak(u);
+}
+
+function copyText(){
+  navigator.clipboard.writeText(document.getElementById('rTitle').textContent + '\n\n' + document.getElementById('rBody').textContent)
+    .then(()=>alert('Copied! Paste it anywhere 💛'));
+}
+
+function openModal(){ document.getElementById('modal').style.display='flex'; }
+function closeModal(){ document.getElementById('modal').style.display='none'; }
+</script>
+</body>
+</html>
