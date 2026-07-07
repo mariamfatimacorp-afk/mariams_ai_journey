@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>StoryMagic Pack — Printables</title>
+<style>
+  @font-face{font-family:'Baloo 2';src:url('fonts/baloo2.ttf');font-weight:400 800}
+  @font-face{font-family:'Nunito';src:url('fonts/nunito.ttf');font-weight:400 800}
+  @font-face{font-family:'Naskh';src:url('fonts/naskh.ttf')}
+  @page{size:A4;margin:0}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Nunito',sans-serif;color:#3B2A1A}
+  .page{width:210mm;height:296mm;page-break-after:always;padding:16mm 15mm;position:relative;overflow:hidden;background:#fff}
+  .page:last-child{page-break-after:auto}
+
+  h1{font-family:'Baloo 2';font-size:26pt;color:#F09000;text-align:center;line-height:1.15}
+  h2{font-family:'Baloo 2';font-size:13pt;color:#E85D8A;text-align:center;margin-top:2mm}
+  .kicker{text-align:center;font-size:9pt;font-weight:700;letter-spacing:.25em;color:#B89060;text-transform:uppercase;margin-bottom:2mm}
+  .foot{position:absolute;bottom:8mm;left:0;right:0;text-align:center;font-size:8pt;color:#B89060}
+  .urdu{font-family:'Naskh';direction:rtl}
+
+  /* decorative page border for activity pages */
+  .bordered{border:1.2mm solid #FFD9A0;border-radius:6mm;padding:10mm;height:100%;display:flex;flex-direction:column}
+
+  /* cover */
+  .cover{background:linear-gradient(160deg,#FFF3DC 0%,#FFE3EE 60%,#E3F2FD 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .cover h1{font-size:44pt}
+  .cover .sub{font-size:14pt;color:#7A6248;margin-top:4mm;font-weight:700}
+  .cover .big-star{font-size:60pt;margin:8mm 0}
+  .cover .items{margin-top:10mm;font-size:11pt;color:#7A6248;line-height:2}
+
+  /* certificate */
+  .cert{background:linear-gradient(160deg,#FFFBF2, #FFF3DC);display:flex;align-items:center;justify-content:center}
+  .cert-inner{border:2mm solid #F09000;outline:1mm solid #FFD9A0;outline-offset:2mm;border-radius:4mm;padding:16mm;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .cert h1{font-size:34pt}
+  .cert .line{border-bottom:.6mm solid #3B2A1A;width:110mm;height:14mm;margin:6mm auto 2mm}
+  .cert .lbl{font-size:9pt;color:#B89060;letter-spacing:.2em;text-transform:uppercase}
+  .cert p{font-size:13pt;line-height:1.8;max-width:130mm}
+  .sign-row{display:flex;gap:20mm;margin-top:14mm;width:100%;justify-content:center}
+  .sign-row div{width:55mm;text-align:center}
+  .sign-row .line2{border-bottom:.4mm solid #3B2A1A;height:10mm;margin-bottom:2mm}
+
+  /* generic content */
+  .intro{font-size:11pt;line-height:1.9;margin-top:6mm}
+  .intro li{margin-left:6mm;margin-bottom:2mm}
+
+  /* story fill-in */
+  .story-text{font-size:14pt;line-height:2.6;margin-top:8mm}
+  .blank{display:inline-block;min-width:34mm;border-bottom:.5mm solid #E85D8A;text-align:center;font-size:8pt;color:#C9A0B0;vertical-align:baseline;padding-bottom:1mm}
+
+  /* tracing */
+  .trace-row{border-bottom:.35mm solid #999;position:relative;height:22mm;margin-top:10mm}
+  .trace-row::before{content:"";position:absolute;top:50%;left:0;right:0;border-top:.3mm dashed #CCC}
+  .trace-hint{font-size:9pt;color:#999;margin-top:1mm}
+
+  /* coloring pages */
+  .art{flex:1;display:flex;align-items:center;justify-content:center}
+  .art svg{max-width:100%;max-height:100%}
+  .c-stroke{fill:none;stroke:#444;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+
+  /* flashcards */
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:8mm;flex:1;margin-top:6mm}
+  .fcard{border:.8mm dashed #E85D8A;border-radius:5mm;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6mm;text-align:center}
+  .fcard .urdu{font-size:30pt;color:#5530A8;line-height:1.6}
+  .fcard .tr{font-family:'Baloo 2';font-size:16pt;color:#F09000;margin-top:2mm}
+  .fcard .en{font-size:11pt;color:#7A6248}
+  .fcard .pic{font-size:26pt;margin-bottom:2mm}
+
+  /* match activity */
+  .match{display:flex;justify-content:space-between;flex:1;margin-top:8mm;padding:0 10mm}
+  .match ul{list-style:none;display:flex;flex-direction:column;justify-content:space-around}
+  .match li{font-size:16pt;font-weight:700;padding:4mm 8mm;border:.5mm solid #FFD9A0;border-radius:4mm;text-align:center}
+  .match .urdu{font-size:18pt}
+
+  /* checklist / chart */
+  table{width:100%;border-collapse:collapse;margin-top:8mm}
+  th,td{border:.4mm solid #E0C9A8;padding:5mm 3mm;text-align:center;font-size:11pt}
+  th{background:#FFF3DC;font-family:'Baloo 2';color:#B06000}
+  td.task{text-align:left;font-weight:700}
+  .bigcell{height:16mm}
+
+  .frame-box{flex:1;border:1mm solid #5BB8E8;border-radius:5mm;margin-top:8mm}
+  .prompt-line{border-bottom:.4mm solid #B89060;height:12mm}
+  .about li{font-size:13pt;line-height:3.2;list-style:none}
+</style>
+</head>
+<body>
+
+<!-- 1 · COVER -->
+<div class="page cover">
+  <div class="big-star">🌟</div>
+  <h1>The StoryMagic Pack</h1>
+  <p class="sub">20 magical printables for your little star</p>
+  <div class="items">
+    ⭐ "Star of the Story" certificate<br>
+    🎨 6 storybook coloring pages<br>
+    ✏️ Fill-in stories & name tracing<br>
+    🌙 Urdu–English word cards<br>
+    🛏️ Bedtime routine chart & reward chart
+  </div>
+  <p style="margin-top:14mm;font-size:10pt;color:#7A6248">from <b>StoryMagic</b> · made with ❤️ by Mariam</p>
+</div>
+
+<!-- 2 · WELCOME -->
+<div class="page"><div class="bordered">
+  <p class="kicker">Welcome</p>
+  <h1>How to use this pack</h1>
+  <ul class="intro" style="margin-top:10mm">
+    <li>🖨️ <b>Print any page, any time</b> — you can print every page as many times as you like for your own family.</li>
+    <li>⭐ <b>Start with the certificate</b> — fill in your child's name after their first StoryMagic story and watch their face light up.</li>
+    <li>🎨 <b>Coloring pages</b> pair with the stories: read the story first, then color its hero together.</li>
+    <li>🌙 <b>Urdu word cards</b> — cut along the dashed lines. Show the card while you read stories in Urdu mode.</li>
+    <li>🛏️ <b>Bedtime chart & reward chart</b> — stick them on the fridge; one star sticker per calm bedtime works wonders.</li>
+  </ul>
+  <p class="intro" style="margin-top:auto;text-align:center;color:#7A6248">Made to go with the free StoryMagic app —<br>where your child is the star of every story ✨</p>
+</div><div class="foot">The StoryMagic Pack · Page 2</div></div>
+
+<!-- 3 · CERTIFICATE -->
+<div class="page cert">
+  <div class="cert-inner">
+    <p class="kicker">✦ ✦ ✦</p>
+    <h1>Star of the Story</h1>
+    <p style="margin-top:6mm">This certifies that the bravest, kindest,<br>most wonderful hero…</p>
+    <div class="line"></div>
+    <p class="lbl">child's name</p>
+    <p style="margin-top:6mm">…starred in their very own story, showed a heart full of<br>courage and kindness, and earned a place among the stars. 🌟</p>
+    <div class="sign-row">
+      <div><div class="line2"></div><p class="lbl">date</p></div>
+      <div><div class="line2"></div><p class="lbl">signed with love</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- 4 · BEDTIME ROUTINE -->
+<div class="page"><div class="bordered">
+  <p class="kicker">Every night</p>
+  <h1>🌙 My Bedtime Routine</h1>
+  <h2>Check each step, then it's story time!</h2>
+  <table>
+    <tr><th style="width:60%">My step</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr>
+    <tr><td class="task">🧸 Tidy my toys</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td class="task">🛁 Bath time</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td class="task">🦷 Brush my teeth</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td class="task">👕 Pyjamas on</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td class="task">💧 Sip of water</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td class="task">📖 My StoryMagic story</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td class="task">😴 Lights off — so jao!</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  </table>
+  <p style="text-align:center;margin-top:10mm;font-size:11pt;color:#7A6248">7 checks = a super-sleeper week! ⭐</p>
+</div><div class="foot">The StoryMagic Pack · Page 4</div></div>
+
+<!-- 5 · NAME TRACING -->
+<div class="page"><div class="bordered">
+  <p class="kicker">Writing practice</p>
+  <h1>✏️ I Can Write My Name!</h1>
+  <h2>Grown-up: write the name in the first row — then trace together</h2>
+  <div class="trace-row"></div><p class="trace-hint">Grown-up writes the name here, big and clear</p>
+  <div class="trace-row"></div><p class="trace-hint">Trace over it with a finger first, then a crayon</p>
+  <div class="trace-row"></div><p class="trace-hint">Try it a little more on your own…</p>
+  <div class="trace-row"></div><p class="trace-hint">All by yourself now — you can do it!</p>
+  <div class="trace-row"></div><p class="trace-hint">Superstar signature! ⭐</p>
+</div><div class="foot">The StoryMagic Pack · Page 5</div></div>
+
+<!-- 6 · FILL-IN STORY 1 -->
+<div class="page"><div class="bordered">
+  <p class="kicker">Tell it together</p>
+  <h1>📖 The Sleepy Adventure</h1>
+  <h2>Fill the blanks and read your very own story aloud</h2>
+  <p class="story-text">
+    Once upon a time, <span class="blank">child's name</span> put on their favourite
+    <span class="blank">colour</span> pyjamas and heard a knock at the window.
+    It was a sleepy little <span class="blank">animal</span>!<br>
+    "I can't sleep," it yawned. "Will you help me?"<br>
+    So they counted <span class="blank">number</span> twinkling stars, drank a warm cup of
+    <span class="blank">yummy drink</span>, and sang a song about
+    <span class="blank">anything you love</span>.<br>
+    The little <span class="blank">same animal</span> smiled, whispered
+    "<span class="blank">goodnight word</span>", and they both fell fast asleep. 🌙
+  </p>
+</div><div class="foot">The StoryMagic Pack · Page 6</div></div>
+
+<!-- 7 · FILL-IN STORY 2 -->
+<div class="page"><div class="bordered">
+  <p class="kicker">Tell it together</p>
+  <h1>📖 My Best Friend and Me</h1>
+  <h2>Fill the blanks and read your very own story aloud</h2>
+  <p class="story-text">
+    In a land of <span class="blank">silly place</span>, there lived a hero named
+    <span class="blank">child's name</span>, who was <span class="blank">age</span> years old
+    and very, very brave.<br>
+    One day, their best friend <span class="blank">friend's name</span> lost their favourite
+    <span class="blank">toy or thing</span>! "Don't worry," said our hero.
+    "We will find it together."<br>
+    They looked under the <span class="blank">furniture</span>, behind the
+    <span class="blank">big thing</span>, and even inside a
+    <span class="blank">funny place</span> — and there it was!<br>
+    "You are the best friend in the whole world," said
+    <span class="blank">friend's name</span>. And they danced the
+    <span class="blank">silly dance name</span> until dinner time. 💛
+  </p>
+</div><div class="foot">The StoryMagic Pack · Page 7</div></div>
+
+<!-- 8 · COLORING: BUNNY -->
+<div class="page"><div class="bordered">
+  <p class="kicker">Color the story</p>
+  <h1>🎨 The Little Bunny</h1>
+  <div class="art"><svg viewBox="0 0 600 640">
+    <g class="c-stroke">
+      <ellipse cx="230" cy="150" rx="38" ry="105" transform="rotate(-14 230 150)"/>
+      <ellipse cx="230" cy="160" rx="16" ry="70" transform="rotate(-14 230 160)"/>
+      <ellipse cx="350" cy="150" rx="38" ry="105" transform="rotate(14 350 150)"/>
+      <ellipse cx="350" cy="160" rx="16" ry="70" transform="rotate(14 350 160)"/>
+      <circle cx="290" cy="310" r="110"/>
+      <circle cx="253" cy="290" r="10" fill="#444"/>
+      <circle cx="327" cy="290" r="10" fill="#444"/>
+      <path d="M278 330 Q290 342 302 330"/>
+      <ellipse cx="290" cy="325" rx="12" ry="8"/>
+      <path d="M200 320 L150 305 M200 335 L152 335 M380 320 L430 305 M380 335 L428 335"/>
+      <ellipse cx="290" cy="520" rx="105" ry="95"/>
+      <ellipse cx="215" cy="560" rx="30" ry="45" transform="rotate(15 215 560)"/>
+      <ellipse cx="365" cy="560" rx="30" ry="45" transform="rotate(-15 365 560)"/>
+      <circle cx="290" cy="500" r="35"/>
+      <path d="M60 620 Q80 590 95 620 M110 620 Q130 585 150 620 M450 620 Q470 588 490 620 M505 620 Q522 592 540 620"/>
+      <path d="M480 90 l12 26 28 4 -20 20 5 28 -25 -13 -25 13 5 -28 -20 -20 28 -4 z"/>
+    </g>
+  </svg></div>
+</div><div class="foot">The StoryMagic Pack · Page 8</div></div>
+
+<!-- 9 · COLORING: MOON & STARS -->
+<div class="page"><div class="bordered">
+  <p class="kicker">Color the story</p>
+  <h1>🎨 Goodnight, Chanda</h1>
+  <div class="art"><svg viewBox="0 0 600 640">
+    <g class="c-stroke">
+      <path d="M330 100 A170 170 0 1 0 330 520 A135 170 0 1 1 330 100 Z"/>
+      <circle cx="250" cy="250" r="14"/><circle cx="225" cy="360" r="18"/>
+      <path d="M300 320 Q310 328 300 336"/>
+      <path d="M470 150 l10 22 24 3 -17 17 4 24 -21 -11 -21 11 4 -24 -17 -17 24 -3 z"/>
+      <path d="M500 330 l8 18 20 3 -14 14 3 20 -17 -9 -17 9 3 -20 -14 -14 20 -3 z"/>
+      <path d="M440 470 l10 22 24 3 -17 17 4 24 -21 -11 -21 11 4 -24 -17 -17 24 -3 z"/>
+      <path d="M80 120 l7 15 17 2 -12 12 3 17 -15 -8 -15 8 3 -17 -12 -12 17 -2 z"/>
+      <path d="M60 480 Q80 450 110 465 Q120 440 150 450 Q175 435 190 460 Q215 455 215 480 Q200 500 175 495 Q160 510 135 500 Q110 510 95 495 Q70 500 60 480 Z"/>
+    </g>
+  </svg></div>
+</div><div class="foot">The StoryMagic Pack · Page 9</div></div>
+
+<!-- 10 · COLORING: ROCKET -->
+<div class="page"><div class="bordered">
+  <p class="kicker">Color the story</p>
+  <h1>🎨 Off to Dreamland!</h1>
+  <div class="art"><svg viewBox="0 0 600 640">
+    <g class="c-stroke">
+      <path d="M300 60 Q380 160 380 320 L380 430 L220 430 L220 320 Q220 160 300 60 Z"/>
+      <circle cx="300" cy="250" r="48"/><circle cx="300" cy="250" r="30"/>
+      <path d="M220 340 L150 440 L220 430 M380 340 L450 440 L380 430"/>
+      <path d="M260 430 L260 470 M340 430 L340 470"/>
+      <path d="M270 470 Q300 560 300 560 Q300 560 330 470"/>
+      <path d="M245 480 Q300 620 355 480"/>
+      <path d="M100 200 l8 18 20 3 -14 14 3 20 -17 -9 -17 9 3 -20 -14 -14 20 -3 z"/>
+      <path d="M490 120 l8 18 20 3 -14 14 3 20 -17 -9 -17 9 3 -20 -14 -14 20 -3 z"/>
+      <circle cx="500" cy="360" r="10"/><circle cx="120" cy="420" r="8"/>
+    </g>
+  </svg></div>
+</div><div class="foot">The StoryMagic Pack · Page 10</div></div>
+
+<!-- 11 · COLORING: BUTTERFLY -->
+<div class="page"><div class="bordered">
+  <p class="kicker">Color the story</p>
+  <h1>🎨 The Garden Friend</h1>
+  <div class="art"><svg viewBox="0 0 600 640">
+    <g class="c-stroke">
+      <ellipse cx="300" cy="330" rx="22" ry="90"/>
+      <circle cx="300" cy="215" r="26"/>
+      <path d="M288 195 Q270 150 250 145 M312 195 Q330 150 350 145"/>
+      <circle cx="250" cy="143" r="6"/><circle cx="350" cy="143" r="6"/>
+      <path d="M282 300 Q140 200 105 280 Q85 340 190 360 Q120 380 140 440 Q170 490 282 375"/>
+      <path d="M318 300 Q460 200 495 280 Q515 340 410 360 Q480 380 460 440 Q430 490 318 375"/>
+      <circle cx="185" cy="290" r="18"/><circle cx="415" cy="290" r="18"/>
+      <circle cx="205" cy="415" r="12"/><circle cx="395" cy="415" r="12"/>
+      <path d="M100 560 Q120 530 140 560 M120 560 L120 620 M100 585 Q80 570 78 550 M140 585 Q160 570 162 550"/>
+      <circle cx="120" cy="545" r="16"/>
+      <path d="M470 580 Q490 550 510 580 M490 580 L490 625"/>
+    </g>
+  </svg></div>
+</div><div class="foot">The StoryMagic Pack · Page 11</div></div>
+
+<!-- 12 · COLORING: FISH -->
+<div class="page"><div class="bordered">
+  <p class="kicker">Color the story</p>
+  <h1>🎨 The Splashy Fish</h1>
+  <div class="art"><svg viewBox="0 0 600 640">
+    <g class="c-stroke">
+      <ellipse cx="290" cy="320" rx="160" ry="100"/>
+      <path d="M430 280 L520 220 L500 320 L520 420 L430 360"/>
+      <circle cx="205" cy="295" r="14" fill="#444"/>
+      <path d="M160 345 Q175 360 195 350"/>
+      <path d="M290 230 Q310 180 350 185 Q345 225 310 240"/>
+      <path d="M260 300 Q290 320 260 345 M310 295 Q340 320 310 350 M355 300 Q380 320 355 340"/>
+      <circle cx="480" cy="120" r="12"/><circle cx="520" cy="80" r="8"/><circle cx="450" cy="70" r="10"/>
+      <path d="M60 540 Q110 510 160 540 Q210 570 260 540 Q310 510 360 540 Q410 570 460 540 Q510 510 550 540"/>
+      <path d="M60 590 Q110 560 160 590 Q210 620 260 590 Q310 560 360 590 Q410 620 460 590 Q510 560 550 590"/>
+    </g>
+  </svg></div>
+</div><div class="foot">The StoryMagic Pack · Page 12</div></div>
+
+<!-- 13 · COLORING: ELEPHANT -->
+<div class="page"><div class="bordered">
+  <p class="kicker">Color the story</p>
+  <h1>🎨 The Gentle Elephant</h1>
+  <div class="art"><svg viewBox="0 0 600 640">
+    <g class="c-stroke">
+      <ellipse cx="330" cy="380" rx="170" ry="130"/>
+      <circle cx="180" cy="300" r="95"/>
+      <ellipse cx="110" cy="280" rx="55" ry="70"/>
+      <path d="M150 380 Q120 450 145 520 Q160 550 185 535 Q170 480 190 420"/>
+      <circle cx="165" cy="280" r="9" fill="#444"/>
+      <path d="M250 480 L250 555 M310 500 L310 560 M380 500 L380 560 M440 480 L440 550"/>
+      <path d="M490 350 Q530 380 515 420"/>
+      <path d="M60 600 L540 600"/>
+      <path d="M470 120 l8 18 20 3 -14 14 3 20 -17 -9 -17 9 3 -20 -14 -14 20 -3 z"/>
+    </g>
+  </svg></div>
+</div><div class="foot">The StoryMagic Pack · Page 13</div></div>
+
+<!-- 14 · COUNT THE STARS -->
+<div class="page"><div class="bordered">
+  <p class="kicker">Counting fun</p>
+  <h1>🔢 Count the Stars!</h1>
+  <h2>Count each row and write the number in the box</h2>
+  <table style="margin-top:10mm">
+    <tr><td style="font-size:20pt;text-align:left;letter-spacing:.3em">⭐ ⭐ ⭐</td><td style="width:28mm" class="bigcell"></td></tr>
+    <tr><td style="font-size:20pt;text-align:left;letter-spacing:.3em">🌙 🌙 🌙 🌙 🌙</td><td class="bigcell"></td></tr>
+    <tr><td style="font-size:20pt;text-align:left;letter-spacing:.3em">⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐</td><td class="bigcell"></td></tr>
+    <tr><td style="font-size:20pt;text-align:left;letter-spacing:.3em">☁️ ☁️</td><td class="bigcell"></td></tr>
+    <tr><td style="font-size:20pt;text-align:left;letter-spacing:.3em">⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐</td><td class="bigcell"></td></tr>
+  </table>
+  <p style="text-align:center;margin-top:10mm;font-size:11pt;color:#7A6248">Bonus: which row has the most? Circle it! ⭕</p>
+</div><div class="foot">The StoryMagic Pack · Page 14</div></div>
+
+<!-- 15 · URDU CARDS 1 -->
+<div class="page"><div class="bordered">
+  <p class="kicker">Urdu word cards · 1</p>
+  <h1>🌙 My First Urdu Words</h1>
+  <h2>Cut along the dashed lines — show a card at story time</h2>
+  <div class="cards">
+    <div class="fcard"><div class="pic">🌙</div><div class="urdu">چاند</div><div class="tr">chanda</div><div class="en">moon</div></div>
+    <div class="fcard"><div class="pic">⭐</div><div class="urdu">ستارہ</div><div class="tr">sitara</div><div class="en">star</div></div>
+    <div class="fcard"><div class="pic">💛</div><div class="urdu">پیارا</div><div class="tr">pyara</div><div class="en">dear / sweet</div></div>
+    <div class="fcard"><div class="pic">❤️</div><div class="urdu">دل</div><div class="tr">dil</div><div class="en">heart</div></div>
+  </div>
+</div><div class="foot">The StoryMagic Pack · Page 15</div></div>
+
+<!-- 16 · URDU CARDS 2 -->
+<div class="page"><div class="bordered">
+  <p class="kicker">Urdu word cards · 2</p>
+  <h1>🌙 More Urdu Words</h1>
+  <h2>Cut along the dashed lines — show a card at story time</h2>
+  <div class="cards">
+    <div class="fcard"><div class="pic">🤝</div><div class="urdu">دوست</div><div class="tr">dost</div><div class="en">friend</div></div>
+    <div class="fcard"><div class="pic">👩‍👧</div><div class="urdu">امی</div><div class="tr">Ammi</div><div class="en">Mom</div></div>
+    <div class="fcard"><div class="pic">📖</div><div class="urdu">کتاب</div><div class="tr">kitaab</div><div class="en">book</div></div>
+    <div class="fcard"><div class="pic">😴</div><div class="urdu">سو جاؤ</div><div class="tr">so jao</div><div class="en">go to sleep</div></div>
+  </div>
+</div><div class="foot">The StoryMagic Pack · Page 16</div></div>
+
+<!-- 17 · MATCH THE WORDS -->
+<div class="page"><div class="bordered">
+  <p class="kicker">Urdu game</p>
+  <h1>🎯 Match the Words!</h1>
+  <h2>Draw a line from each Urdu word to its picture</h2>
+  <div class="match">
+    <ul>
+      <li><span class="urdu">چاند</span> chanda</li>
+      <li><span class="urdu">ستارہ</span> sitara</li>
+      <li><span class="urdu">دوست</span> dost</li>
+      <li><span class="urdu">کتاب</span> kitaab</li>
+      <li><span class="urdu">دل</span> dil</li>
+    </ul>
+    <ul>
+      <li>📖</li>
+      <li>🌙</li>
+      <li>❤️</li>
+      <li>⭐</li>
+      <li>🤝</li>
+    </ul>
+  </div>
+</div><div class="foot">The StoryMagic Pack · Page 17</div></div>
+
+<!-- 18 · CONNECT THE DOTS -->
+<div class="page"><div class="bordered">
+  <p class="kicker">Dot to dot</p>
+  <h1>✨ Make a Star!</h1>
+  <h2>Join the dots from 1 to 10 — then color your star</h2>
+  <div class="art"><svg viewBox="0 0 600 600">
+    <g font-family="Nunito" font-size="26" font-weight="800" fill="#E85D8A" text-anchor="middle">
+      <circle cx="300" cy="110" r="7" fill="#444"/><text x="300" y="90">1</text>
+      <circle cx="344" cy="239" r="7" fill="#444"/><text x="372" y="235">2</text>
+      <circle cx="481" cy="241" r="7" fill="#444"/><text x="510" y="238">3</text>
+      <circle cx="371" cy="323" r="7" fill="#444"/><text x="398" y="330">4</text>
+      <circle cx="412" cy="454" r="7" fill="#444"/><text x="436" y="470">5</text>
+      <circle cx="300" cy="375" r="7" fill="#444"/><text x="300" y="412">6</text>
+      <circle cx="188" cy="454" r="7" fill="#444"/><text x="163" y="470">7</text>
+      <circle cx="229" cy="323" r="7" fill="#444"/><text x="201" y="330">8</text>
+      <circle cx="119" cy="241" r="7" fill="#444"/><text x="90" y="238">9</text>
+      <circle cx="256" cy="239" r="7" fill="#444"/><text x="240" y="222">10</text>
+    </g>
+  </svg></div>
+</div><div class="foot">The StoryMagic Pack · Page 18</div></div>
+
+<!-- 19 · DRAW YOUR DREAM -->
+<div class="page"><div class="bordered">
+  <p class="kicker">Imagination time</p>
+  <h1>🖍️ Draw Last Night's Dream</h1>
+  <h2>What did you see in dreamland? Draw it here!</h2>
+  <div class="frame-box"></div>
+  <p style="margin-top:6mm;font-size:11pt;font-weight:700">My dream was about: </p>
+  <div class="prompt-line"></div>
+</div><div class="foot">The StoryMagic Pack · Page 19</div></div>
+
+<!-- 20 · GOODNIGHT CHECKLIST -->
+<div class="page"><div class="bordered">
+  <p class="kicker">Say goodnight</p>
+  <h1>😴 My Goodnight List</h1>
+  <h2>Say goodnight to each one — check the box!</h2>
+  <table style="margin-top:8mm">
+    <tr><td class="task" style="font-size:14pt">🧸 Goodnight, toys!</td><td style="width:24mm" class="bigcell"></td></tr>
+    <tr><td class="task" style="font-size:14pt">🌙 Goodnight, chanda (moon)!</td><td class="bigcell"></td></tr>
+    <tr><td class="task" style="font-size:14pt">⭐ Goodnight, sitara (stars)!</td><td class="bigcell"></td></tr>
+    <tr><td class="task" style="font-size:14pt">🐦 Goodnight, birdies!</td><td class="bigcell"></td></tr>
+    <tr><td class="task" style="font-size:14pt">👨‍👩‍👧 Goodnight, family — I love you!</td><td class="bigcell"></td></tr>
+    <tr><td class="task" style="font-size:14pt">💤 Goodnight, me. Sweet dreams!</td><td class="bigcell"></td></tr>
+  </table>
+</div><div class="foot">The StoryMagic Pack · Page 20</div></div>
+
+<!-- 21 · REWARD CHART -->
+<div class="page"><div class="bordered">
+  <p class="kicker">One week of wins</p>
+  <h1>🌟 My Star Reward Chart</h1>
+  <h2>One star for every great bedtime — 7 stars = a special treat!</h2>
+  <table style="margin-top:10mm">
+    <tr><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr>
+    <tr><td style="height:30mm"></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  </table>
+  <p style="margin-top:12mm;font-size:12pt;font-weight:700">My special treat will be:</p>
+  <div class="prompt-line"></div>
+  <p style="text-align:center;margin-top:14mm;font-size:24pt">⭐ ⭐ ⭐ ⭐ ⭐ ⭐ ⭐</p>
+</div><div class="foot">The StoryMagic Pack · Page 21</div></div>
+
+<!-- 22 · ALL ABOUT ME + THANK YOU -->
+<div class="page"><div class="bordered">
+  <p class="kicker">The real star</p>
+  <h1>💛 All About Me</h1>
+  <ul class="about" style="margin-top:6mm">
+    <li>My name is <span class="blank" style="min-width:60mm"></span></li>
+    <li>I am <span class="blank" style="min-width:20mm"></span> years old</li>
+    <li>My favourite animal is <span class="blank" style="min-width:50mm"></span></li>
+    <li>My favourite colour is <span class="blank" style="min-width:50mm"></span></li>
+    <li>The best story we made was about <span class="blank" style="min-width:55mm"></span></li>
+    <li>When I grow up I want to be <span class="blank" style="min-width:55mm"></span></li>
+  </ul>
+  <p style="margin-top:auto;text-align:center;font-size:10pt;color:#7A6248;line-height:1.9">
+    Thank you for bringing StoryMagic home! 💛<br>
+    This pack is for your personal family use — please don't resell or share the files.<br>
+    Questions or story ideas? I'd love to hear them. — <b>Mariam</b>
+  </p>
+</div><div class="foot">The StoryMagic Pack · Page 22 · © Mariam · storymagic</div></div>
+
+</body>
+</html>
